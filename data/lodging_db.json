@@ -260,6 +260,90 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Private Queen Room Ensuite",
+       "rate_plan": "non-refundable, pay at property before arrival",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 252,
+       "total_for_stay": 503,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 8% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/hostelling-international-boston.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Private Queen Room Ensuite",
+       "rate_plan": "free cancel before Nov 18, 2026; no prepayment",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 280,
+       "total_for_stay": 559,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 8% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/hostelling-international-boston.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Private Queen Room Ensuite",
+       "rate_plan": "default price; 'Fully refundable before Nov 18' offered +$65",
+       "refundable": null,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 252,
+       "total_for_stay": 586,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-HI-Boston.h10057467.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -1373,6 +1457,94 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "Bed in 6-Bed Men's/All-Gender/Women's Dormitory (1床)",
+     "max_occupancy": 1,
+     "beds": null,
+     "pricing": "per_bed",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Bed in 6-Bed Men's/All-Gender/Women's Dormitory",
+       "rate_plan": "non-refundable; 4 guests: Booking says select 4 beds",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 73,
+       "total_for_stay": 146,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 8% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/hostelling-international-boston.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "note": "1床あたり。4人なら4床（4×$146=$584、計算値）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Expedia card (room type not captured)",
+     "max_occupancy": null,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "(room type not captured; search card only; page lists dorm beds sleeps 1)",
+       "rate_plan": "card cheapest",
+       "refundable": null,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 73,
+       "total_for_stay": 170,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees (card)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=1&rooms=1&hotelName=HI%20Boston",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ],
+     "occ_seen": 1
     }
    ],
    "features": [
@@ -1481,6 +1653,11 @@
    ],
    "multi_channel_checked": true,
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "4人：個室は定員2まで。1部屋に4人は不可で、ドミトリー4床（Booking.com）",
+    "Expedia：大人4では掲載なし",
+    "公式（hiusa.org）：日付指定の予約リンクが見つからず料金は未取得"
+   ],
    "prev": {
     "area": "Chinatown／Theater District"
    },
@@ -2191,6 +2368,301 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "Quadruple Room w/ Private Bathroom (4 bunk beds)",
+     "max_occupancy": 4,
+     "beds": "4 bunk beds",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Quadruple Room w/ Private Bathroom",
+       "rate_plan": "non-refundable, pay online, no breakfast listed",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 189,
+       "total_for_stay": 397,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        1,
+        2,
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax (5% service charge included)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/meco.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Quadruple Room w/ Private Bathroom",
+       "rate_plan": "free cancel before Nov 17, 2026; pay nothing until Nov 15",
+       "refundable": true,
+       "cancel_until": "2026-11-17",
+       "price_per_night": null,
+       "nightly_display": 210,
+       "total_for_stay": 441,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        1,
+        2,
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/meco.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Bed in 4-Bed Female Dormitory (1床)",
+     "max_occupancy": 1,
+     "beds": "bunk bed",
+     "pricing": "per_bed",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Bed in 4-Bed Female Dormitory",
+       "rate_plan": "non-refundable, pay online",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 81,
+       "total_for_stay": 170,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/meco.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "note": "1床あたり。4人なら4床",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Expedia card (room type not captured)",
+     "max_occupancy": null,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "(room type not captured; search card only)",
+       "rate_plan": "card cheapest; no cancellation detail captured",
+       "refundable": null,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 74,
+       "total_for_stay": 173,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees (card)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=1&rooms=1&hotelName=Meco",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ],
+     "occ_seen": 1
+    },
+    {
+     "room_type": "Private Quadruple Room for 4, Bunk Beds, Women Only",
+     "max_occupancy": 4,
+     "beds": "bunk beds",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "Private Quadruple Room for 4, Bunk Beds, Women Only",
+       "rate_plan": "Non-Refundable (+$0 default); 'Fully refundable before Nov 17' offered at +$72 (resulting total not displayed)",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 174,
+       "total_for_stay": 404,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        2,
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Meco-Hotel.h100356773.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "note": "1 left",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Small Room Female Bunk Shared (1 pod, shared room w/ ensuite)",
+     "max_occupancy": 1,
+     "beds": "bunk pod",
+     "pricing": "per_bed",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "MECO Hotels (official site, Cloudbeds)",
+       "room_type": "Small Room Female Bunk Shared",
+       "rate_plan": "non-refundable",
+       "refundable": false,
+       "price_per_night": null,
+       "total_for_stay": 135,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": null,
+       "taxes_fees_note": "tax status not stated",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://hotels.cloudbeds.com/en/reservation/E4kbJa?checkin=2026-11-20&checkout=2026-11-22&adults=2&currency=usd",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "1ポッド（1人）あたり。表示 $135.00（取消線 $150.00）。検索は大人2で実施",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Private Room - Female (4 bunk pods, private bath)",
+     "max_occupancy": 4,
+     "beds": "4 bunk pods",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "MECO Hotels (official site, Cloudbeds)",
+       "room_type": "Private Room - Female (ADA Private Room - Female same price)",
+       "rate_plan": "non-refundable",
+       "refundable": false,
+       "price_per_night": null,
+       "total_for_stay": 315,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        2,
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": null,
+       "taxes_fees_note": "tax status not stated; only N=2 search run",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://hotels.cloudbeds.com/en/reservation/E4kbJa?checkin=2026-11-20&checkout=2026-11-22&adults=2&currency=usd",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "'Only 1 left'。$315.00（取消線 $350.00）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Official T&C taxes: 5.7% state + 6.5% city + 2.75% convention + 1.5% tourism assessment + 5% service fee. Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -2296,6 +2768,9 @@
    ],
    "multi_channel_checked": false,
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "公式（Cloudbeds）：税の扱いの記載なし。大人2の検索だけ"
+   ],
    "prev": {
     "fees_note": "サービス料5%（宿泊税とは別）、チェックイン時に$150のデポジット（カード枠の保留）",
     "type": "capsule",
@@ -2417,6 +2892,91 @@
        "url": "https://www.google.com/travel/search?q=Hotel%20Ivy%20Boston%20Common&hl=en&gl=us&curr=USD&ts=CAESBgoCCAMQARocEhoSFAoHCOoPEAsYFBIHCOoPEAsYFhgCMgIIASoJCgU6A1VTRBoA&qs=MiZDaGdJdU9mRW83WDFuY2VNQVJvTEwyY3ZNWFJuT0d0eU5YZ1FBUQ&ap=ugEGcHJpY2Vz",
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Room with One Double Bed (sleeps 2)",
+       "rate_plan": "non-refundable, pay in advance (partner offer)",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 209,
+       "total_for_stay": 418,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. US$68.76 tax per stay",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/found-hotel-boston-common.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Room with One Double Bed",
+       "rate_plan": "free cancel before Nov 18, 2026 (15% off; was $597); pay at property",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 254,
+       "total_for_stay": 508,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/found-hotel-boston-common.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Standard Room, 1 Double Bed (sleeps 2)",
+       "rate_plan": "Non-Refundable (+$0); fully refundable before Nov 18 at +$79",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 204,
+       "total_for_stay": 474,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Found-Hotel-Boston-Common.h15746.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
@@ -3130,6 +3690,104 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "Queen Room with Two Queen Beds",
+     "max_occupancy": 4,
+     "beds": "2 queen beds",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Queen Room with Two Queen Beds (max 4)",
+       "rate_plan": "non-refundable, pay at property",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 319,
+       "total_for_stay": 637,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/found-hotel-boston-common.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Queen Room with Two Queen Beds (max 4)",
+       "rate_plan": "free cancel before Nov 18 (15% off; was $833); pay at property",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 354,
+       "total_for_stay": 708,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/found-hotel-boston-common.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 2 Queen Beds (sleeps 4; 3 left)",
+       "rate_plan": "Non-Refundable; refundable before Nov 18 +$110",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 284,
+       "total_for_stay": 661,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Found-Hotel-Boston-Common.h15746.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "url": "https://www.hotelivyboston.com/",
@@ -3197,6 +3855,9 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "公式（hotelivyboston.com）：接続できず料金は未取得"
+   ],
    "prev": {
     "area": "Theater District"
    },
@@ -9597,6 +10258,35 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Bed in 6-Bed Mixed Dormitory",
+       "rate_plan": "pay at property; free cancel before Oct 21",
+       "refundable": true,
+       "cancel_until": "2026-10-21",
+       "price_per_night": null,
+       "nightly_display": 58,
+       "total_for_stay": 116,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 19.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/boston-homestel.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "note": "1床あたり",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -9671,6 +10361,63 @@
        "url": "https://www.google.com/travel/search?q=Boston%20Homestel&hl=en&gl=us&curr=USD&ts=CAESBgoCCAMQARocEhoSFAoHCOoPEAsYFBIHCOoPEAsYFhgCMgIIASoJCgU6A1VTRBoA&qs=MihDaG9JeExISDJ0cklzczdtQVJvTkwyY3ZNVEZvTUdKalltWm9iQkFC&ap=ugEGcHJpY2Vz",
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Budget Double Room",
+       "rate_plan": "non-refundable, pay at property",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 109,
+       "total_for_stay": 217,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 19.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/boston-homestel.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Budget Double Room",
+       "rate_plan": "free cancel before Oct 21, 2026 (3 days from capture); pay at property",
+       "refundable": true,
+       "cancel_until": "2026-10-21",
+       "price_per_night": null,
+       "nightly_display": 114,
+       "total_for_stay": 229,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 19.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/boston-homestel.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
@@ -10254,6 +11001,25 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "availability_by_channel": [
+    {
+     "channel": "Expedia",
+     "availability": "not_listed",
+     "availability_note": "Expedia に掲載なし（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=Homestel",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    }
+   ],
+   "manual_check_notes": [
+    "4人：最大の部屋は定員3（Comfort Triple）で、1部屋に4人は不可",
+    "公式（bostonhomestel.com/book-now）：料金はなく規定のみ。7日より前の取消は50%返金、週末は2泊以上（two-night minimum on weekends）"
+   ],
    "prev": {
     "area": "Boston"
    },
@@ -10467,6 +11233,141 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 2
+    },
+    {
+     "room_type": "Single Room Shared Bathroom",
+     "max_occupancy": 1,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "The Farrington Inn (official site, letsbook.me)",
+       "room_type": "Single Room Shared Bathroom",
+       "rate_plan": "room only; free cancellation before 18 Nov 2026",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "total_for_stay": 198,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 1,
+       "guests_list": [
+        1
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "+ $29.60 taxes & fees (excluded)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://letsbook.me/booking/thefarringtoninn?checkin=2026-11-20&checkout=2026-11-22&adults=1&children=0",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "4 left。1泊 $99（計算値）",
+       "taxes_fees_amount": 29.6,
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Double Room Shared Bathroom",
+     "max_occupancy": 2,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "The Farrington Inn (official site, letsbook.me)",
+       "room_type": "Double Room Shared Bathroom",
+       "rate_plan": "room only; free cancellation before 18 Nov 2026",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "total_for_stay": 218,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "+ $32.59 taxes & fees (excluded)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://letsbook.me/booking/thefarringtoninn?checkin=2026-11-20&checkout=2026-11-22&adults=2&children=0",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "2 left。1泊 $109（計算値）",
+       "taxes_fees_amount": 32.59,
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Triple Room Shared Bathroom",
+     "max_occupancy": 3,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "The Farrington Inn (official site, letsbook.me)",
+       "room_type": "Triple Room Shared Bathroom",
+       "rate_plan": "free cancel before 18 Nov",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "total_for_stay": 238,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 3,
+       "guests_list": [
+        3
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "+ $35.58 taxes (excluded)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://letsbook.me/booking/thefarringtoninn?checkin=2026-11-20&checkout=2026-11-22&adults=4&children=0",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "大人4で検索。定員3なので4人は入れない（Quadruple 2種は Sold Out、次の空きは 11/23・24）",
+       "taxes_fees_amount": 35.58,
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "url": "https://farringtoninn.com/rooms/",
@@ -10520,6 +11421,37 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "availability_by_channel": [
+    {
+     "channel": "Booking.com",
+     "availability": "sold_out",
+     "availability_note": "Booking.com: 'We have no availability here between Fri, Nov 20, 2026 and Sun, Nov 22, 2026'（2026-10-18時点）。公式サイト（letsbook.me）では1人・2人の部屋に空きあり",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.booking.com/hotel/us/the-farrington-inn.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    },
+    {
+     "channel": "Expedia",
+     "availability": "not_listed",
+     "availability_note": "Expedia に掲載なし（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=Farrington",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    }
+   ],
+   "manual_check_notes": [
+    "4人：11/20–22 は Quadruple Room Shared Bathroom・Quadruple Private Bath とも Sold Out（次の空きは 11/23・24）"
+   ],
    "prev": {
     "type": "guesthouse",
     "area": "Allston"
@@ -14982,6 +15914,64 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room Bathroom Down the Hall (shared bath)",
+       "rate_plan": "free cancel before Nov 17, 2026; pay at property; no breakfast listed (high-speed internet incl.)",
+       "refundable": true,
+       "cancel_until": "2026-11-17",
+       "price_per_night": null,
+       "nightly_display": 229,
+       "total_for_stay": 458,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 1.5% gov tax, 2.75% local, 6.5% tax, 5.7% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/the-revolution.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "BED:KING + BATH:DOWN THE HALL (sleeps 2; 1 left)",
+       "rate_plan": "Fully refundable before Wed Nov 18",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_pre_tax_display": 175,
+       "total_for_stay": 409,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-The-Revolution-Hotel.h30080227.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -15030,11 +16020,40 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Triple Room Bathroom down the Hall (max 3)",
+       "rate_plan": "free cancel before Nov 17",
+       "refundable": true,
+       "cancel_until": "2026-11-17",
+       "price_per_night": null,
+       "nightly_display": 246,
+       "total_for_stay": 491,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 3,
+       "guests_list": [
+        3
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. taxes (info only; max 3)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/the-revolution.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "note": "大人4で検索。定員3なので4人は入れない（参考）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
-     "occ_seen": 2
+     "occ_seen": 3
     },
     {
      "room_type": "Lowest-priced room listed (any room type)",
@@ -15752,6 +16771,94 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "Revolution Loft Junior Suite Bathroom in Room (1 king)",
+     "max_occupancy": 4,
+     "beds": "1 king bed",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Revolution Loft Junior Suite Bathroom in Room (max 4; 1 left)",
+       "rate_plan": "free cancel before Nov 17; pay at property",
+       "refundable": true,
+       "cancel_until": "2026-11-17",
+       "price_per_night": null,
+       "nightly_display": 473,
+       "total_for_stay": 946,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 1.5% gov tax, 2.75% local, 6.5% tax, 5.7% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/the-revolution.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Superior Suite, 1 King Bed (Bath in room)",
+     "max_occupancy": 4,
+     "beds": "1 king bed",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "Superior Suite, 1 King Bed (Bath in room) (sleeps 4; 1 left)",
+       "rate_plan": "Fully refundable before Wed Nov 18",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_pre_tax_display": 362,
+       "total_for_stay": 844,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-The-Revolution-Hotel.h30080227.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -15796,6 +16903,9 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "公式サイトは見つからず（revolutionhotel.com は売り出し中のドメイン）"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 1.42,
     "nearest_rapid_transit_stop": "Back Bay",
@@ -16343,6 +17453,95 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room - Non-Smoking",
+       "rate_plan": "free cancel before Nov 19, 2026; pay nothing until Nov 17; continental breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-19",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 103,
+       "total_for_stay": 206,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 19.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/r-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room - Non-Smoking",
+       "rate_plan": "non-refundable, pay in advance (partner offer); breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 103,
+       "total_for_stay": 206,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. US$33.94 tax per stay",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/r-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 1 King Bed, Non Smoking (sleeps 2)",
+       "rate_plan": "Fully refundable before Thu Nov 19; breakfast included; reserve now pay later",
+       "refundable": true,
+       "cancel_until": "2026-11-19",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 102,
+       "total_for_stay": 238,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees (strike-through shown $300)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Ramada-By-Wyndham-Boston.h293.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -16391,6 +17590,64 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Double Room with Two Double Beds - Non-Smoking (max 4)",
+       "rate_plan": "free cancel before Nov 19; continental breakfast incl.",
+       "refundable": true,
+       "cancel_until": "2026-11-19",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 111,
+       "total_for_stay": 222,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 19.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/r-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 2 Double Beds, Non Smoking (sleeps 4)",
+       "rate_plan": "Fully refundable before Nov 19; breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-19",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 110,
+       "total_for_stay": 256,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Ramada-By-Wyndham-Boston.h293.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -16437,6 +17694,35 @@
        "url": "https://www.google.com/travel/search?q=Ramada%20by%20Wyndham%20Boston&hl=en&gl=us&curr=USD&ts=CAESCgoCCAMKAggDEAEaHBIaEhQKBwjqDxALGBQSBwjqDxALGBYYAjICCAEqCQoFOgNVU0QaAA&qs=MiRDaGNJbjhDNXpkemJ2YjBQR2dzdlp5OHhkR3BpZERWaWN4QUI&ap=ugEGcHJpY2Vz",
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 2 Double Beds, Pool View (sleeps 4)",
+       "rate_plan": "Fully refundable before Nov 19; breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-19",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 111,
+       "total_for_stay": 258,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Ramada-By-Wyndham-Boston.h293.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
@@ -17626,6 +18912,9 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "公式（wyndhamhotels.com）：料金ページが見つからず未取得"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 6.79,
     "nearest_rapid_transit_stop": "Fields Corner",
@@ -19905,6 +21194,35 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Standard Room, 1 Double Bed, Non Smoking (Small Room) (sleeps 2)",
+       "rate_plan": "Non-Refundable (+$0); fully refundable before Nov 18 at +$35; breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 142,
+       "total_for_stay": 317,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Best-Western-Adams-Inn-Quincy-Boston.h54941.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -20627,6 +21945,226 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "Double Room - Sofa Bed - Non-Smoking (1 full + 1 sofa bed)",
+     "max_occupancy": 4,
+     "beds": "1 full + 1 sofa bed",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Double Room - Sofa Bed - Non-Smoking (also King Room same price)",
+       "rate_plan": "non-refundable, pay online; continental breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 143,
+       "total_for_stay": 286,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 11.7% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/best-western-adams-inn.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Double Room - Sofa Bed - Non-Smoking",
+       "rate_plan": "free cancel before Nov 18, 2026; pay at property; continental breakfast incl.",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 159,
+       "total_for_stay": 318,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 11.7% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/best-western-adams-inn.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Double Room - Sofa Bed - Non-Smoking (max 4)",
+       "rate_plan": "non-refundable, pay online; continental breakfast",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 161,
+       "total_for_stay": 322,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 11.7% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/best-western-adams-inn.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Double Room - Sofa Bed - Non-Smoking (max 4)",
+       "rate_plan": "free cancel before Nov 18; pay at property; continental breakfast",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 179,
+       "total_for_stay": 358,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 11.7% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/best-western-adams-inn.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Standard Room, 1 Double Bed with Sofabed",
+     "max_occupancy": 4,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "Standard Room, 1 Double Bed with Sofabed (sleeps 4)",
+       "rate_plan": "Non-Refundable; refundable before Nov 18 +$40; breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 160,
+       "total_for_stay": 356,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Best-Western-Adams-Inn-Quincy-Boston.h54941.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Standard Room, 2 Double Beds, Refrigerator",
+     "max_occupancy": 4,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "Standard Room, 2 Double Beds, Refrigerator (sleeps 4)",
+       "rate_plan": "Non-Refundable; refundable +$44; breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 177,
+       "total_for_stay": 396,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Best-Western-Adams-Inn-Quincy-Boston.h54941.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Outside Boston/Cambridge: 5.7% state excise + local option excise up to 6% (mass.gov); no convention center fee. Exact local rate not verified. Google prices exclude taxes.",
@@ -20668,6 +22206,9 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "公式（bestwestern.com）：HTTP 403 で料金は未取得"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 8.34,
     "nearest_rapid_transit_stop": "North Quincy",
@@ -31438,6 +32979,37 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "availability_by_channel": [
+    {
+     "channel": "Booking.com",
+     "availability": "not_listed",
+     "availability_note": "Booking.com に掲載なし（検索結果は Hotel Ivy などの別ホテルと、イタリア・バーリの別の 'Hotel Boston' だけ）（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.booking.com/searchresults.html?ss=Hotel+Boston+Boston&checkin=2026-11-20&checkout=2026-11-22&group_adults=2&no_rooms=1",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    },
+    {
+     "channel": "Expedia",
+     "availability": "not_listed",
+     "availability_note": "Expedia に掲載なし（名前で絞っても無関係のホテルだけ）（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=Hotel%20Boston",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    }
+   ],
+   "manual_check_notes": [
+    "Booking.com・Expedia とも掲載なし、公式サイトも見つからず。料金なし"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 4.63,
     "nearest_rapid_transit_stop": "Sutherland Road",
@@ -37951,6 +39523,110 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 2
+    },
+    {
+     "room_type": "King Room (Booking.com)",
+     "max_occupancy": 2,
+     "beds": "1 king",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room (max 2)",
+       "rate_plan": "non-refundable, pay at property; good breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 273,
+       "total_for_stay": 546,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/citizenm-boston-north-station.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room - High Floor",
+       "rate_plan": "non-refundable, pay at property; breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 281,
+       "total_for_stay": 561,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/citizenm-boston-north-station.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room",
+       "rate_plan": "free cancel before Nov 18, 2026; pay at property; breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 301,
+       "total_for_stay": 602,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/citizenm-boston-north-station.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -37978,6 +39654,25 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "availability_by_channel": [
+    {
+     "channel": "Expedia",
+     "availability": "not_listed",
+     "availability_note": "Expedia に掲載なし（名前検索・絞り込みなし約110件にもなし）（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=citizen",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    }
+   ],
+   "manual_check_notes": [
+    "4人：部屋は定員2まで",
+    "公式：marriott.com/brands/citizenm.mi に転送され料金は未取得"
+   ],
    "transit_to_hynes": "不明（座標なし）",
    "rating": "Google 4.2（1.3K件）",
    "tax": {
@@ -40750,6 +42445,80 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "Premium King Room - High Floor",
+     "max_occupancy": 2,
+     "beds": "1 king",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Premium King Room - High Floor (1 king, max 2)",
+       "rate_plan": "non-refundable, pay at property; American breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 453,
+       "total_for_stay": 906,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 8% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/sheraton-boston-towers.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Premium King Room - High Floor",
+       "rate_plan": "free cancel before Nov 17, 2026; pay at property; breakfast $30 optional",
+       "refundable": true,
+       "cancel_until": "2026-11-17",
+       "price_per_night": null,
+       "nightly_display": 459,
+       "total_for_stay": 918,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 8% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/sheraton-boston-towers.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -40803,6 +42572,25 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "availability_by_channel": [
+    {
+     "channel": "Expedia",
+     "availability": "not_listed",
+     "availability_note": "Expedia に掲載なし（'Sheraton' では Four Points by Sheraton だけ。絞り込みなしの結果にもなし）（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=Sheraton",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    }
+   ],
+   "manual_check_notes": [
+    "4人：表示された定員は2〜3で、1部屋に4人は不可（Booking.com）",
+    "公式（marriott.com）：エラー表示で料金は未取得"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 0.37,
     "nearest_rapid_transit_stop": "Prudential",
@@ -42884,6 +44672,65 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Standard Queen Room, Private Bathroom (only 1 left; only room shown)",
+       "rate_plan": "free cancel before Nov 15, 2026; pay at property; very good breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-15",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 315,
+       "total_for_stay": 630,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 5.7% residential tax, 9.25% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/oasis-guest-house.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Standard Double Room, Ensuite (sleeps 2; 1 left)",
+       "rate_plan": "Fully refundable before Sun Nov 15",
+       "refundable": true,
+       "cancel_until": "2026-11-15",
+       "price_per_night": null,
+       "nightly_pre_tax_display": 281,
+       "total_for_stay": 645,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Oasis-Guest-House.h1145259.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
@@ -43565,6 +45412,10 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "4人：部屋は定員2（Booking.com）。Expedia は大人4で掲載なし",
+    "公式（eviivo）：URLの日付が反映されず料金は未取得"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 0.23,
     "nearest_rapid_transit_stop": "Hynes Convention Center",
@@ -44179,6 +46030,84 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 1 King Bed (Kenmore) (sleeps 3; 7 left)",
+       "rate_plan": "Non-Refundable (+$0); fully refundable before Nov 18 at +$205",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 430,
+       "total_for_stay": 1094,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees (resort fee treatment not stated)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Hotel-Commonwealth.h894999.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Hotel Commonwealth (official site)",
+       "room_type": "Kenmore King (1 king, sleeps 3)",
+       "rate_plan": "Best Flexible Rate",
+       "refundable": null,
+       "price_per_night": {
+        "2026-11-20": 559,
+        "2026-11-21": 559
+       },
+       "total_for_stay": null,
+       "guests": 2,
+       "guests_list": [
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "EXCLUDING taxes and fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://bookings.hotelcommonwealth.com/?chain=22989&config=RBE&currency=USD&hotel=95031&level=hotel&locale=en-US&productcurrency=USD&arrive=2026-11-20&depart=2026-11-22&adult=2&child=0&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "合計は表示なし（2×$559=$1,118 は計算値）"
+      },
+      {
+       "channel": "Hotel Commonwealth (official site)",
+       "room_type": "Kenmore King (sleeps 3)",
+       "rate_plan": "Advance Purchase Discount (book-direct; terms not opened)",
+       "refundable": null,
+       "price_per_night": {
+        "2026-11-20": 448,
+        "2026-11-21": 448
+       },
+       "total_for_stay": null,
+       "guests": 2,
+       "guests_list": [
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "EXCLUDING taxes and fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://bookings.hotelcommonwealth.com/?chain=22989&config=RBE&currency=USD&hotel=95031&level=hotel&locale=en-US&productcurrency=USD&arrive=2026-11-20&depart=2026-11-22&adult=2&child=0&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "$448（取消線 $559）。合計は表示なし（2×$448=$896 は計算値）"
       }
      ],
      "taxes_fees_included": false,
@@ -44227,11 +46156,38 @@
        "via": "Google Hotels Prices tab (featured room options)",
        "confidence": "date_specific",
        "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 2 Queen Beds (Kenmore) (sleeps 4)",
+       "rate_plan": "Non-Refundable; refundable +$196",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 452,
+       "total_for_stay": 1146,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Hotel-Commonwealth.h894999.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
       }
      ],
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
-     "occ_seen": 2
+     "occ_seen": 4
     },
     {
      "room_type": "Fenway King - Free Cancellation by Dec 14, 2026",
@@ -44997,6 +46953,236 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 4
+    },
+    {
+     "room_type": "King Room - Disability Access (Booking.com)",
+     "max_occupancy": 2,
+     "beds": "1 king",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room - Disability Access (1 king, sleeps 2)",
+       "rate_plan": "non-refundable, pay online; breakfast optional $40",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 464,
+       "total_for_stay": 1008,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "$40/night resort fee INCLUDED in total; excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/c-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room - Disability Access",
+       "rate_plan": "free cancel before Nov 18, 2026; pay nothing until Nov 16",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 559,
+       "total_for_stay": 1198,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "resort fee incl.; excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/c-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Deluxe Double Room (2 king beds)",
+     "max_occupancy": 4,
+     "beds": "2 king beds",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Deluxe Double Room (2 king beds, max 4)",
+       "rate_plan": "non-refundable, pay online",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 479,
+       "total_for_stay": 1038,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "resort fee incl.; excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/c-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "Deluxe Double Room (2 king beds, max 4)",
+       "rate_plan": "free cancel before Nov 18; pay nothing until Nov 16",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 629,
+       "total_for_stay": 1338,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "resort fee incl.; excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/c-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Deluxe Queen Room w/ Two Queen Beds",
+     "max_occupancy": 4,
+     "beds": "2 queen beds",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Deluxe Queen Room w/ Two Queen Beds (max 4)",
+       "rate_plan": "non-refundable",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 481,
+       "total_for_stay": 1041,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "resort fee incl.; excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/c-boston-massachusettes.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=4&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Room, 2 King Beds (Kenmore)",
+     "max_occupancy": 4,
+     "beds": "2 king beds",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "Room, 2 King Beds (Kenmore) (sleeps 4)",
+       "rate_plan": "Non-Refundable; refundable +$258",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 453,
+       "total_for_stay": 1148,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 4,
+       "guests_list": [
+        4
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-Hotel-Commonwealth.h894999.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=4&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -45039,6 +47225,9 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "公式・大人4：Kenmore King（定員3と表示）のカードだけ読めた（Best Flexible $594／Advance Purchase $483、取消線 $559、税抜き）。2クイーン・2キングの4人部屋の料金は未読"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 0.64,
     "nearest_rapid_transit_stop": "Kenmore",
@@ -46137,6 +48326,110 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 2
+    },
+    {
+     "room_type": "King Room (Booking.com)",
+     "max_occupancy": 2,
+     "beds": "1 king",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room (max 2)",
+       "rate_plan": "non-refundable, pay at property; excellent breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 341,
+       "total_for_stay": 681,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/citizenm-boston-back-bay.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room - High Floor",
+       "rate_plan": "non-refundable, pay at property; breakfast included",
+       "refundable": false,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 350,
+       "total_for_stay": 700,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/citizenm-boston-back-bay.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room",
+       "rate_plan": "free cancel before Nov 18, 2026; pay at property; breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 376,
+       "total_for_stay": 752,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/citizenm-boston-back-bay.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -46180,6 +48473,25 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "availability_by_channel": [
+    {
+     "channel": "Expedia",
+     "availability": "not_listed",
+     "availability_note": "Expedia に掲載なし（名前検索・絞り込みなし約110件にもなし）（2026-10-18時点）",
+     "total_for_stay": null,
+     "price_per_night": null,
+     "stay_dates": "2026-11-20 to 2026-11-22",
+     "currency": "USD",
+     "price_seen_date": "2026-10-18",
+     "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=citizen",
+     "via": "lodging_manual_check_grokbot.md",
+     "confidence": "手動確認"
+    }
+   ],
+   "manual_check_notes": [
+    "4人：部屋は定員2まで",
+    "公式：marriott.com/brands/citizenm.mi に転送され料金は未取得"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 0.07,
     "nearest_rapid_transit_stop": "Hynes Convention Center",
@@ -47260,6 +49572,126 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 2
+    },
+    {
+     "room_type": "One-Bedroom Suite (1 queen, kitchenette)",
+     "max_occupancy": 2,
+     "beds": "1 queen",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "One-Bedroom Suite (1 queen, kitchenette, sleeps 2; only room shown)",
+       "rate_plan": "non-refundable, pay at property; breakfast $1.69 optional",
+       "refundable": false,
+       "price_per_night": null,
+       "nightly_display": 323,
+       "total_for_stay": 646,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 6.5% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/inn-at-st-botolph.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "Booking.com",
+       "room_type": "One-Bedroom Suite",
+       "rate_plan": "free cancel before Nov 13, 2026; pay at property; breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-13",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_display": 359,
+       "total_for_stay": 718,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 2.75% municipality fee, 5.7% tax, 6.5% city tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/inn-at-st-botolph.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Suite, 1 Bedroom (Expedia)",
+     "max_occupancy": 3,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "Suite, 1 Bedroom (sleeps 3; 4 left)",
+       "rate_plan": "Fully refundable before Nov 13 (+$0); breakfast included",
+       "refundable": true,
+       "cancel_until": "2026-11-13",
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 323,
+       "total_for_stay": 743,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees (strike-through $825)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Boston-Hotels-The-Inn-At-St-Botolph.h2201801.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22&adults=2&rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -47307,6 +49739,10 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "4人：部屋は定員2〜3。Expedia は大人4で掲載なし",
+    "公式（travelclick）：25秒待っても料金が出ず未取得"
+   ],
    "transit_raw": {
     "straight_line_km_to_hynes": 0.66,
     "nearest_rapid_transit_stop": "Prudential",
@@ -48278,6 +50714,197 @@
      "taxes_fees_included": false,
      "tax_basis": "Google Hotels の一覧の料金は手数料込み・税抜き（lodging_db_notes.md）",
      "occ_seen": 2
+    },
+    {
+     "room_type": "Twin Room",
+     "max_occupancy": 2,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "Twin Room (sleeps 2; only 1 left)",
+       "rate_plan": "free cancel before Nov 18, 2026; pay at property",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 530,
+       "total_for_stay": 1060,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/midtown.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "The Midtown Hotel (official site, Sonesta)",
+       "room_type": "Twin Room (sleeps 2)",
+       "rate_plan": "Book Early & Save advance purchase: deposit required, on-the-go breakfast included",
+       "refundable": null,
+       "breakfast": true,
+       "price_per_night": null,
+       "total_for_stay": 1223,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "including taxes and fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://be.synxis.com/?Hotel=98269&Chain=5157&arrive=2026-11-20&depart=2026-11-22&adult=2&child=0&rooms=1&currency=USD",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "1泊 $612。N=1 は未検索",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      },
+      {
+       "channel": "The Midtown Hotel (official site, Sonesta)",
+       "room_type": "Twin Room (sleeps 2)",
+       "rate_plan": "Stay More Save More: free cancel up to 4PM 2 days before arrival; breakfast incl.",
+       "refundable": true,
+       "breakfast": true,
+       "price_per_night": null,
+       "total_for_stay": 1235,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "including taxes and fees",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:12–03:15 PT",
+       "url": "https://be.synxis.com/?Hotel=98269&Chain=5157&arrive=2026-11-20&depart=2026-11-22&adult=2&child=0&rooms=1&currency=USD",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "公式サイト表示",
+       "note": "1泊 $618。Travel Pass 会員料金 $605/$1,210 は会員限定のため数えない",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "King Room",
+     "max_occupancy": 2,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Booking.com",
+       "room_type": "King Room (only 1 left)",
+       "rate_plan": "free cancel before Nov 18, 2026; pay at property",
+       "refundable": true,
+       "cancel_until": "2026-11-18",
+       "price_per_night": null,
+       "nightly_display": 539,
+       "total_for_stay": 1078,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": false,
+       "taxes_fees_note": "excl. 16.45% tax",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:08 PT",
+       "url": "https://www.booking.com/hotel/us/midtown.html?checkin=2026-11-20&checkout=2026-11-22&group_adults=1&no_rooms=1",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Booking.com 表示、税抜き）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
+    },
+    {
+     "room_type": "Expedia card (room type not captured)",
+     "max_occupancy": 2,
+     "beds": null,
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": null,
+      "2026-11-21": null
+     },
+     "price_confidence": "手動確認",
+     "price_seen_date": "2026-10-18",
+     "price_source": "lodging_manual_check_grokbot.md",
+     "occupancy_note": null,
+     "offers": [
+      {
+       "channel": "Expedia",
+       "room_type": "(room type not captured; search card; 1 left)",
+       "rate_plan": "Fully refundable; breakfast included (card). Card links to sign-in ('Sign in for extra savings') - price shown is the public card price",
+       "refundable": true,
+       "breakfast": true,
+       "price_per_night": null,
+       "nightly_pre_tax_display": 534,
+       "total_for_stay": 1243,
+       "stay_dates": [
+        "2026-11-20",
+        "2026-11-22"
+       ],
+       "guests": 2,
+       "guests_list": [
+        1,
+        2
+       ],
+       "currency": "USD",
+       "taxes_fees_included": true,
+       "taxes_fees_note": "incl. taxes & fees (strike-through $1,256)",
+       "price_seen_date": "2026-10-18",
+       "captured_pt": "2026-10-18 ~03:11 PT",
+       "url": "https://www.expedia.com/Hotel-Search?destination=Boston%2C%20Massachusetts&regionId=660&startDate=2026-11-20&endDate=2026-11-22&adults=2&rooms=1&hotelName=Midtown",
+       "via": "lodging_manual_check_grokbot.md",
+       "confidence": "手動確認",
+       "price_basis": "2泊の合計（Expedia「Total with taxes and fees」）",
+       "stay_dates_raw": "2026-11-20 to 2026-11-22"
+      }
+     ]
     }
    ],
    "fees_note": "Boston hotel/short-term-rental tax 14.95% (5.7% state + 6.5% city + 2.75% convention center fee; boston.gov FY25 revenue page, mass.gov room occupancy excise). Hotels in the Boston tourism district may add a 1.5% assessment (16.45% total, e.g. YOTEL help center, Meco T&C). Google Hotels list prices are \"nightly price with fees\" i.e. mandatory fees included, taxes NOT included unless an offer says \"taxes + fees\".",
@@ -48325,6 +50952,9 @@
     }
    ],
    "last_checked": "2026-10-18",
+   "manual_check_notes": [
+    "4人：部屋はどれも定員2（Booking.com）。Expedia は大人4で掲載なし"
+   ],
    "transit_to_hynes": "不明（座標なし）",
    "rating": "Google 3.6（1.2K件）",
    "tax": {
@@ -51025,6 +53655,10 @@
     "rate": 14.95,
     "basis": "Boston市外。市の税率は調べていないのでBoston市の14.95%を仮定",
     "assumed": true
+   },
+   "alt_only": {
+    "label": "代替案",
+    "note": "最低泊数は部屋ごとに不明または2泊以上、会場までの所要時間は未確認。おすすめの3件には出さず代替案として示す"
    },
    "min_stay": {
     "warn": true,

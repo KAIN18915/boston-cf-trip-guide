@@ -284,3 +284,34 @@ tr.est td{color:var(--muted,#5b6472)}
 .lbl.c-min{display:inline-flex;align-items:center;gap:3px;background:#fff4e0;color:#8a5a00;border:1px solid #f0d29a}
 .lbl.c-min .ic{width:12px;height:12px}
 .alerts.static li.minstay{color:#8a5a00}
+.sg-alt{margin-top:12px}
+.sg-alt h3{font-size:14px;display:flex;align-items:center;gap:6px;color:var(--muted,#5b6472);margin:0 0 6px}
+.sg-alt .sg{max-width:360px;border-top-color:#9aa3b2}
+.lbl.c-ok{background:#e3f4ea;color:#1d6b3f}
+.ip-sec{margin-bottom:28px}
+.ip-sec h2,#cmp-h{font-size:18px;margin:18px 0 8px}
+.ip-f{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:8px 0}
+.ip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.ip{border:1px solid #d9dee6;border-radius:10px;padding:12px;background:#fff;min-width:0}
+.ip.ip-bad{border-color:#c8102e;background:#fff7f7}
+.ip h3{font-size:15px;margin:0 0 4px}
+.ip-tags{display:flex;flex-wrap:wrap;gap:4px}
+.ip-tot{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.ip-tot dt{font-size:12px;color:#5b6472}
+.ip-tot dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.ip-tot dd small{display:block;font-weight:400;font-size:12px}
+.ip-mm,.ip-ok,.ip-broken{font-size:13px;margin:4px 0}
+.ip-mm{color:#7a4b00}.ip-broken{color:#c8102e}
+.ip-m{font-size:13px;margin:6px 0}
+.ip-fz,.ip-un{font-size:13px;margin:6px 0}
+.ip-fz ul,.ip-un ul{margin:4px 0 0;padding-left:18px}
+.ip .btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.cmp-t td small{display:block}
+@media (max-width:480px){.ip-grid{grid-template-columns:1fr}.ip-tot{grid-template-columns:1fr}}
+.ip-note{font-size:13px;margin:6px 0;color:#3c5677}
+.lbl.c-rec{background:#fff4c2;color:#6b4e00;font-weight:700}
+.ip-rec{font-size:13px;margin:6px 0;background:#fffbe6;padding:6px 8px;border-radius:6px}
+.ip-note ul{margin:4px 0 0;padding-left:18px}
+.ip-side td{min-width:220px;vertical-align:top}
+.ip-side td small{display:block;margin-top:2px}
+.rev{margin:2px 0;display:flex;gap:4px;flex-wrap:wrap}
