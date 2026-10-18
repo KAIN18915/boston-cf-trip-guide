@@ -3,16 +3,20 @@
 (function () {
 'use strict';
 var META = window.SITE_META || {local_photos: {}}, ROOT = META.root || './', PAGE = META.page || 'planner';
-var DB = [], BY = {}, TRIP = null, FL = [], FBY = {};
+var DB = [], BY = {}, TRIP = null, FL = [], FBY = {}, RTQ = [];
 var MAXN = 6, MAXSAVE = 4, STALE_DAYS = 14, SCHEMA = 1;
 var LS = {plan: 'bcf26.plan', saved: 'bcf26.saved', check: 'bcf26.check', ack: 'bcf26.ack', filt: 'bcf26.filters', target: 'bcf26.target'};
 var CONF = {date: '日付指定で確認', est: '概算', from: '〜から', unv: '未確認'};
 var BASIS = {cheapest: '最安', refundable: 'キャンセル可の最安', breakfast: '朝食付き最安', nomember: '会員料金を除く'};
+/* 宿の種類。lodging_db.json の12種類に、seed の旧い種類名を同じ表示名で寄せる */
 var TYPES = {
-  hostel: ['ホステル', 'bed-double'], capsule: ['カプセル', 'bed'], pod: ['カプセル', 'bed'], hotel: ['ホテル', 'hotel'],
-  motel: ['モーテル', 'hotel'], guesthouse: ['ゲストハウス', 'bed-double'], inn: ['イン', 'hotel'], homestay: ['ホームステイ', 'bed-double'],
-  dorm: ['学生寮', 'bed-double'], airbnb_room: ['Airbnb 個室', 'house'], airbnb_entire: ['Airbnb 1棟', 'house'],
-  vrbo_entire: ['Vrbo 1棟', 'house'], apartment: ['アパート', 'house']
+  hotel: ['ホテル', 'hotel'], extended_stay_apartment_hotel: ['長期滞在型ホテル', 'hotel'], motel: ['モーテル', 'hotel'],
+  guesthouse_bnb_inn: ['ゲストハウス・B&B', 'bed-double'], guesthouse: ['ゲストハウス・B&B', 'bed-double'], inn: ['ゲストハウス・B&B', 'bed-double'],
+  hostel: ['ホステル', 'bed-double'], capsule_pod_hotel: ['カプセル', 'bed'], capsule: ['カプセル', 'bed'], pod: ['カプセル', 'bed'],
+  homestay: ['ホームステイ', 'bed-double'], private_room_rental: ['民泊・個室', 'house'], airbnb_room: ['民泊・個室', 'house'],
+  vacation_rental: ['民泊・1棟', 'house'], airbnb_entire: ['民泊・1棟', 'house'], vrbo_entire: ['民泊・1棟', 'house'], apartment: ['民泊・1棟', 'house'],
+  club_hotel: ['クラブのゲストルーム', 'hotel'], community_guest_room: ['団体のゲストルーム', 'bed-double'],
+  university_dorm: ['学生寮', 'bed-double'], dorm: ['学生寮', 'bed-double']
 };
 var FEATS = {
   late: ['深夜チェックイン', /深夜|24時間|24h|セルフチェックイン|self.?check|late.?check/i],
@@ -26,7 +30,8 @@ var WD = ['日', '月', '火', '水', '木', '金', '土'];
 /* 説明（ツールチップ）。30〜80字 */
 var TIPS = {
   pp: '航空券＋宿代÷人数＋空港移動＋市内交通。料金が分からない項目は0にせず「未確認」と出す。',
-  fit: '部屋の定員と必要な部屋数で判定する。空室があるかは別で、予約サイトで確認する。',
+  fit: '部屋の定員と必要な部屋数で判定。定員が不明でもその人数の料金が出ていれば入るとみなす。空室は別に確認。',
+  taxe: '税抜きの宿代に宿泊税（Boston 14.95%、Back Bay・会場周辺 16.45%）を足した概算。地域不明は14.95%を仮定。',
   avail: '空室は確認していない。表示は確認日に掲載があったかどうかで、予約できる保証ではない。',
   verdict: '便の到着・出発時刻、会場の受付時間、宿泊日を照らし合わせた目安。遅延は考えていない。',
   cmp: '同じ日程・人数・部屋タイプで見た料金を並べる。確認日から14日を過ぎたものは要再確認。',
@@ -60,8 +65,8 @@ var T0 = '2026-11-19';
 function tmin(dt) { if (!dt) return null; var d = dt.slice(0, 10), t = dt.slice(11, 16); var m = diffD(T0, d) * 1440; if (t) { var p = t.split(':'); m += +p[0] * 60 + +p[1]; } return m; }
 function confKey(c, note) {
   c = String(c || '').toLowerCase();
-  if (/^(listed|listed_before_fees|confirmed|high|date|date_confirmed|exact|verified)$/.test(c) || c === '日付指定で確認') return 'date';
-  if (/^(from|starting|starting_at)$/.test(c) || c === '〜から') return 'from';
+  if (/^(listed|listed_before_fees|confirmed|high|date|date_confirmed|date_specific|exact|verified)$/.test(c) || c === '日付指定で確認' || c === '手動確認') return 'date';
+  if (/^(from|starting|starting_at|starting_from)$/.test(c) || c === '〜から') return 'from';
   if (c === 'reference' && /〜\s*$|〜（|〜$/.test(note || '')) return 'from';
   if (/^(estimate|estimated|approx|medium|reference)$/.test(c) || c === '概算') return 'est';
   return 'unv';
@@ -75,7 +80,17 @@ function taxOf(set) {
   return a.indexOf(false) >= 0 ? '税・手数料別を含む' : '税込か未確認を含む';
 }
 function typeOf(p) { var t = String(p.type || '').toLowerCase(); return TYPES[t] || TYPES[t.split('_')[0]] || [p.type || '宿', 'hotel']; }
-function singleUnit(p) { return /airbnb|vrbo|entire|homestay|apartment/i.test(p.type || ''); }
+function singleUnit(p) { return /airbnb|vrbo|entire|homestay|apartment|vacation_rental|private_room/i.test(p.type || ''); }
+/* 空室メモ（確認日時点の表示。今の空室ではない）。nights を渡すと、その泊にかかるときだけ返す */
+function availOf(p, nights) {
+  var a = p && p.avail; if (!a) return null;
+  if (nights && a.nights && !nights.some(function (d) { return a.nights.indexOf(d) >= 0; })) return null;
+  return a;
+}
+/* 最低泊数：泊数を超える部屋、または最低泊数が不明な部屋（Homestay.com）は false */
+function minOK(r, nights) { if (r.min_nights_unknown) return false; return !(r.min_nights > nights.length); }
+function minBadge(p) { return p && p.min_stay ? '<span class="lbl c-min">' + ic('calendar-x') + '最低泊数に注意</span>' : ''; }
+function availLbl(a) { return a ? a.label + '（' + md(a.seen) + '時点' + (a.nights ? '・' + a.nights.map(md).join('・') + '泊' : '') + '）' : ''; }
 function km(p) {
   if (!p || p.lat == null || p.lon == null) return null;
   var v = TRIP.venue, R = 6371, r = Math.PI / 180;
@@ -125,7 +140,8 @@ function entries(r, basis, occ) {
   });
   if (basis === 'cheapest' || !offers.length) {
     if (basis !== 'cheapest') known = false;
-    out = out.concat(baseEntries(r));
+    /* 人数つきの料金が合ったら、人数の分からない「日付ごとの最安」は足さない（2人の料金で4人を数えないため） */
+    if (!(matched > 0 && occ != null && offers.some(function (o) { return o.guests != null; }))) out = out.concat(baseEntries(r));
   }
   return {list: out, known: known, nomatch: basis !== 'cheapest' && offers.length > 0 && !matched};
 }
@@ -157,7 +173,8 @@ function blockPrice(list, nights) {
   return best[n];
 }
 function roomUnits(p, r, n) {
-  var occ = r.max_occupancy == null ? null : Math.max(1, r.max_occupancy), perBed = r.pricing === 'per_bed';
+  var mo = r.max_occupancy != null ? r.max_occupancy : r.occ_seen;
+  var occ = mo == null ? null : Math.max(1, mo), perBed = r.pricing === 'per_bed';
   var units = perBed ? n : (occ ? Math.ceil(n / occ) : 1);
   var limit = r.available_units != null ? r.available_units : (singleUnit(p) ? 1 : Infinity);
   return {occ: occ, perBed: perBed, units: units, limit: limit, fits: occ == null ? null : units <= limit, per: perBed ? 1 : (occ ? Math.min(n, occ) : null)};
@@ -196,9 +213,22 @@ function priceFoot(m) { return '<small class="pf">' + esc(seenTxt(m)) + '・' + 
 
 /* ---------- 状態 ---------- */
 var st = {};
-function defFlight(dir, pref) { var f = FBY[pref] && FBY[pref].direction === dir ? FBY[pref] : FL.find(function (x) { return x.direction === dir; }); return f ? f.id : ''; }
+function normNo(x) { return String(x || '').replace(/\s+/g, '').toUpperCase(); }
+function findFl(dir, no, date) {
+  var n = normNo(no); if (!n) return null;
+  var c = FL.filter(function (f) { return f.direction === dir && (f.flight_numbers || []).map(normNo).join('+') === n; });
+  return c.find(function (f) { return !date || f.date === date; }) || null;
+}
+/* 既定の便。古いURL・保存プランの便ID（例：AS460）は便名で読み替え、11/22に無い便（AS306など）は既定の便にする */
+function defFlight(dir, pref) {
+  if (FBY[pref] && FBY[pref].direction === dir) return pref;
+  var D = (TRIP.default_flights || {})[dir] || {}, date = D.date || (dir === 'outbound' ? TRIP.dates.default_in : TRIP.dates.default_out);
+  var f = findFl(dir, pref, date) || findFl(dir, D.no, date) || FL.find(function (x) { return x.direction === dir && !x.alternative; }) || FL.find(function (x) { return x.direction === dir; });
+  return f ? f.id : '';
+}
+function flVisible(f) { return !f.alternative || st.alt || f.id === st.f || f.id === st.r; }
 function defaults() {
-  return {n: 1, ci: TRIP.dates.default_in, co: TRIP.dates.default_out, f: defFlight('outbound', 'AS460'), r: defFlight('return', 'AS306'), auto: 1, fb: '',
+  return {n: 1, ci: TRIP.dates.default_in, co: TRIP.dates.default_out, f: defFlight('outbound', ''), r: defFlight('return', ''), auto: 1, alt: 0, fb: '',
     ti: 'sl1', to: 'logan_express', fo: '', b: 'cheapest', c: {mode: 'same', id: BY.hi_boston ? 'hi_boston' : (DB[0] || {}).id || '', room: null},
     bud: '', oth: '', pv: 'pp', sd: 0, sk: '', sw: 20};
 }
@@ -225,14 +255,14 @@ function parseQ(qs) {
   if (s.ci < TRIP.dates.min || s.ci >= TRIP.dates.max) s.ci = TRIP.dates.default_in;
   if (s.co <= s.ci || s.co > TRIP.dates.max) s.co = addD(s.ci, 1);
   ['f', 'r', 'ti', 'to', 'fo', 'b', 'fb', 'bud', 'oth', 'pv', 'sk'].forEach(function (k) { if (g(k) != null) s[k] = g(k); });
-  if (!FBY[s.f] || FBY[s.f].direction !== 'outbound') s.f = defFlight('outbound', 'AS460');
-  if (!FBY[s.r] || FBY[s.r].direction !== 'return') s.r = defFlight('return', 'AS306');
+  if (!FBY[s.f] || FBY[s.f].direction !== 'outbound') s.f = defFlight('outbound', s.f);
+  if (!FBY[s.r] || FBY[s.r].direction !== 'return') s.r = defFlight('return', s.r);
   if (!FB[s.fb]) s.fb = '';
   if (!BASIS[s.b]) s.b = 'cheapest';
   if (s.pv !== 'grp') s.pv = 'pp';
   if (!TRIP.transfer_in.some(function (t) { return t.id === s.ti; })) s.ti = 'sl1';
   if (!TRIP.transfer_out.some(function (t) { return t.id === s.to; })) s.to = 'logan_express';
-  ['auto', 'sd'].forEach(function (k) { if (g(k) != null) s[k] = +g(k) ? 1 : 0; });
+  ['auto', 'sd', 'alt'].forEach(function (k) { if (g(k) != null) s[k] = +g(k) ? 1 : 0; });
   if (g('sw') && [10, 20, 40].indexOf(+g('sw')) >= 0) s.sw = +g('sw');
   if (g('c') != null) { var c = (g('c') || '').split(',').map(decC).filter(Boolean)[0]; s.c = c || {mode: 'same', id: '', room: null}; }
   return s;
@@ -246,6 +276,7 @@ function toQ(s) {
   ['fo', 'fb', 'bud', 'oth', 'sk'].forEach(function (k) { if (s[k] !== '' && s[k] != null) add(k, encodeURIComponent(s[k])); });
   if (s.pv === 'grp') add('pv', 'grp');
   if (s.sd) add('sd', 1);
+  if (s.alt) add('alt', 1);
   if (s.sw !== 20) add('sw', s.sw);
   add('c', encC(s.c));
   return q.join('&');
@@ -280,7 +311,9 @@ function fareMatch(fa, fb) {
   if (fb === 'bags') return fa.bags_included === true || (typeof fa.bags_included === 'number' && fa.bags_included > 0);
   return true;
 }
-function usable(fa) { return num(fa.price) != null && (!fa.currency || fa.currency === 'USD'); }
+function rtQuote(o, r, fb) { var c = RTQ.filter(function (q) { return q.outbound_id === o && q.return_id === r && fareMatch(q, fb); }); c.sort(function (a, b) { return num(a.price) - num(b.price); }); return c[0] || null; }
+/* 合計に使う運賃：USD・価格あり。往復検索の最安（復路未固定）・旧い確認値・OTA は表に出すだけ */
+function usable(fa) { return num(fa.price) != null && (!fa.currency || fa.currency === 'USD') && fa.one_way_or_rt !== 'rt_total' && !fa.old && !fa.ota; }
 function bestFare(f, fb) { var c = ((f && f.fares) || []).filter(function (fa) { return usable(fa) && fareMatch(fa, fb); }); c.sort(function (a, b) { return num(a.price) - num(b.price); }); return c[0] || null; }
 function flNo(f) { return (f.flight_numbers || []).join('・') || f.label || '便未定'; }
 function flName(f) { return flNo(f) + (f.airline ? '（' + f.airline + '）' : ''); }
@@ -300,7 +333,10 @@ function flightCost() {
   function tx(ps) { return taxOf(new Set(ps.map(function (x) { return x.taxes_included == null ? null : !!x.taxes_included; }))); }
   if (fo && fo.one_way_or_rt === 'rt') return {v: num(fo.price), parts: [fo], note: '往復運賃', conf: confKey(fo.confidence), tax: tx([fo])};
   if (!fo && fr && fr.one_way_or_rt === 'rt') return {v: num(fr.price), parts: [fr], note: '往復運賃', conf: confKey(fr.confidence), tax: tx([fr])};
-  if (fo && fr) return {v: num(fo.price) + num(fr.price), parts: [fo, fr], note: '片道＋片道', conf: [confKey(fo.confidence), confKey(fr.confidence)].sort(function (a, b) { return ['unv', 'from', 'est', 'date'].indexOf(a) - ['unv', 'from', 'est', 'date'].indexOf(b); })[0],
+  /* 往復見積もり：選んだ往路＋復路の組み合わせに往復運賃があり、片道2本より安いか同じならそれを使う */
+  var q = rtQuote(st.f, st.r, st.fb), ow = fo && fr ? num(fo.price) + num(fr.price) : null;
+  if (q && (ow == null || num(q.price) <= ow)) return {v: num(q.price), parts: [q], note: '往復運賃（' + (q.channel || '') + '）' + (ow != null ? '・片道2本なら' + money(ow) : ''), conf: confKey(q.confidence), tax: tx([q]), rt: q, ow: ow};
+  if (fo && fr) return {v: num(fo.price) + num(fr.price), parts: [fo, fr], note: '片道＋片道' + (q ? '・往復（' + q.channel + '）なら' + money(num(q.price)) : ''), conf: [confKey(fo.confidence), confKey(fr.confidence)].sort(function (a, b) { return ['unv', 'from', 'est', 'date'].indexOf(a) - ['unv', 'from', 'est', 'date'].indexOf(b); })[0],
     unclear: fo.one_way_or_rt == null || fr.one_way_or_rt == null, tax: tx([fo, fr])};
   return {v: null, parts: [fo, fr].filter(Boolean), note: (!fo ? '往路' : '復路') + 'の運賃が未確認' + (st.fb ? '（' + FB[st.fb] + '）' : ''), tax: null};
 }
@@ -344,6 +380,8 @@ function itinerary() {
   if (late) add('chk', 'late', 'moon', '深夜着（' + hm(a) + '）。宿の受付時間を確認', 'in-c');
   if (morning) add('chk', 'morning', 'luggage', '朝着。チェックインまで荷物を預ける場所が要る', 'in-c');
   if (f.overnight) add('chk', 'redeye', 'moon', '夜行便。機内泊で寝不足になりやすい', 'in-f');
+  if (f.arrive_airport && f.arrive_airport !== 'BOS') add('chk', 'altair', 'plane-landing', f.arrive_airport + '着。ボストンまでの移動の時間・費用は未計算', 'in-f');
+  if (r.depart_airport && r.depart_airport !== 'BOS') add('chk', 'altdep', 'plane-takeoff', r.depart_airport + '発。空港までの移動の時間・費用は未計算', 'in-r');
   if (!A.known) add('chk', 'arrunk', 'clock', '到着時刻が未確認（' + (f.overnight ? '朝' : '昼') + '着として計算）', 'in-f');
   if (!D.known) add('chk', 'depunk', 'clock', '復路の出発時刻が未確認', 'in-r');
   var lastDay = days[days.length - 1];
@@ -354,6 +392,7 @@ function itinerary() {
   var notes = [];
   if (f.arrival_note && !(late && /^深夜着$/.test(f.arrival_note))) notes.push(['plane-landing', f.arrival_note]);
   if (r.arrival_note) notes.push(['plane-takeoff', r.arrival_note]);
+  [[f, 'plane-landing'], [r, 'plane-takeoff']].forEach(function (x) { (Array.isArray(x[0].notes) ? x[0].notes : []).forEach(function (n) { notes.push([x[1], n]); }); });
   var car = (ti && ti.per === 'car') || (to && to.per === 'car');
   if (st.n > 4 && car) notes.push(['car', '5人以上は車2台で計算']);
   if (st.n === 4 && car) notes.push(['car', '4人で荷物が多いと大型車になることがある（料金未調査）']);
@@ -388,13 +427,22 @@ function calcPlan(it) {
     if (last && last.key === key) last.nights.push(nights[i]);
     else blocks.push({key: key, a: a, nights: [nights[i]]});
   });
-  var total = 0, unknown = [], alerts = [], notes = [], ids = new Set(), feeOpen = false, kms = [];
+  var total = 0, unknown = [], alerts = [], notes = [], ids = new Set(), feeOpen = false, kms = [], taxAdd = 0, taxRates = new Set(), taxAssumed = false;
   blocks.forEach(function (b) {
     if (!b.a) { unknown = unknown.concat(b.nights); alerts.push({k: 'price', icon: 'circle-help', text: b.nights.map(md).join('・') + '泊の宿が未選択'}); b.q = null; return; }
     var p = BY[b.a.id]; ids.add(p.id); kms.push(km(p));
     b.q = lodgingQuote(p, b.nights, n, st.b, b.a.room);
     b.m = partsMeta(b.q.parts);
-    if (b.q.total == null) { unknown = unknown.concat(b.q.unk || b.nights); total += b.q.partial || 0; } else total += b.q.total;
+    /* 追加料金（宿の案内で金額が分かるもの）は合計に入れる */
+    var base0 = b.q.total != null ? b.q.total : (b.q.partial || 0), xf = p.extra_fee, fee = 0;
+    if (xf && base0) fee = xf.per_room_night ? xf.per_room_night * b.nights.length * (b.q.units || 1) : xf.pct ? base0 * xf.pct / 100 : 0;
+    b.fee = fee;
+    /* 税抜きの料金だけに宿泊税を足して「税込み目安」を出す（概算） */
+    var pre = b.q.parts.filter(function (e) { return e.tax === false; }).reduce(function (a, e) { return a + e.amt; }, 0) * (b.q.units || 1);
+    var tx = p.tax || {rate: 14.95, assumed: true};
+    b.taxAdd = pre > 0 ? (pre + (xf && xf.per_room_night ? fee : 0)) * tx.rate / 100 : 0;
+    if (b.taxAdd) { taxAdd += b.taxAdd; taxRates.add(tx.rate); if (tx.assumed) taxAssumed = true; }
+    if (b.q.total == null) { unknown = unknown.concat(b.q.unk || b.nights); total += (b.q.partial || 0) + fee; } else total += b.q.total + fee;
   });
   var fit = blocks.some(function (b) { return b.q && b.q.fits === false; }) ? false : blocks.every(function (b) { return b.q && b.q.fits === true; }) ? true : null;
   blocks.forEach(function (b) {
@@ -403,8 +451,12 @@ function calcPlan(it) {
     if (q.fits === false) alerts.push({k: 'cap', icon: 'users', text: nm + '：' + n + '人は入らない（' + (q.occ || '?') + '人まで' + (isFinite(q.limit) ? '・' + q.limit + '室' : '') + '）'});
     if (q.fits === null) alerts.push({k: 'cap', icon: 'users', text: nm + '：定員の情報がない'});
     if (q.total == null) alerts.push({k: 'price', icon: 'circle-help', text: nm + '：' + (q.unk || b.nights).map(md).join('・') + '泊の料金が未確認' + (q.nomatch ? '（条件に合う料金なし）' : '')});
-    if ((b.m && b.m.tax.has(false)) || p.fees_note) { feeOpen = true; alerts.push({k: 'fee', icon: 'wallet', text: nm + '：' + (p.fees_note || '税・手数料が別の料金') + '（合計に入れていない）'}); }
-    else if (q.total != null && b.m.tax.has(null)) notes.push(['wallet', nm + '：税込かどうか未確認']);
+    if (b.fee) notes.push(['wallet', nm + '：' + p.extra_fee.label + ' ' + money(Math.round(b.fee)) + 'を合計に含めた']);
+    if (b.taxAdd) notes.push(['receipt', nm + '：税抜きの料金。宿泊税' + (p.tax || {rate: 14.95}).rate + '%（' + ((p.tax || {}).basis || '地域不明のため仮定') + '）で税込み目安 +' + money(Math.round(b.taxAdd))]);
+    if (q.total != null && b.m.tax.has(null)) notes.push(['wallet', nm + '：税込かどうか未確認（税込み目安に税を足していない）']);
+    if (p.min_stay && q.room && !minOK(q.room, b.nights)) alerts.push({k: 'cap', icon: 'calendar-x', text: nm + '：最低泊数に注意（' + (q.room.min_nights ? q.room.min_nights + '泊以上' : '最低泊数が不明') + '・この部屋は' + b.nights.length + '泊）'});
+    var av = availOf(p, b.nights);
+    if (av) alerts.push({k: 'avail', icon: av.status === 'none' ? 'circle-x' : 'triangle-alert', text: nm + '：' + availLbl(av) + '。今の空室ではない'});
     if (!q.known) notes.push(['receipt', nm + '：「' + BASIS[st.b] + '」の料金はないので通常の料金で計算']);
     if (q.total != null && b.m.conf === 'est') notes.push(['info', nm + '：概算の料金を含む']);
     if (q.total != null && b.m.conf === 'from') notes.push(['info', nm + '：「〜から」の下限料金']);
@@ -424,9 +476,10 @@ function calcPlan(it) {
   if (tout.lo == null) { unk.push('市内→空港'); alerts.push({k: 'price', icon: 'circle-help', text: '市内→空港：' + (tout.t ? tout.t.label + 'の料金は未調査' : '未選択')}); }
   var unkPrice = unk.slice();
   if (feeOpen) unk.push('税・手数料');
-  var lodPP = total / n, lo = lodPP + (fr.v || 0) + (tin.lo || 0) + (tout.lo || 0) + loc + oth, hi = lodPP + (fr.v || 0) + (tin.hi || 0) + (tout.hi || 0) + loc + oth;
+  var taxPP = taxAdd / n, lodPP = total / n, lo = lodPP + (fr.v || 0) + (tin.lo || 0) + (tout.lo || 0) + loc + oth, hi = lodPP + (fr.v || 0) + (tin.hi || 0) + (tout.hi || 0) + loc + oth;
   var kk = kms.filter(function (x) { return x != null; });
   return {blocks: blocks, nights: nights, total: total, unknown: unknown, lodPP: lodPP, fare: fr, tin: tin, tout: tout, loc: loc, oth: oth, lo: lo, hi: hi, mid: (lo + hi) / 2,
+    taxPP: taxPP, loT: lo + taxPP, hiT: hi + taxPP, midT: (lo + hi) / 2 + taxPP, taxRates: Array.from(taxRates).sort(), taxAssumed: taxAssumed,
     unk: unk, unkPrice: unkPrice, feeOpen: feeOpen, alerts: alerts, notes: notes.concat(it.notes), fit: fit,
     km: kk.length === kms.length && kk.length ? Math.max.apply(null, kk) : null, from: blocks.some(function (b) { return b.m && b.m.conf === 'from'; })};
 }
@@ -439,26 +492,75 @@ function calc(s) {
     return r;
   });
 }
-function deltaOf(base, other) { return base.unkPrice.length || other.unkPrice.length ? null : other.mid - base.mid; }
-function totalTxt(r, grp) {
+function deltaOf(base, other) { return base.unkPrice.length || other.unkPrice.length ? null : other.midT - base.midT; }
+/* 合計。宿に税抜きの料金があるときは「税込み目安」を下に併記する（plain=true なら文字だけ） */
+function totalTxt(r, grp, plain) {
   var k = grp ? r.s.n : 1;
   if (r.unkPrice.length && !r.lo) return '未確認';
-  return range(r.lo * k, r.hi * k) + (r.from ? '〜' : '') + (r.unkPrice.length ? '＋未確認' : r.feeOpen ? '＋税・手数料' : '');
+  var t = range(r.lo * k, r.hi * k) + (r.from ? '〜' : '') + (r.unkPrice.length ? '＋未確認' : r.feeOpen ? '＋税・手数料' : '');
+  if (!r.taxPP) return t;
+  var e2 = range(r.loT * k, r.hiT * k) + (r.unkPrice.length ? '＋未確認' : '');
+  return plain ? t + '（宿泊税抜き）・税込み目安 ' + e2 : t + '<small class="taxe">宿泊税抜き・税込み目安 ' + e2 + '</small>';
 }
 function daysTxt(it) { var d = it.days.filter(function (x) { return x.st !== 'no'; }).map(function (x) { return wd(x.e.date); }); return d.length ? d.join('') : 'なし'; }
 function lodName(r) { var ids = []; r.blocks.forEach(function (b) { if (b.q && ids.indexOf(b.q.p.name) < 0) ids.push(b.q.p.name); }); return ids.join('→') || '宿未選択'; }
 
 /* ---------- 提案（最安・時間優先・バランス） ---------- */
+/* 便の絞り込み：同じ「最初の泊」（往路）・同じ日（復路）の中で、運賃も時刻も他の便に負けている便は外す（運賃不明の便も外す） */
+function inRT(f) { return RTQ.some(function (q) { return q.outbound_id === f.id || q.return_id === f.id; }); }
+function frontier(list, dir) {
+  var g = {};
+  list.forEach(function (f) {
+    var b = bestFare(f, st.fb); if (!b) return;
+    var t, k;
+    if (dir === 'outbound') { var A = flArr(f), at = A.min - tmin(A.date); t = A.min; k = (at < 300 ? addD(A.date, -1) : A.date) + (at >= 22 * 60 || at < 300 ? 'L' : ''); }
+    else { t = -flDep(f).min; k = f.date; }
+    (g[k] = g[k] || []).push({f: f, p: num(b.price), t: t, s: f.stops || 0});
+  });
+  var out = [];
+  Object.keys(g).forEach(function (k) {
+    var a = g[k].sort(function (x, y) { return x.p - y.p || x.s - y.s || x.t - y.t; });
+    a.forEach(function (x, i) { if (inRT(x.f) || !a.slice(0, i).some(function (y) { return y.p <= x.p && y.t <= x.t && y.s <= x.s; })) out.push(x.f); });
+  });
+  return out;
+}
 var SG_CACHE = {key: '', res: null};
 function suggestions() {
-  var key = [st.n, st.bud, st.sd, st.sk, st.sw, st.b, st.fb, st.ti, st.to, st.fo, st.oth].join('|');
+  var key = [st.n, st.bud, st.sd, st.sk, st.sw, st.b, st.fb, st.ti, st.to, st.fo, st.oth, st.alt].join('|');
   if (SG_CACHE.key === key) return SG_CACHE.res;
-  var outs = FL.filter(function (f) { return f.direction === 'outbound' && (!st.sd || f.stops === 0); });
-  var rets = FL.filter(function (f) { return f.direction === 'return' && (!st.sd || f.stops === 0); });
+  var outs = frontier(FL.filter(function (f) { return f.direction === 'outbound' && (!st.sd || f.stops === 0) && (!f.alternative || st.alt); }), 'outbound');
+  var rets = frontier(FL.filter(function (f) { return f.direction === 'return' && (!st.sd || f.stops === 0) && (!f.alternative || st.alt); }), 'return');
   var lods = DB.filter(function (p) { if (excluded(p)) return false; if (st.sk) { var k = km(p); if (k == null || k > +st.sk) return false; } return true; });
+  /* 宿の絞り込み：同じ泊の組み合わせごとに、人数が入り料金が分かる宿を税込み目安の安い順に12件と、近い順に6件だけ計算する。
+     空きなし（確認日時点）の宿はその泊にかかるなら外す */
+  var shortCache = {};
+  function shortlist(nights) {
+    var key = nights.join(',');
+    if (shortCache[key]) return shortCache[key];
+    var cand = [];
+    lods.forEach(function (p) {
+      var av = availOf(p, nights); if (av && av.status === 'none') { why.avail++; return; }
+      var q = null;
+      if (p.min_stay) {
+        (p.rooms || []).forEach(function (r, i) { if (!minOK(r, nights)) return; var x = roomQuote(p, r, i, nights, st.n, st.b); if (x.fits === true && x.total != null && (!q || x.total < q.total)) q = x; });
+        if (!q) { why.minstay++; return; }
+        q.p = p;
+      } else q = lodgingQuote(p, nights, st.n, st.b, null);
+      if (q.fits !== true || q.total == null) { cand.push({p: p, v: null}); return; }
+      var pre = q.parts.filter(function (e) { return e.tax === false; }).reduce(function (a, e) { return a + e.amt; }, 0) * (q.units || 1);
+      var xf = p.extra_fee, fee = xf ? (xf.per_room_night ? xf.per_room_night * nights.length * (q.units || 1) : q.total * xf.pct / 100) : 0;
+      cand.push({p: p, ri: p.min_stay ? q.ri : null, v: q.total + fee + pre * ((p.tax || {}).rate || 14.95) / 100, k: km(p)});
+    });
+    var priced = cand.filter(function (c) { return c.v != null; });
+    var keep = new Set();
+    priced.slice().sort(function (a, b) { return a.v - b.v; }).slice(0, 12).forEach(function (c) { keep.add(c); });
+    priced.filter(function (c) { return c.k != null; }).sort(function (a, b) { return a.k - b.k || a.v - b.v; }).slice(0, 6).forEach(function (c) { keep.add(c); });
+    why.pruned += cand.length - keep.size;
+    return (shortCache[key] = Array.from(keep));
+  }
   var tinOrder = TRIP.transfer_in.filter(function (t) { return t.cost; }).sort(function (a, b) { return a.cost[0] - b.cost[0]; }).map(function (t) { return t.id; });
   var toutOrder = TRIP.transfer_out.filter(function (t) { return t.cost; }).sort(function (a, b) { return a.cost[0] - b.cost[0]; }).map(function (t) { return t.id; });
-  var why = {price: 0, cap: 0, time: 0, budget: 0}, ok = [];
+  var why = {price: 0, cap: 0, time: 0, budget: 0, avail: 0, minstay: 0, pruned: 0}, ok = [];
   outs.forEach(function (o) { rets.forEach(function (rt) {
     var base = clone(st); base.f = o.id; base.r = rt.id; base.auto = 1;
     var r0 = calc(Object.assign(clone(base), {c: {mode: 'same', id: '', room: null}}));
@@ -466,13 +568,13 @@ function suggestions() {
     var tiFix = r0.it.iss.some(function (x) { return x.key === 'tin'; }), toFix = r0.it.iss.some(function (x) { return x.key === 'tout'; });
     if (tiFix) base.ti = tinOrder.find(function (id) { var s2 = Object.assign(clone(base), {ti: id}); return !calc(s2).it.iss.some(function (x) { return x.key === 'tin'; }); }) || base.ti;
     if (toFix) base.to = toutOrder.find(function (id) { var s2 = Object.assign(clone(base), {to: id}); return !calc(s2).it.iss.some(function (x) { return x.key === 'tout'; }); }) || base.to;
-    lods.forEach(function (p) {
-      var s = clone(base); s.c = {mode: 'same', id: p.id, room: null};
+    shortlist(r0.nights).forEach(function (c) {
+      var p = c.p, s = clone(base); s.c = {mode: 'same', id: p.id, room: c.ri};
       var r = calc(s);
       if (r.fit !== true) { why.cap++; return; }
       if (r.v.lv === 'no') { why.time++; return; }
       if (r.unkPrice.length) { why.price++; return; }
-      if (st.bud && r.hi > +st.bud) { why.budget++; return; }
+      if (st.bud && r.hiT > +st.bud) { why.budget++; return; }
       ok.push(r);
     });
   }); });
@@ -483,9 +585,9 @@ function suggestions() {
     function k(r) { return toQ(r.s); }
     var used = {};
     function pick(arr) { var x = arr.find(function (r) { return !used[k(r)]; }) || arr[0]; used[k(x)] = 1; return x; }
-    var cheap = pick(ok.slice().sort(function (a, b) { return a.mid - b.mid; }));
-    var time = pick(ok.slice().sort(function (a, b) { return b.it.hours - a.it.hours || a.mid - b.mid; }));
-    var bal = pick(ok.slice().sort(function (a, b) { return (a.mid + (maxH - a.it.hours) * st.sw + kmv(a) * 5) - (b.mid + (maxH - b.it.hours) * st.sw + kmv(b) * 5); }));
+    var cheap = pick(ok.slice().sort(function (a, b) { return a.midT - b.midT; }));
+    var time = pick(ok.slice().sort(function (a, b) { return b.it.hours - a.it.hours || a.midT - b.midT; }));
+    var bal = pick(ok.slice().sort(function (a, b) { return (a.midT + (maxH - a.it.hours) * st.sw + kmv(a) * 5) - (b.midT + (maxH - b.it.hours) * st.sw + kmv(b) * 5); }));
     res.list = [['cheap', '最安', '費用が最も小さい', cheap], ['time', '時間優先', '会場にいられる時間が最も長い', time], ['bal', 'バランス', '費用と時間・距離を換算して比べる', bal]];
   }
   SG_CACHE = {key: key, res: res};
@@ -500,14 +602,16 @@ function capTxt(q, n) {
   var u = q.perBed ? 'ベッド' + q.units + '床' : q.units + '室';
   return '<span class="st-fit ' + (q.fits === true ? 'ok' : q.fits === false ? 'ng' : 'unv') + '">' + n + '人：' + (q.fits === true ? '適合' : q.fits === false ? '入らない' : '定員未確認') + '（' + u + '）</span>';
 }
-function availTxt(q) {
+function availTxt(q, nights) {
+  var a = q && q.p && availOf(q.p, nights);
+  if (a) return '<span class="st-av av-' + a.status + '">' + esc(availLbl(a)) + '・今の空室ではない</span>';
   var obs = q && q.room && (q.room.offers || []).map(function (o) { return o.availability === 'observed' || o.availability === 'unavailable' ? o : null; }).filter(Boolean)[0];
   if (obs) return '<span class="st-av">' + (obs.availability === 'observed' ? md(obs.price_seen_date || '') + 'に掲載あり' : md(obs.price_seen_date || '') + 'に満室表示') + '・空室は予約サイトで確認</span>';
   return '<span class="st-av">空室：予約サイトで確認</span>';
 }
 function alertList(alerts) {
   if (!alerts.length) return '';
-  var K = {price: '料金未確認', cap: '人数', sched: '日程', fee: '追加料金'};
+  var K = {price: '料金未確認', cap: '人数', sched: '日程', fee: '追加料金', avail: '空室メモ'};
   return '<ul class="alerts">' + alerts.map(function (a) { return '<li class="a-' + a.k + '"' + (a.tgt ? ' data-act="goto" data-tgt="' + a.tgt + '"' : '') + '>' + ic(a.icon) + '<b>' + K[a.k] + '</b><span>' + esc(a.text) + '</span></li>'; }).join('') + '</ul>';
 }
 
@@ -526,10 +630,14 @@ function renderPlanner() {
   var nN = r.nights.length;
   /* 便の候補（差額つき） */
   function fopts(dir) {
-    return FL.filter(function (f) { return f.direction === dir; }).map(function (f) {
-      var sel = dir === 'outbound' ? st.f : st.r, extra = '';
-      if (f.id !== sel) { var s2 = clone(st); s2[dir === 'outbound' ? 'f' : 'r'] = f.id; extra = '　' + dlt(deltaOf(r, calc(s2))); }
-      return opt(f.id, flShort(f) + extra, sel);
+    var sel = dir === 'outbound' ? st.f : st.r, by = {};
+    FL.filter(function (f) { return f.direction === dir && flVisible(f); }).forEach(function (f) { (by[f.date] = by[f.date] || []).push(f); });
+    return Object.keys(by).sort().map(function (d) {
+      return '<optgroup label="' + esc(mdw(d)) + '">' + by[d].map(function (f) {
+        var extra = '';
+        if (f.id !== sel) { var s2 = clone(st); s2[dir === 'outbound' ? 'f' : 'r'] = f.id; extra = '　' + dlt(deltaOf(r, calc(s2))); }
+        return opt(f.id, flShort(f) + (f.stops > 0 ? '・乗継' : '') + (f.alternative ? '・' + (dir === 'outbound' ? f.arrive_airport + '着' : f.depart_airport + '発') : '') + extra, sel);
+      }).join('') + '</optgroup>';
     }).join('');
   }
   function lodMk(night) { return function (id) { var s2 = clone(st); if (night) { s2.c.nights[night] = {id: id, room: null}; } else s2.c = {mode: 'same', id: id, room: null}; return dlt(deltaOf(r, calc(s2))); }; }
@@ -600,9 +708,10 @@ function summaryHTML(r) {
     + '<label class="chip"><input type="radio" name="pv" data-k="pv" value="grp"' + (grp ? ' checked' : '') + '>' + st.n + '人の合計</label></div>'
     + '<table class="sum-t"><tbody>'
     + row('航空券', r.fare.v != null ? money(r.fare.v * k) : '未確認', r.fare.custom ? '手入力' : esc(r.fare.note) + '・' + esc(r.fare.tax || '税込か未確認'), r.fare.v == null ? 'unk' : '')
-    + row('宿泊', lod, r.nights.length + '泊・' + esc(taxOf(lm.tax) || '税込か未確認'), r.unknown.length || r.feeOpen ? 'unk' : '')
+    + row('宿泊', lod, r.nights.length + '泊・' + (r.taxPP ? (lm.tax.size > 1 ? '税込と税抜きが混在' : '宿泊税抜き') + '（税は下の目安）' : esc(taxOf(lm.tax) || '税込か未確認')), r.unknown.length || r.feeOpen ? 'unk' : '')
     + row('空港→市内', r.tin.lo != null ? range(r.tin.lo * k, r.tin.hi * k) : '未確認', esc(r.tin.t ? r.tin.t.label : ''), r.tin.lo == null ? 'unk' : '')
     + row('市内→空港', r.tout.lo != null ? range(r.tout.lo * k, r.tout.hi * k) : '未確認', esc(r.tout.t ? r.tout.t.label : ''), r.tout.lo == null ? 'unk' : '')
+    + (r.taxPP ? row('宿泊税（目安）' + tip(TIPS.taxe), '+' + money(Math.round(r.taxPP * k)), '税抜きの宿代に' + r.taxRates.join('・') + '%' + (r.taxAssumed ? '（一部は地域不明で仮定）' : '') + '・概算', 'est') : '')
     + row('市内交通', money(r.loc * k), '目安')
     + (r.oth ? row('その他', money(r.oth * k), '手入力') : '')
     + '</tbody></table>'
@@ -611,8 +720,8 @@ function summaryHTML(r) {
   if (st.bud) {
     var b = +st.bud, cls, t;
     if (r.unkPrice.length) { cls = 'unv'; t = '予算 ' + money(b) + '/人：既知分で' + (b - r.hi >= 0 ? '残り ' + money(Math.round(b - r.hi)) : money(Math.round(r.hi - b)) + '超過') + '（未確認を除く）'; }
-    else if (r.hi <= b) { cls = 'ok'; t = '予算 ' + money(b) + '/人の内（残り ' + money(Math.round(b - r.hi)) + (r.feeOpen ? '、税・手数料を除く' : '') + '）'; }
-    else { cls = 'ng'; t = '予算 ' + money(b) + '/人を ' + money(Math.round(r.hi - b)) + ' 超える'; }
+    else if (r.hiT <= b) { cls = 'ok'; t = '予算 ' + money(b) + '/人の内（税込み目安で残り ' + money(Math.round(b - r.hiT)) + (r.feeOpen ? '、税・手数料を除く' : '') + '）'; }
+    else { cls = 'ng'; t = '予算 ' + money(b) + '/人を税込み目安で ' + money(Math.round(r.hiT - b)) + ' 超える'; }
     h += '<p class="bud b-' + cls + '">' + ic('wallet') + esc(t) + '</p>';
   }
   h += '<div class="sum-act"><button type="button" class="btn pri" data-act="save-plan">' + ic('bookmark-plus') + '比較に保存</button>'
@@ -628,7 +737,7 @@ function renderSugg(r) {
     + '<label class="fld inl">参加1時間の価値<select data-k="sw">' + [10, 20, 40].map(function (v) { return opt(v, '$' + v, st.sw); }).join('') + '</select></label>' + tip(balTip(st.sw)) + '</div>';
   if (!sg.list.length) {
     var w = sg.why;
-    h += '<p class="note sg-none">条件に合うプランがない。除外：予算超過 ' + w.budget + '・料金未確認 ' + w.price + '・人数 ' + w.cap + '・日程 ' + w.time + '</p>';
+    h += '<p class="note sg-none">条件に合うプランがない。除外：予算超過 ' + w.budget + '・料金未確認 ' + w.price + '・人数 ' + w.cap + '・日程 ' + w.time + '・空きなし ' + w.avail + '・最低泊数 ' + w.minstay + '</p>';
   } else {
     h += '<div class="sg-grid">' + sg.list.map(function (x, i) {
       var p = x[3], s = p.s, pr = p.blocks[0] && p.blocks[0].q ? p.blocks[0].q.p : null;
@@ -636,9 +745,9 @@ function renderSugg(r) {
       var same = toQ(s) === toQ(st);
       return '<article class="sg sg-' + x[0] + '"><header><span class="sg-l">' + x[1] + '</span><b class="sg-p">' + totalTxt(p) + '<small>/人</small></b></header>'
         + '<p class="card-desc">' + esc(desc) + '</p>'
-        + '<p class="sg-m">' + esc(flShort(FBY[s.f])) + '／' + esc(flShort(FBY[s.r])) + '<br>参加' + Math.round(p.it.hours) + '時間（' + daysTxt(p.it) + '）・' + (p.km != null ? '会場まで' + p.km.toFixed(1) + 'km' : '距離不明') + '<br><span class="dl">' + (same ? '今のプラン' : '今より ' + dlt(deltaOf(r, p))) + '</span>' + (p.feeOpen ? '<span class="lbl c-unv">税・手数料別</span>' : '') + '</p>'
+        + '<p class="sg-m">' + esc(flShort(FBY[s.f])) + '／' + esc(flShort(FBY[s.r])) + '<br>参加' + Math.round(p.it.hours) + '時間（' + daysTxt(p.it) + '）・' + (p.km != null ? '会場まで' + p.km.toFixed(1) + 'km' : '会場まで 不明') + '<br><span class="dl">' + (same ? '今のプラン' : '今より ' + dlt(deltaOf(r, p))) + '</span>' + (p.feeOpen ? '<span class="lbl c-unv">税・手数料別</span>' : '') + '</p>'
         + '<button type="button" class="btn" data-act="load-sg" data-i="' + i + '"' + (same ? ' disabled' : '') + '>' + (same ? '選択中' : 'このプランにする') + '</button></article>';
-    }).join('') + '</div><p class="note">掲載データ内での比較。料金未確認・人数不適合・日程不成立の組み合わせは除く（' + sg.n + '件から選択）。</p>';
+    }).join('') + '</div><p class="note">掲載データ内での比較。税込み目安の安い順。料金未確認・人数不適合・日程不成立・空きなし（10/18時点）・最低泊数が合わない宿は除く（' + sg.n + '件から選択）。</p>';
   }
   el.innerHTML = h;
 }
@@ -648,42 +757,75 @@ function renderPlanDetail(r) {
     var q = b.q, p = q.p, rm = q.room;
     var price = q.total != null ? '<b>' + money(q.total) + (b.m.conf === 'from' ? '〜' : '') + '</b>' + lbl(b.m.conf) + priceFoot(b.m)
       : (q.parts.length ? '<b>' + money(q.partial) + '＋未確認</b>' + lbl('unv') + '<small class="pf">' + q.unk.map(md).join('・') + '泊が未確認</small>' + priceFoot(b.m) : '<b>未確認</b>' + lbl('unv'));
-    return '<li><a href="' + stayURL(p.id) + '">' + esc(p.name) + '</a><span class="pl-bm">' + b.nights.map(md).join('・') + '泊・' + esc(rm && rm.room_type || '部屋情報なし') + '</span>'
-      + '<span class="stt">' + capTxt(q, st.n) + tip(TIPS.fit) + availTxt(q) + tip(TIPS.avail) + '</span><span class="pl-bp">' + price + '</span></li>';
+    return '<li><a href="' + stayURL(p.id) + '">' + esc(p.name) + '</a>' + minBadge(p) + '<span class="pl-bm">' + b.nights.map(md).join('・') + '泊・' + esc(rm && rm.room_type || '部屋情報なし') + '</span>'
+      + '<span class="stt">' + capTxt(q, st.n) + tip(TIPS.fit) + availTxt(q, b.nights) + tip(TIPS.avail) + '</span><span class="pl-bp">' + price + '</span></li>';
   }).join('') + '</ul>';
   h += renderFlightList(r);
   if (r.notes.length) h += '<details class="ctl"><summary>そのほかの注意 ' + r.notes.length + '件</summary><div class="db"><ul class="wl">' + r.notes.map(function (w) { return '<li>' + ic(w[0]) + '<span>' + esc(w[1]) + '</span></li>'; }).join('') + '</ul></div></details>';
   $('#plan-detail').innerHTML = h;
 }
 var FL_OPEN = {list: false, rows: []};
-function renderFlightList(r) {
+function fareKind(fa) {
+  if (fa.one_way_or_rt === 'rt_total') return fa.old ? '往復（旧）' : '往復の最安（復路は未固定）';
+  return fa.one_way_or_rt === 'rt' ? '往復' : fa.one_way_or_rt === 'one_way' ? '片道' : '往復/片道不明';
+}
+function fareTable(f, dir) {
   function yn(v, y, n) { return v === true ? y : v === false ? n : (typeof v === 'number' ? v + '個' : (v ? esc(v) : '<span class="muted">?</span>')); }
+  var fares = (f.fares || []).slice().sort(function (x, y) { return (x.old ? 1 : 0) - (y.old ? 1 : 0) || (num(x.price) == null ? 1e9 : num(x.price)) - (num(y.price) == null ? 1e9 : num(y.price)); });
+  if (!fares.length) return '<p class="note">運賃データなし' + (dir === 'return' ? '（往路の往復運賃に含む場合あり）' : '') + '。</p>';
+  return '<div class="tw"><table class="wide"><thead><tr><th>予約先</th><th>運賃種別</th><th>価格</th><th>預け荷物</th><th>変更</th><th>払い戻し</th><th>確認日</th><th></th></tr></thead><tbody>'
+    + fares.map(function (fa) {
+      var cur = fa.currency && fa.currency !== 'USD' ? fa.currency + ' ' : '';
+      var tag = (fa.old ? '<span class="lbl c-old">旧</span>' : '') + (fa.ota ? '<span class="lbl c-unv">OTA・合計に使わない</span>' : '') + (fa.one_way_or_rt === 'rt_total' && !fa.old ? '<span class="lbl c-unv">参考</span>' : '');
+      return '<tr' + (fa.old ? ' class="old"' : '') + '><td>' + esc(fa.channel || '') + (fa.site ? '<small>' + esc(fa.site) + '</small>' : '') + tag + '</td><td>' + (fa.fare_brand ? esc(fa.fare_brand) : '<span class="muted">不明</span>') + (fa.fare_brand_note ? '<small>' + esc(fa.fare_brand_note) + '</small>' : '') + '</td>'
+        + '<td>' + (num(fa.price) != null ? (cur ? cur + num(fa.price) : money(num(fa.price))) : '未確認') + '<small>' + fareKind(fa) + '・' + taxTxt(fa.taxes_included == null ? null : !!fa.taxes_included) + '</small>' + lbl(confKey(fa.confidence)) + '</td>'
+        + '<td>' + yn(fa.bags_included, '込み', 'なし') + '</td><td>' + yn(fa.change_policy) + '</td><td>' + yn(fa.refundable, '可', '不可') + '</td>'
+        + '<td>' + esc(fa.price_seen_date ? md(fa.price_seen_date) : '不明') + (stale(fa.price_seen_date) ? '<span class="lbl c-old">要再確認</span>' : '') + '</td>'
+        + '<td>' + (fa.url ? '<a href="' + esc(fa.url) + '" target="_blank" rel="noopener" aria-label="予約先を開く">' + ic('external-link') + '</a>' : '') + '</td></tr>';
+    }).join('') + '</tbody></table></div>'
+    + ((f.sources || []).length ? '<div class="links">' + f.sources.map(function (x) { return '<a class="btn" href="' + esc(x.url) + '" target="_blank" rel="noopener">' + ic('link') + esc(x.label || '出典') + '</a>'; }).join('') + '</div>' : '');
+}
+function renderFlightList(r) {
   function rows(dir) {
-    return FL.filter(function (f) { return f.direction === dir; }).map(function (f) {
-      var b = bestFare(f, st.fb), chosen = f.id === st.f || f.id === st.r;
-      var s2 = clone(st); s2[dir === 'outbound' ? 'f' : 'r'] = f.id;
-      var d = chosen ? '' : dlt(deltaOf(r, calc(s2)));
-      var fares = (f.fares || []).slice().sort(function (x, y) { return (num(x.price) == null ? 1e9 : num(x.price)) - (num(y.price) == null ? 1e9 : num(y.price)); });
-      var tbl = fares.length ? '<div class="tw"><table class="wide"><thead><tr><th>予約先</th><th>運賃種別</th><th>価格</th><th>預け荷物</th><th>変更</th><th>払い戻し</th><th>確認日</th><th></th></tr></thead><tbody>'
-        + fares.map(function (fa) {
-          var cur = fa.currency && fa.currency !== 'USD' ? fa.currency + ' ' : '';
-          return '<tr><td>' + esc(fa.channel || '') + '</td><td>' + (fa.fare_brand ? esc(fa.fare_brand) : '<span class="muted">不明</span>') + '</td>'
-            + '<td>' + (num(fa.price) != null ? (cur ? cur + num(fa.price) : money(num(fa.price))) : '未確認') + '<small>' + (fa.one_way_or_rt === 'rt' ? '往復' : fa.one_way_or_rt === 'one_way' ? '片道' : '往復/片道不明') + '・' + taxTxt(fa.taxes_included == null ? null : !!fa.taxes_included) + '</small>' + lbl(confKey(fa.confidence)) + '</td>'
-            + '<td>' + yn(fa.bags_included, '込み', 'なし') + '</td><td>' + yn(fa.change_policy) + '</td><td>' + yn(fa.refundable, '可', '不可') + '</td>'
-            + '<td>' + esc(fa.price_seen_date ? md(fa.price_seen_date) : '不明') + (stale(fa.price_seen_date) ? '<span class="lbl c-old">要再確認</span>' : '') + '</td>'
-            + '<td>' + (fa.url ? '<a href="' + esc(fa.url) + '" target="_blank" rel="noopener" aria-label="予約先を開く">' + ic('external-link') + '</a>' : '') + '</td></tr>';
-        }).join('') + '</tbody></table></div>' : '<p class="note">運賃データなし' + (dir === 'return' ? '（往路の往復運賃に含む場合あり）' : '') + '。</p>';
-      return '<details class="fl-row' + (chosen ? ' on' : '') + '" data-id="' + esc(f.id) + '"' + (FL_OPEN.rows.indexOf(f.id) >= 0 ? ' open' : '') + '><summary><span class="fl-n">' + esc(flName(f)) + '</span><span class="fl-t">' + esc(flTime(f)) + '・' + stopsTxt(f) + (f.overnight ? '・夜行' : '') + '</span>'
-        + '<span class="fl-p">' + (b ? money(num(b.price)) + '<small>' + (b.one_way_or_rt === 'rt' ? '往復' : '片道') + '</small>' + fareFoot([b]) : '<span class="muted">運賃未確認</span>') + (d ? '<span class="dl">' + d + '</span>' : '') + '</span>'
-        + '<button type="button" class="btn" data-act="pick-flight" data-dir="' + dir + '" data-id="' + esc(f.id) + '"' + (chosen ? ' disabled' : '') + '>' + (chosen ? ic('check') + '選択中' : 'この便にする') + '</button></summary>'
-        + '<div class="db">' + tbl + ((f.sources || []).length ? '<div class="links">' + f.sources.map(function (s) { return '<a class="btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">' + ic('link') + esc(s.label || '出典') + '</a>'; }).join('') + '</div>' : '') + '</div></details>';
+    var by = {};
+    FL.filter(function (f) { return f.direction === dir && flVisible(f); }).forEach(function (f) { (by[f.date] = by[f.date] || []).push(f); });
+    return Object.keys(by).sort().map(function (d) {
+      return '<h5 class="fl-d">' + esc(mdw(d)) + '</h5>' + by[d].map(function (f) {
+        var b = bestFare(f, st.fb), chosen = f.id === st.f || f.id === st.r, open = FL_OPEN.rows.indexOf(f.id) >= 0;
+        var s2 = clone(st); s2[dir === 'outbound' ? 'f' : 'r'] = f.id;
+        var dd = chosen ? '' : dlt(deltaOf(r, calc(s2)));
+        var ap = f.alternative ? '・' + (dir === 'outbound' ? f.arrive_airport + '着' : f.depart_airport + '発') : '';
+        return '<details class="fl-row' + (chosen ? ' on' : '') + '" data-id="' + esc(f.id) + '" data-dir="' + dir + '"' + (open ? ' open' : '') + '><summary><span class="fl-n">' + esc(flName(f)) + '</span><span class="fl-t">' + esc(flTime(f)) + '・' + stopsTxt(f) + (f.overnight ? '・夜行' : '') + esc(ap) + '</span>'
+          + '<span class="fl-p">' + (b ? money(num(b.price)) + '<small>' + (b.one_way_or_rt === 'rt' ? '往復' : '片道') + '</small>' + fareFoot([b]) : '<span class="muted">運賃未確認</span>') + (dd ? '<span class="dl">' + dd + '</span>' : '') + '</span>'
+          + '<button type="button" class="btn" data-act="pick-flight" data-dir="' + dir + '" data-id="' + esc(f.id) + '"' + (chosen ? ' disabled' : '') + '>' + (chosen ? ic('check') + '選択中' : 'この便にする') + '</button></summary>'
+          + '<div class="db">' + (open ? fareTable(f, dir) : '') + '</div></details>';
+      }).join('');
     }).join('');
   }
   var cur = $('.fl-list');
   FL_OPEN = {list: cur ? cur.open : false, rows: $$('details.fl-row[open]').map(function (d) { return d.dataset.id; })};
-  return '<details class="ctl fl-list"' + (FL_OPEN.list ? ' open' : '') + '><summary>' + ic('plane') + '便と予約先別の運賃（' + FL.length + '便）</summary><div class="db">'
+  var nAlt = FL.filter(function (f) { return f.alternative; }).length, nVis = FL.filter(flVisible).length;
+  return '<details class="ctl fl-list"' + (FL_OPEN.list ? ' open' : '') + '><summary>' + ic('plane') + '便と予約先別の運賃（' + nVis + '便）</summary><div class="db">'
     + '<p class="note">' + esc(TRIP.fare_note || '') + '。時刻は現地時間（SEAとBOSの時差3時間）。</p>'
-    + '<h4>往路</h4>' + rows('outbound') + '<h4>復路</h4>' + rows('return') + '</div></details>';
+    + (nAlt ? '<label class="tg"><input type="checkbox" data-k="alt"' + (st.alt ? ' checked' : '') + '>PVD・MHT発着の便も表示（' + nAlt + '便。ボストンまでの移動は未計算）</label>' : '')
+    + rtTable(r) + '<h4>往路</h4>' + rows('outbound') + '<h4>復路</h4>' + rows('return') + '</div></details>';
+}
+function rtTable(r) {
+  if (!RTQ.length) return '';
+  var q2 = RTQ.slice().sort(function (a, b) { return num(a.price) - num(b.price); });
+  return '<h4>往復の見積もり（便の組み合わせ）</h4><p class="note">往路と復路をこの組み合わせで選ぶと、片道2本の合計より安い場合に往復運賃で計算する。</p><div class="tw"><table class="wide"><thead><tr><th>往路</th><th>復路</th><th>往復/人</th><th>片道2本</th><th>予約先・確認日</th><th></th></tr></thead><tbody>'
+    + q2.map(function (q) {
+      var o = FBY[q.outbound_id], rt = FBY[q.return_id], on = st.f === q.outbound_id && st.r === q.return_id;
+      var fo = bestFare(o, st.fb), fr = bestFare(rt, st.fb), ow = fo && fr ? num(fo.price) + num(fr.price) : null;
+      return '<tr' + (on ? ' class="on"' : '') + '><td>' + esc(flShort(o)) + '</td><td>' + esc(flShort(rt)) + '</td><td>' + money(num(q.price)) + '<small>' + esc(q.fare_brand || '') + '・' + taxTxt(q.taxes_included == null ? null : !!q.taxes_included) + '</small>' + lbl(confKey(q.confidence)) + '</td>'
+        + '<td>' + (ow != null ? money(ow) : '<span class="muted">未確認</span>') + '</td><td>' + esc(q.channel || '') + '・' + esc(q.price_seen_date ? md(q.price_seen_date) : '確認日不明') + (q.url ? ' <a href="' + esc(q.url) + '" target="_blank" rel="noopener" aria-label="予約先を開く">' + ic('external-link') + '</a>' : '') + '</td>'
+        + '<td><button type="button" class="btn sm" data-act="pick-rt" data-o="' + esc(q.outbound_id) + '" data-r="' + esc(q.return_id) + '"' + (on ? ' disabled' : '') + '>' + (on ? '選択中' : 'この組み合わせ') + '</button></td></tr>';
+    }).join('') + '</tbody></table></div>';
+}
+function fillFareRow(d) {
+  if (!d || !d.open || !d.classList.contains('fl-row')) return;
+  var box = d.querySelector('.db'), f = FBY[d.dataset.id];
+  if (box && f && !box.firstChild) box.innerHTML = fareTable(f, d.dataset.dir);
 }
 /* 予約前チェック */
 function checkItems(r) {
@@ -693,7 +835,7 @@ function checkItems(r) {
     {k: 'fl', t: '往復便の日付・時刻', d: '往路 ' + flNo(f) + ' ' + flTime(f) + '・復路 ' + flNo(rt) + ' ' + flTime(rt), sig: [s.f, s.r].join('|')},
     {k: 'dt', t: '宿泊日とチェックアウト日', d: md(s.ci) + 'チェックイン・' + md(s.co) + 'チェックアウト（' + r.nights.length + '泊）', sig: [s.ci, s.co, encC(s.c)].join('|')},
     {k: 'pp', t: '人数・部屋数・定員', d: s.n + '人・' + (b0.map(function (b) { return (b.q.perBed ? 'ベッド' + b.q.units + '床' : b.q.units + '室') + (b.q.fits === true ? '（適合）' : b.q.fits === false ? '（入らない）' : '（定員未確認）'); }).join('／') || '宿が未選択'), sig: [s.n, encC(s.c)].join('|')},
-    {k: 'fee', t: '税・追加料金・キャンセル条件', d: names.map(function (p) { return p.name + '：キャンセル ' + (p.cancellation || '未確認') + (p.fees_note ? '・' + p.fees_note : ''); }).join('／') || '宿が未選択', sig: [encC(s.c), s.b, s.f, s.fb].join('|')},
+    {k: 'fee', t: '税・追加料金・キャンセル条件', d: names.map(function (p) { return p.name + '：キャンセル ' + (p.cancellation || '未確認') + '・宿泊税' + (p.tax ? p.tax.rate + '%' + (p.tax.assumed ? '（仮定）' : '') : '未確認') + (p.extra_fee ? '・' + p.extra_fee.label : '') + (availOf(p, r.nights) ? '・' + availLbl(availOf(p, r.nights)) : ''); }).join('／') || '宿が未選択', sig: [encC(s.c), s.b, s.f, s.fb].join('|')},
     {k: 'fin', t: '予約サイトでの最終金額・空室', d: '表示は確認日時点。予約サイトを開いて最終額を見る', sig: toQ(s)}
   ];
 }
@@ -746,8 +888,8 @@ function photoHTML(p, cls) {
 function maxOcc(p) { return (p.rooms || []).reduce(function (m, r) { return Math.max(m, r.max_occupancy || 0); }, 0); }
 function tileDesc(p, k) {
   var a = String(p.area || 'エリア不明');
-  var s = typeOf(p)[0] + '・' + a + '・' + (k != null ? '会場まで約' + k.toFixed(1) + 'km' : '会場までの距離は未確認');
-  if (s.length > 50) s = typeOf(p)[0] + '・' + areaOf(p) + '・' + (k != null ? '会場まで約' + k.toFixed(1) + 'km' : '会場までの距離は未確認');
+  var s = typeOf(p)[0] + '・' + a + '・' + (k != null ? '会場まで約' + k.toFixed(1) + 'km' : '会場まで 不明');
+  if (s.length > 50) s = typeOf(p)[0] + '・' + areaOf(p) + '・' + (k != null ? '会場まで約' + k.toFixed(1) + 'km' : '会場まで 不明');
   return fitLen(s, 20, 50, maxOcc(p) ? '・1室' + maxOcc(p) + '人まで' : '・定員未確認');
 }
 function renderStays(keepFocus) {
@@ -799,14 +941,14 @@ function renderStays(keepFocus) {
     var p = x.p, q = x.q, m = partsMeta(q.parts), url = stayURL(p.id);
     var s2 = clone(st); if (target && s2.c.mode === 'per') s2.c.nights[target] = {id: p.id, room: null}; else s2.c = {mode: 'same', id: p.id, room: null};
     var isCur = encC(s2.c) === encC(st.c), d = isCur ? 'プランに入っている' : 'プランに入れると ' + dlt(deltaOf(base, calc(s2)));
-    var price = x.pp != null ? '<b>' + money(Math.round(x.pp)) + (m.conf === 'from' ? '〜' : '') + '</b><small>/人・' + nN + '泊</small>' + lbl(m.conf) + (m.tax.has(false) || p.fees_note ? '<span class="lbl c-unv">＋税・手数料</span>' : '') + priceFoot(m)
+    var price = x.pp != null ? '<b>' + money(Math.round(x.pp)) + (m.conf === 'from' ? '〜' : '') + '</b><small>/人・' + nN + '泊</small>' + lbl(m.conf) + (m.tax.has(false) ? '<span class="lbl c-unv">税抜き</span>' : '') + (p.extra_fee ? '<span class="lbl c-unv">' + esc(p.extra_fee.per_room_night ? '＋施設料$' + p.extra_fee.per_room_night + '/泊' : '＋サービス料' + p.extra_fee.pct + '%') + '</span>' : '') + priceFoot(m)
       : (q.parts.length ? '<b>' + money(Math.round(q.partial / st.n)) + '＋未確認</b><small>/人</small>' + lbl('unv') : '<b>未確認</b>' + lbl('unv') + '<small class="pf">この日程の料金データなし</small>');
     return '<article class="lx-tile">' + photoHTML(p, 'lx-ph')
       + '<div class="lx-b">' + (excluded(p) ? '<span class="tag x">候補外</span>' : '')
-      + '<h3><a href="' + url + '">' + esc(p.name) + '</a></h3>'
+      + '<h3><a href="' + url + '">' + esc(p.name) + '</a></h3>' + minBadge(p)
       + '<p class="card-desc">' + esc(tileDesc(p, x.km)) + '</p>'
       + '<p class="lx-p">' + price + '</p>'
-      + '<p class="stt">' + capTxt(q, st.n) + availTxt(q) + '</p>'
+      + '<p class="stt">' + capTxt(q, st.n) + availTxt(q, base.nights) + '</p>'
       + '<p class="dl">' + d + '</p>'
       + '<div class="btns"><a class="btn" href="' + url + '">' + ic('info') + '詳細</a>'
       + '<button type="button" class="btn pri" data-act="to-plan" data-id="' + esc(p.id) + '"' + (isCur ? ' disabled' : '') + '>' + ic('plus') + (target ? md(target) + 'の宿にする' : 'プランに入れる') + '</button></div></div></article>';
@@ -1031,6 +1173,7 @@ function onClick(e) {
   if (act === 'ack') { var ack = lsGet(LS.ack, {}), key = a.dataset.key + '|' + sigOf(calc(st).s); if (ack[key]) delete ack[key]; else ack[key] = 1; lsSet(LS.ack, ack); rerender(); return; }
   if (act === 'save-plan') { savePlan(); renderPlanner(); return; }
   if (act === 'load-sg') { var sg = suggestions().list[+a.dataset.i]; if (sg) { st = clone(sg[3].s); UI.saveMsg = ''; persist(); rerender(); window.scrollTo({top: 0, behavior: 'smooth'}); } return; }
+  if (act === 'pick-rt') { st.f = a.dataset.o; st.r = a.dataset.r; persist(); rerender(); return; }
   if (act === 'pick-flight') { e.preventDefault(); st[a.dataset.dir === 'outbound' ? 'f' : 'r'] = a.dataset.id; persist(); rerender(); return; }
   if (act === 'to-plan') { putInPlan(a.dataset.id, null); location.href = ROOT; return; }
   if (act === 'use-room') { st.c = {mode: 'same', id: META.stay, room: +a.dataset.ri}; sessionStorage.removeItem(LS.target); persist(); rerender(); return; }
@@ -1061,6 +1204,7 @@ function start() {
     DB.forEach(function (p) { p.rooms = Array.isArray(p.rooms) ? p.rooms : []; BY[p.id] = p; });
     TRIP = res[1];
     var fd = res[2];
+    RTQ = (fd && Array.isArray(fd.rt_quotes) ? fd.rt_quotes : []).filter(function (q) { return q && q.outbound_id && q.return_id && num(q.price) != null; });
     FL = (Array.isArray(fd) ? fd : fd.flights || []).filter(function (f) { return f && f.id && f.date && (f.direction === 'outbound' || f.direction === 'return'); });
     FL.forEach(function (f) { f.fares = Array.isArray(f.fares) ? f.fares : []; FBY[f.id] = f; });
     FL.sort(function (a, b) { return (a.date + (a.depart_time ? pad(a.depart_time) : '99')).localeCompare(b.date + (b.depart_time ? pad(b.depart_time) : '99')); });
@@ -1069,6 +1213,7 @@ function start() {
     rerender();
     document.addEventListener('change', onChange);
     document.addEventListener('input', onInput);
+    document.addEventListener('toggle', function (e) { fillFareRow(e.target); }, true);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeSheet(); $$('.tip[aria-expanded="true"]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); } });
     window.addEventListener('hashchange', function () { if (PAGE === 'planner' && oldStayRedirect()) return; if (PAGE === 'planner' && location.hash.indexOf('#/?') === 0) { st = loadPlan(); persist(); rerender(); } else if (PAGE === 'planner' && location.hash.length > 1 && location.hash.indexOf('#/') !== 0) goto(location.hash.slice(1)); });
     window.addEventListener('storage', function (e) { if (e.key === LS.saved || e.key === LS.plan) { if (e.key === LS.plan) st = loadPlan(); rerender(); } });
