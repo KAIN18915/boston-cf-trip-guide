@@ -460,7 +460,8 @@ function calcPlan(it) {
     if (!q.known) notes.push(['receipt', nm + '：「' + BASIS[st.b] + '」の料金はないので通常の料金で計算']);
     if (q.total != null && b.m.conf === 'est') notes.push(['info', nm + '：概算の料金を含む']);
     if (q.total != null && b.m.conf === 'from') notes.push(['info', nm + '：「〜から」の下限料金']);
-    if (p.restrictions) alerts.push({k: 'cap', icon: 'circle-x', text: nm + '：' + p.restrictions});
+    if (p.restrictions) { var cz = p.cautions || [], cr = cz.filter(function (c) { return c.crit; }), use = cr.length ? cr : cz;
+      alerts.push({k: 'cap', icon: 'circle-x', text: nm + '：' + (use.length ? use.map(function (c) { return c.ja || c.en; }).join('。') + (use.length < cz.length ? '（ほか' + (cz.length - use.length) + '件は宿の詳細）' : '') : p.restrictions)}); }
     if (excluded(p)) notes.push(['circle-x', nm + '：ガイドでは候補から外した宿']);
   });
   var first = blocks[0] && blocks[0].q;
@@ -635,7 +636,7 @@ function stepStates(r) {
   var noStay = r.blocks.some(function (b) { return !b.q; });
   var tr = r.tin.lo != null && r.tout.lo != null ? range(r.tin.lo + r.tout.lo + r.loc, r.tin.hi + r.tout.hi + r.loc) : '一部未確認';
   return {
-    1: {st: bad(['in-dates']) ? 'ng' : chk(['in-dates']) ? 'chk' : 'ok', sub: st.n + '人・' + md(st.ci) + '–' + md(st.co) + '（' + r.nights.length + '泊）' + (st.bud ? '・予算' + money(+st.bud) : '')},
+    1: {st: bad(['in-dates']) ? 'ng' : chk(['in-dates']) ? 'chk' : 'ok', sub: st.n + '人 · ' + md(st.ci) + '–' + (st.co.slice(5, 7) === st.ci.slice(5, 7) ? String(+st.co.slice(8)) : md(st.co)) + ' · ' + r.nights.length + '泊' + (st.bud ? ' · 予算' + money(+st.bud) : '')},
     2: {st: bad(['in-f', 'in-r']) ? 'ng' : r.fare.v == null || chk(['in-f', 'in-r']) ? 'chk' : 'ok', sub: r.fare.v != null ? money(r.fare.v) + '/人' : '運賃未確認'},
     3: {st: noStay ? 'none' : r.fit === false ? 'ng' : r.unknown.length || chk(['in-c']) ? 'chk' : 'ok', sub: noStay ? '宿が未選択' : lod + '/人' + (r.taxPP ? '＋税目安' + money(Math.round(r.taxPP)) : '')},
     4: {st: bad(['in-ti', 'in-to']) ? 'ng' : r.tin.lo == null || r.tout.lo == null ? 'chk' : 'ok', sub: tr + '/人'}
@@ -645,9 +646,9 @@ function stepCard(n, title, S, body) {
   var mob = window.matchMedia && window.matchMedia('(max-width:860px)').matches;
   var open = UI.stepOpen[n] != null ? UI.stepOpen[n] : (!mob || n === 1);
   return '<details class="step st-' + S.st + '" data-step="' + n + '" id="step-' + n + '"' + (open ? ' open' : '') + '><summary><span class="st-no" aria-hidden="true">0' + n + '</span><span class="st-t">' + title + '</span>'
-    + '<span class="st-sub">' + esc(S.sub) + '</span>' + stBadge(S.st) + '</summary><div class="st-b">' + body + '</div></details>';
+    + stBadge(S.st) + '<span class="st-sub">' + esc(S.sub) + '</span></summary><div class="st-b">' + body + '</div></details>';
 }
-function stBadge(k) { return '<span class="badge b-' + ({ok: 'ok', chk: 'warn', ng: 'ng', none: 'none'}[k]) + '">' + ic({ok: 'check', chk: 'circle-alert', ng: 'circle-x', none: 'circle-dashed'}[k] || 'info', 'ic sm') + STATE_LBL[k] + '</span>'; }
+function stBadge(k) { return '<span class="badge b-' + ({ok: 'ok', chk: 'warn', ng: 'ng', none: 'none'}[k]) + '">' + ic({ok: 'check', chk: 'circle-alert', ng: 'circle-x', none: 'circle-dashed'}[k] || 'info', 'ic sm') + '<span class="b-t">' + STATE_LBL[k] + '</span></span>'; }
 /* 旅程のタイムライン（PC：日ごとに横並び、スマホ：縦）。空港の時刻は現地時間で PT／ET を付ける */
 function tz(ap) { return /^(SEA|PDX|SFO|LAX)$/.test(ap || '') ? 'PT' : 'ET'; }
 function tlHTML(r) {
@@ -686,10 +687,10 @@ function renderPlanner() {
   var s1 = '<div class="in-grid">'
     + '<label class="fld" id="in-n">人数<select data-k="n">' + ns + '</select></label>'
     + '<label class="fld" id="in-bud">予算/人<input data-k="bud" type="number" min="0" step="10" inputmode="numeric" placeholder="上限なし" value="' + esc(st.bud) + '"></label></div>'
-    + '<div class="in-dates" id="in-dates">' + (st.auto ? '<span>宿泊 ' + md(st.ci) + '–' + md(st.co) + '（' + nN + '泊）</span><small>便から自動</small>'
+    + '<div class="in-dates" id="in-dates">' + (st.auto ? '<span>宿泊 ' + md(st.ci) + '–' + md(st.co) + '（' + nN + '泊）</span>'
       : '<label class="fld">チェックイン<select data-k="ci">' + dates.slice(0, -1).map(function (x) { return opt(x, mdw(x), st.ci); }).join('') + '</select></label>'
       + '<label class="fld">チェックアウト<select data-k="co">' + dates.slice(1).filter(function (x) { return x > st.ci; }).map(function (x) { return opt(x, mdw(x), st.co); }).join('') + '</select></label>') + '</div>'
-    + '<label class="tg"><input type="checkbox" data-k="auto"' + (st.auto ? ' checked' : '') + '>泊数を便の到着・出発から決める</label>'
+    + '<label class="tg" title="泊数を便の到着・出発から決める"><input type="checkbox" data-k="auto"' + (st.auto ? ' checked' : '') + '>泊数は便から自動</label>'
     + '<details class="ctl" id="in-basis"><summary>宿の料金の基準</summary><div class="db">'
     + '<div class="pl-basis" role="radiogroup" aria-label="宿の料金の基準"><span>宿の料金</span>' + Object.keys(BASIS).map(function (k) {
       return '<label class="chip"><input type="radio" name="basis" data-k="b" value="' + k + '"' + (st.b === k ? ' checked' : '') + '>' + BASIS[k] + '</label>'; }).join('') + '</div></div></details>';
@@ -737,26 +738,29 @@ function renderPlanner() {
   $('#plan-side').innerHTML = '<div class="panel sticky sum">' + summaryHTML(r) + '</div>';
   var mb = $('#mbar');
   mb.hidden = false;
-  mb.innerHTML = '<button type="button" class="mbar-b" data-act="sheet-open" aria-haspopup="dialog" aria-controls="sheet"><span class="mb-l"><small>1人あたり概算</small><b>' + totalTxt(r) + '</b></span>'
-    + '<span class="vchip v-' + r.v.lv + '">' + VLBL[r.v.lv] + '</span><span class="mb-r">' + ic('chevron-up') + '内訳を見る</span></button>';
+  var tt = totalTxt(r), ti = tt.indexOf('<small class="taxe">');
+  mb.innerHTML = '<button type="button" class="mbar-b" data-act="sheet-open" aria-haspopup="dialog" aria-controls="sheet">'
+    + '<span class="mb-r1"><small>1人あたり概算</small><span class="vchip v-' + r.v.lv + '">' + VLBL[r.v.lv] + '</span></span>'
+    + '<span class="mb-l mb-r2"><b>' + (ti < 0 ? tt : tt.slice(0, ti)) + '</b><span class="mb-r">' + ic('chevron-up') + '内訳を見る</span></span>'
+    + (ti < 0 ? '' : '<span class="mb-r3">' + tt.slice(ti).replace('<small class="taxe">', '<small class="taxe mb-tx">') + '</span>') + '</button>';
   if (UI.sheet) fillSheet(r);
 }
 function summaryHTML(r) {
   var it = r.it, v = r.v, grp = st.pv === 'grp', k = grp ? st.n : 1;
-  var h = '<details class="vd v-' + v.lv + '" open><summary><b>日程：' + VLBL[v.lv] + '</b>' + (v.open ? '<span class="vd-n">' + v.open + '件</span>' : '') + '</summary>' + tip(TIPS.verdict)
+  var vdH = '<details class="vd v-' + v.lv + '" open><summary><b>日程：' + VLBL[v.lv] + '</b>' + (v.open ? '<span class="vd-n">' + v.open + '件</span>' : '') + '</summary>' + tip(TIPS.verdict)
     + (v.items.length ? '<ul class="vd-l">' + v.items.map(function (x) {
       var cat = /^(order|miss|nodays)$/.test(x.key) ? '日程衝突' : /^(tin|tout|leave)$/.test(x.key) ? '接続時間不足' : '';
       return '<li class="lv-' + x.lv + (x.acked ? ' acked' : '') + '">' + ic(x.icon) + '<span>' + (cat ? '<span class="vcat">' + cat + '</span>' : '') + '<a href="#" data-act="goto" data-tgt="' + x.tgt + '">' + esc(x.text) + '</a></span>'
         + (x.lv === 'chk' ? '<button type="button" class="btn xs" data-act="ack" data-key="' + x.key + '">' + (x.acked ? '確認済み' : '確認した') + '</button>' : '') + '</li>';
     }).join('') + '</ul>' : '<p class="note">矛盾は見つからない。</p>') + '</details>';
-  h += '<div class="dchips">' + it.days.map(function (x) {
+  var dchH = '<div class="dchips">' + it.days.map(function (x) {
     return '<span class="dc d-' + x.st + '"><b>' + md(x.e.date) + '</b>' + (x.st === 'full' ? '終日' : x.st === 'part' ? hm(x.from) + '–' + hm(x.to) : '不可') + '</span>';
   }).join('') + '</div>';
-  function row(lab, val, sub, cls) { return '<tr' + (cls ? ' class="' + cls + '"' : '') + '><th>' + lab + '</th><td>' + val + (sub ? '<small>' + sub + '</small>' : '') + '</td></tr>'; }
+  function row(lab, val, sub, cls) { return '<tr' + (cls ? ' class="' + cls + '"' : '') + '><th>' + lab + '</th><td><span class="sv">' + val + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + '</td></tr>'; }
   var lod = r.unknown.length ? (r.total ? money(r.total / (grp ? 1 : st.n)) + '＋未確認' : '未確認') : money(r.total / (grp ? 1 : st.n)) + (r.from ? '〜' : '');
   if (r.feeOpen && !r.unknown.length) lod += '＋税・手数料';
   var lm = partsMeta([].concat.apply([], r.blocks.map(function (b) { return b.q ? b.q.parts : []; })));
-  h += '<div class="pv" role="radiogroup" aria-label="表示単位"><label class="chip"><input type="radio" name="pv" data-k="pv" value="pp"' + (grp ? '' : ' checked') + '>1人あたり</label>'
+  var tblH = '<div class="pv" role="radiogroup" aria-label="表示単位"><label class="chip"><input type="radio" name="pv" data-k="pv" value="pp"' + (grp ? '' : ' checked') + '>1人あたり</label>'
     + '<label class="chip"><input type="radio" name="pv" data-k="pv" value="grp"' + (grp ? ' checked' : '') + '>' + st.n + '人の合計</label></div>'
     + '<table class="sum-t"><tbody>'
     + row('航空券', r.fare.v != null ? money(r.fare.v * k) : '未確認', r.fare.custom ? '手入力' : esc(r.fare.note) + '・' + esc(r.fare.tax || '税込か未確認'), r.fare.v == null ? 'unk' : '')
@@ -766,8 +770,8 @@ function summaryHTML(r) {
     + (r.taxPP ? row('宿泊税（目安）' + tip(TIPS.taxe), '+' + money(Math.round(r.taxPP * k)), '税抜きの宿代に' + r.taxRates.join('・') + '%' + (r.taxAssumed ? '（一部は地域不明で仮定）' : '') + '・概算', 'est') : '')
     + row('市内交通', money(r.loc * k), '目安')
     + (r.oth ? row('その他', money(r.oth * k), '手入力') : '')
-    + '</tbody></table>'
-    + '<p class="sum-total"><small>' + (grp ? st.n + '人の合計' : '1人あたり') + tip(TIPS.pp) + '</small><b>' + totalTxt(r, grp) + '</b>'
+    + '</tbody></table>';
+  var h = '<p class="sum-total"><small>' + (grp ? st.n + '人の合計' : '1人あたり') + tip(TIPS.pp) + '</small><b>' + totalTxt(r, grp) + '</b>'
     + (r.unk.length ? '<span class="lbl c-unv">' + r.unk.join('・') + 'が未確認</span>' : '') + '</p>';
   if (st.bud) {
     var b = +st.bud, cls, t;
@@ -776,6 +780,7 @@ function summaryHTML(r) {
     else { cls = 'ng'; t = '予算 ' + money(b) + '/人を税込み目安で ' + money(Math.round(r.hiT - b)) + ' 超える'; }
     h += '<p class="bud b-' + cls + '">' + ic('wallet') + esc(t) + '</p>';
   }
+  h += vdH + dchH + '<h3 class="sum-bh">内訳</h3>' + tblH;
   h += '<div class="sum-act"><button type="button" class="btn pri" data-act="save-plan">' + ic('bookmark-plus') + '比較に保存</button>'
     + '<a class="btn" href="#checklist" data-act="goto" data-tgt="checklist">' + ic('list-checks') + '予約前チェック</a></div>'
     + (UI.saveMsg ? '<p class="note save-msg" role="status">' + UI.saveMsg + '</p>' : '');
@@ -801,11 +806,17 @@ function renderSugg(r) {
   } else {
     h += '<div class="sg-grid">' + sg.list.map(function (x, i) {
       var p = x[3], s = p.s, pr = p.blocks[0] && p.blocks[0].q ? p.blocks[0].q.p : null;
-      var desc = fitLen((pr ? pr.name : '宿未選択') + '・' + p.nights.length + '泊（' + md(s.ci) + '–' + md(s.co) + '）', 20, 50, '・参加' + daysTxt(p.it));
-      var same = toQ(s) === toQ(st);
-      return '<article class="sg sg-' + x[0] + '"><header><span class="sg-l">' + x[1] + '</span><b class="sg-p">' + totalTxt(p) + '<small>/人</small></b></header>'
-        + '<p class="card-desc">' + esc(desc) + '</p>'
-        + '<p class="sg-m">' + esc(flShort(FBY[s.f])) + '／' + esc(flShort(FBY[s.r])) + '<br>参加' + Math.round(p.it.hours) + '時間（' + daysTxt(p.it) + '）・' + (p.km != null ? '会場まで' + p.km.toFixed(1) + 'km' : '会場まで 不明') + '<br><span class="dl">' + (same ? '今のプラン' : '今より ' + dlt(deltaOf(r, p))) + '</span>' + (p.feeOpen ? '<span class="lbl c-unv">税・手数料別</span>' : '') + '</p>'
+      var same = toQ(s) === toQ(st), cert = ipCert(p), tt = totalTxt(p), ti = tt.indexOf('<small class="taxe">');
+      function row(k, v, c) { return '<div' + (c ? ' class="' + c + '"' : '') + '><dt>' + k + '</dt><dd>' + v + '</dd></div>'; }
+      return '<article class="sg sg-' + x[0] + '"><header><span class="sg-l">' + x[1] + '</span><span class="tag tag-au">サイト算出</span></header>'
+        + '<p class="sg-p"><b>' + (ti < 0 ? tt : tt.slice(0, ti)) + '</b><small>/人</small><span class="lbl c-' + cert.k + '">' + cert.t + '</span>' + (ti < 0 ? '' : tt.slice(ti)) + '</p>'
+        + '<dl class="sg-m sg-dl">'
+        + '<div><dt>宿</dt><dd class="card-desc">' + esc(pr ? pr.name : '宿未選択') + '</dd></div>'
+        + row('日程', p.nights.length + '泊（' + md(s.ci) + '–' + md(s.co) + '）')
+        + row('往路', esc(flShort(FBY[s.f])))
+        + row('復路', esc(flShort(FBY[s.r])))
+        + row('参加', Math.round(p.it.hours) + '時間（' + daysTxt(p.it) + '）・' + (p.km != null ? '会場まで' + p.km.toFixed(1) + 'km' : '会場まで 不明'))
+        + '</dl><p class="sg-d"><span class="dl">' + (same ? '今のプラン' : '今より ' + dlt(deltaOf(r, p))) + '</span></p>'
         + '<button type="button" class="btn" data-act="load-sg" data-i="' + i + '"' + (same ? ' disabled' : '') + '>' + (same ? '選択中' : 'このプランにする') + '</button></article>';
     }).join('') + '</div>' + altCard(sg.alt, r) + '<p class="note">掲載データ内・税込み目安の安い順。除外：料金未確認・人数不適合・日程不成立・空きなし（10/18時点）・最低泊数不適合（' + sg.n + '件から選択）。</p>';
   }
@@ -966,7 +977,7 @@ function photo(p) {
 }
 function photoHTML(p, cls) {
   var ph = photo(p), t = typeOf(p);
-  if (!ph) return '<div class="' + cls + ' noph" role="img" aria-label="写真なし（実際の宿の写真ではありません）">' + ic(t[1], 'ic lg') + '<small>写真なし（イメージ。実際の宿ではない）</small></div>';
+  if (!ph) return '<div class="' + cls + ' noph" role="img" aria-label="写真なし（実際の宿の写真ではありません）">' + ic(t[1], 'ic lg') + '<span class="noph-t"><b>写真未掲載</b><small>アイコンはイメージ・実際の宿ではない</small></span></div>';
   return '<figure class="' + cls + '"><img src="' + esc(ph.src) + '" alt="' + esc(ph.alt) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer">'
     + '<figcaption>写真: <a href="' + esc(ph.url) + '" target="_blank" rel="noopener">' + esc(ph.cap) + '</a></figcaption></figure>';
 }
@@ -994,7 +1005,7 @@ function stayChips(n, types, areas) {
   if (F.rt) a('評価' + F.rt + '以上', 'rt');
   function c(lab, row, val, on) { return '<button type="button" class="chip fc' + (on ? ' on' : '') + '" data-act="fchip" data-row="' + row + '" aria-controls="lx-fb" aria-expanded="' + (UI.fOpenNow ? 'true' : 'false') + '">' + esc(lab) + (val ? '<b>' + esc(val) + '</b>' : '') + ic('chevron-down', 'ic sm') + '</button>'; }
   return '<div class="lx-chips" role="group" aria-label="絞り込み">' + c('人数', 'fr-n', st.n + '人', false) + c('価格', 'fr-pm', F.pm ? money(+F.pm) + 'まで' : '', !!F.pm)
-    + c('宿タイプ', 'fr-ty', F.ty.length ? F.ty.length + '種' : '', F.ty.length > 0) + c('絞り込み', 'lx-fb', act.length ? act.length + '件' : '', act.length > 0) + '</div>'
+    + c('宿タイプ', 'fr-ty', F.ty.length ? F.ty.length + '種' : '', F.ty.length > 0) + c('詳細条件', 'lx-fb', act.length ? act.length + '件' : '', act.length > 0) + '</div>' + '\u0001'
     + (act.length ? '<div class="lx-active" aria-label="使っている条件">' + act.join('') + '<button type="button" class="btn sm" data-act="reset-f">すべて外す</button></div>' : '');
 }
 function renderStays(keepFocus) {
@@ -1032,11 +1043,13 @@ function renderStays(keepFocus) {
   var fOpen = cur ? cur.open : !(window.matchMedia && window.matchMedia('(max-width:640px)').matches);
   UI.fOpenNow = fOpen;
   var active = F.ty.length + F.ft.length + (F.fit ? 1 : 0) + (F.pm ? 1 : 0) + (F.ar ? 1 : 0) + (F.dm ? 1 : 0) + (F.unk ? 0 : 1) + (F.ex ? 1 : 0);
-  var h = stayChips(list.length, types, areas) + '<div class="lx-top"><label class="fld srch">' + ic('search') + '<input type="search" data-f="q" value="' + esc(F.q) + '" placeholder="宿名・エリアで検索" aria-label="宿名・エリアで検索"></label>'
-    + '<label class="fld inl">並び<select data-f="s">' + opt('price', '安い順', F.s) + opt('dist', '近い順', F.s) + opt('name', '名前順', F.s) + (HASREV ? opt('rate', '評価が高い順', F.s) + opt('stars', 'ランクが高い順', F.s) : '') + '</select></label>'
-    + '<span class="cnt-t" role="status" aria-live="polite"><b>' + list.length + '件</b>／' + DB.length + '件中</span></div>'
+  var chp = stayChips(list.length, types, areas).split('\u0001');
+  var panel = '';
+  var h = chp[0] + '\u0002' + '<div class="lx-top"><label class="fld srch">' + ic('search') + '<input type="search" data-f="q" value="' + esc(F.q) + '" placeholder="宿名・エリアで検索" aria-label="宿名・エリアで検索"></label>'
+    + '<div class="lx-sc"><label class="fld inl">並び<select data-f="s">' + opt('price', '安い順', F.s) + opt('dist', '近い順', F.s) + opt('name', '名前順', F.s) + (HASREV ? opt('rate', '評価が高い順', F.s) + opt('stars', 'ランクが高い順', F.s) : '') + '</select></label>'
+    + '<span class="cnt-t" role="status" aria-live="polite"><b>' + list.length + '件</b>／' + DB.length + '件中</span></div></div>'
     + '<p class="note cond">' + st.n + '人・' + md(st.ci) + '–' + md(st.co) + '（' + nN + '泊）・' + BASIS[st.b] + 'で計算・人数' + tip(TIPS.fit) + '・空室' + tip(TIPS.avail) + (target ? '・<b>' + md(target) + 'の宿を探し中</b>' : '') + '</p>'
-    + '<details class="ctl lx-f"' + (fOpen ? ' open' : '') + '><summary>' + ic('sliders-horizontal') + '絞り込み' + (active ? '（' + active + '）' : '') + '</summary><div class="db lx-fb" id="lx-fb">'
+    + (chp[1] || '') + '\u0003<details class="ctl lx-f"' + (fOpen ? ' open' : '') + '><summary>' + ic('sliders-horizontal') + '絞り込み' + (active ? '（' + active + '）' : '') + '</summary><div class="db lx-fb" id="lx-fb">'
     + '<div class="lx-row" id="fr-n"><label class="fld">人数（プランと共通）<select data-k="n">' + (function () { var o = ''; for (var i = 1; i <= MAXN; i++) o += opt(i, i + '人', st.n); return o; })() + '</select></label></div>'
     + '<div class="lx-row" id="fr-ty"><span class="lx-k">種類</span>' + types.map(function (t) { return '<label class="chip"><input type="checkbox" data-f="ty" value="' + esc(t) + '"' + (F.ty.indexOf(t) >= 0 ? ' checked' : '') + '>' + esc(t) + '</label>'; }).join('') + '</div>'
     + '<div class="lx-row"><span class="lx-k">特徴</span>' + Object.keys(FEATS).map(function (k) { return '<label class="chip"><input type="checkbox" data-f="ft" value="' + k + '"' + (F.ft.indexOf(k) >= 0 ? ' checked' : '') + '>' + FEATS[k][0] + '</label>'; }).join('')
@@ -1049,6 +1062,7 @@ function renderStays(keepFocus) {
     + '<div class="lx-row"><label class="chip"><input type="checkbox" data-f="unk"' + (F.unk ? ' checked' : '') + '>料金未確認も含む</label>'
     + '<label class="chip"><input type="checkbox" data-f="ex"' + (F.ex ? ' checked' : '') + '>候補外も含む</label>'
     + '<button type="button" class="btn" data-act="reset-f">' + ic('x') + '条件をリセット</button></div></div></details>';
+  (function () { var i3 = h.indexOf('\u0003'); var pn = h.slice(i3 + 1); h = h.slice(0, i3).replace('\u0002', function () { return pn; }); })();
   var tiles = list.map(function (x) {
     var p = x.p, q = x.q, m = partsMeta(q.parts), url = stayURL(p.id);
     var s2 = clone(st); if (target && s2.c.mode === 'per') s2.c.nights[target] = {id: p.id, room: null}; else s2.c = {mode: 'same', id: p.id, room: null};
@@ -1057,10 +1071,11 @@ function renderStays(keepFocus) {
       : (q.parts.length ? '<b>' + money(Math.round(q.partial / st.n)) + '＋未確認</b><small>/人</small>' + lbl('unv') : '<b>未確認</b>' + lbl('unv') + '<small class="pf">この日程の料金データなし</small>');
     return '<article class="lx-tile">' + photoHTML(p, 'lx-ph')
       + '<div class="lx-b">' + (excluded(p) ? '<span class="tag x">候補外</span>' : '')
-      + '<h3><a href="' + url + '">' + esc(p.name) + '</a></h3>' + minBadge(p) + revBadge(p)
-      + '<p class="card-desc">' + esc(tileDesc(p, x.km)) + '</p>'
+      + '<h3><a href="' + url + '">' + esc(p.name) + '</a></h3>'
       + '<p class="lx-p">' + price + '</p>'
       + '<p class="stt">' + capTxt(q, st.n) + availTxt(q, base.nights) + '</p>'
+      + minBadge(p) + revBadge(p)
+      + '<p class="card-desc">' + esc(tileDesc(p, x.km)) + '</p>'
       + '<p class="dl">' + d + '</p>'
       + '<div class="btns"><a class="btn" href="' + url + '">' + ic('info') + '詳細</a>'
       + '<button type="button" class="btn pri" data-act="to-plan" data-id="' + esc(p.id) + '"' + (isCur ? ' disabled' : '') + '>' + ic('plus') + (target ? md(target) + 'の宿にする' : 'プランに入れる') + '</button></div></div></article>';
@@ -1126,7 +1141,7 @@ function renderStayDetail() {
     + '<p class="cond">' + md(st.ci) + '–' + md(st.co) + '・' + nights.length + '泊・' + n + '人・部屋タイプごと</p>'
     + '<div class="lx-top"><label class="fld inl">並び<select data-act="cmp-sort">' + opt('total', '総額順', CMP_SORT) + opt('free', 'キャンセル無料を先に', CMP_SORT) + '</select></label></div>';
   if (!rows.length) h += '<p class="note">料金データはまだない。</p>';
-  else h += '<div class="tw"><table class="wide cmp"><thead><tr><th>予約先</th><th>部屋・プラン</th><th>総額</th><th>税・手数料</th><th>キャンセル</th><th>確認日</th><th></th></tr></thead><tbody>'
+  else h += '<div class="tw tw-off"><table class="wide cmp offers"><thead><tr><th>予約先<small>部屋・プラン・キャンセル</small></th><th>総額</th><th>税・手数料</th><th>確認日</th><th><span class="sr">操作</span></th></tr></thead><tbody>'
     + rows.map(function (x) {
       var price = x.cur ? '<span class="muted">' + esc(x.cur) + '（合計に入れない）</span>' : x.mism != null ? '<span class="muted">' + x.mism + '人の料金（条件が違う）</span>'
         : x.total != null ? '<b>' + money(x.total) + '</b><small>1人 ' + money(Math.round(x.total / n)) + '・' + (x.perBed ? x.units + '床' : x.units + '室') + '</small>'
@@ -1134,10 +1149,11 @@ function renderStayDetail() {
       var badges = (x.total != null && x.total === minT ? '<span class="lbl c-date">最安</span>' : '') + (x.total != null && x.total === minF && x.refundable ? '<span class="lbl c-est">キャンセル無料の最安</span>' : '') + (x.member ? '<span class="lbl c-from">会員価格</span>' : '');
       var bd = x.bd ? '<small>' + (x.bd[0] != null ? '基本' + money(x.bd[0]) : '基本?') + '＋税' + (x.bd[1] != null ? money(x.bd[1]) : '?') + '＋手数料' + (x.bd[2] != null ? money(x.bd[2]) : '?') + '</small>' : '';
       var av = x.avail === 'observed' ? '<small>確認日に掲載あり</small>' : x.avail === 'unavailable' ? '<small>確認日に満室表示</small>' : '';
-      return '<tr' + (x.fits === false ? ' class="ng"' : '') + '><td>' + esc(x.src) + badges + '</td><td>' + esc(x.room.room_type || '部屋') + (x.plan ? '<small>' + esc(x.plan) + '</small>' : '') + (x.fits === false ? '<small><em>' + n + '人は入らない</em></small>' : '') + '</td>'
-        + '<td>' + price + lbl(x.conf) + '</td><td>' + taxTxt(x.tax) + bd + '</td><td>' + yn(x.refundable) + '</td>'
-        + '<td>' + (x.seen ? md(x.seen) : '不明') + (stale(x.seen) ? '<span class="lbl c-old">要再確認</span>' : '') + av + '</td>'
-        + '<td class="acts">' + (x.url ? '<a class="ib" href="' + esc(x.url) + '" target="_blank" rel="noopener" aria-label="予約サイトを開く">' + ic('external-link') + '</a>' : '')
+      return '<tr' + (x.fits === false ? ' class="ng"' : '') + '><td class="o-src" data-l="予約先"><b>' + esc(x.src) + '</b>' + badges
+        + '<small class="o-sub">' + esc(x.room.room_type || '部屋') + (x.plan ? '・' + esc(x.plan) : '') + '・キャンセル：' + yn(x.refundable) + '</small>' + (x.fits === false ? '<small><em>' + n + '人は入らない</em></small>' : '') + '</td>'
+        + '<td class="o-num" data-l="総額">' + price + lbl(x.conf) + '</td><td data-l="税・手数料">' + taxTxt(x.tax) + bd + '</td>'
+        + '<td class="o-num" data-l="確認日">' + (x.seen ? md(x.seen) : '不明') + (stale(x.seen) ? '<span class="lbl c-old">要再確認</span>' : '') + av + '</td>'
+        + '<td class="acts">' + (x.url ? '<a class="btn xs" href="' + esc(x.url) + '" target="_blank" rel="noopener">' + ic('external-link') + '予約サイト</a>' : '')
         + '<button type="button" class="btn xs" data-act="use-room" data-ri="' + x.ri + '">この部屋で計算</button></td></tr>';
     }).join('') + '</tbody></table></div><p class="note">最終額と空室は予約サイトで確認する。</p>';
   $('#stay-cmp').innerHTML = h;
@@ -1145,15 +1161,20 @@ function renderStayDetail() {
   var s2 = clone(st); if (target && s2.c.mode === 'per') s2.c.nights[target] = {id: p.id, room: null}; else s2.c = {mode: 'same', id: p.id, room: s2.c.id === p.id ? s2.c.room : null};
   var r2 = calc(s2), q = lodgingQuote(p, nights, n, st.b, s2.c.mode === 'same' ? s2.c.room : null), m = partsMeta(q.parts);
   var inPlan = encC(s2.c) === encC(st.c);
-  var btn = '<button type="button" class="btn pri" data-act="to-plan" data-id="' + esc(p.id) + '"' + (inPlan ? ' disabled' : '') + '>' + ic('plus') + (inPlan ? 'プランに入っている' : target ? md(target) + 'の宿として入れる' : 'プランに入れる') + '</button>';
+  var btn = inPlan ? '<button type="button" class="btn sel-ok" data-act="to-plan" data-id="' + esc(p.id) + '" aria-pressed="true" disabled>' + ic('check') + 'プランに入っている</button>'
+    : '<button type="button" class="btn pri" data-act="to-plan" data-id="' + esc(p.id) + '">' + ic('plus') + (target ? md(target) + 'の宿として入れる' : 'プランに入れる') + '</button>';
+  var chg = inPlan ? '<a class="btn" href="../" data-act="back-list">' + ic('shuffle') + '別の宿にする</a>' : '';
   var kmv = km(p);
   var sp = '<h2>このプランだと</h2><dl class="sp-kv"><div><dt>人数</dt><dd>' + n + '人</dd></div><div><dt>日程</dt><dd>' + md(st.ci) + '–' + md(st.co) + '</dd></div><div><dt>泊数</dt><dd>' + nights.length + '泊</dd></div>'
     + '<div><dt>会場まで</dt><dd>' + (kmv != null ? '直線' + kmv.toFixed(1) + 'km' : '不明（座標なし）') + (typeof p.transit_to_hynes === 'string' ? '<small>' + esc(p.transit_to_hynes) + '</small>' : '') + '</dd></div></dl>'
-    + '<p class="sp-price">' + (q.total != null ? '<b>' + money(Math.round(q.total / n)) + '</b><small>/人（宿' + money(q.total) + '）</small>' + lbl(m.conf) : q.parts.length ? '<b>' + money(Math.round(q.partial / n)) + '＋未確認</b><small>/人</small>' : '<b>未確認</b>') + '</p>'
-    + (q.parts.length ? priceFoot(m) : '')
+    + '<div class="sp-amt sp-a1"><span class="sp-k">この宿の料金</span><p class="sp-price">' + (q.total != null ? '<b>' + money(Math.round(q.total / n)) + '</b><small>/人（宿' + money(q.total) + '）</small>' : q.parts.length ? '<b>' + money(Math.round(q.partial / n)) + '＋未確認</b><small>/人</small>' : '<b>未確認</b>') + '</p>'
+    + '<div class="sp-c">' + (q.total != null ? lbl(m.conf) : lbl('unv')) + '</div>' + (q.parts.length ? priceFoot(m) : '') + '</div>'
     + '<p class="stt">' + capTxt(q, n) + tip(TIPS.fit) + availTxt(q) + '</p>'
-    + '<p class="sp-tot">旅行全体 1人 ' + totalTxt(r2) + '<br>' + n + '人の合計 ' + totalTxt(r2, true) + (inPlan ? '' : '<span class="dl">今より ' + dlt(deltaOf(base, r2)) + '</span>') + '</p>'
-    + btn + '<a class="btn" href="' + ROOT + '">' + ic('arrow-left') + 'プランに戻る</a>';
+    + (function () { var tt = totalTxt(r2), ti = tt.indexOf('<small class="taxe">'), tg = totalTxt(r2, true), tgi = tg.indexOf('<small class="taxe">');
+        return '<div class="sp-amt sp-a2"><span class="sp-k">プラン全体</span><p class="sp-tot"><b>' + (ti < 0 ? tt : tt.slice(0, ti)) + '</b><small>/人</small></p>'
+          + '<p class="sp-g">' + n + '人の合計 ' + (tgi < 0 ? tg : tg.slice(0, tgi)) + '</p>' + (inPlan ? '' : '<span class="dl">今より ' + dlt(deltaOf(base, r2)) + '</span>') + '<div class="sp-c">' + lbl(ipCert(r2).k) + '</div></div>'
+          + (ti < 0 ? '' : '<div class="sp-amt sp-a3"><span class="sp-k">税込目安</span><p>' + '<b>' + tt.slice(ti).replace(/<\/?small[^>]*>/g, '').replace('宿泊税抜き・税込み目安 ', '') + '</b><small>/人</small></p><p class="sp-g">' + n + '人の合計 ' + tg.slice(tgi).replace(/<\/?small[^>]*>/g, '').replace('宿泊税抜き・税込み目安 ', '') + '</p><div class="sp-c">' + lbl('est') + '</div></div>'); })()
+    + '<div class="sp-act">' + btn + chg + '<a class="btn" href="' + ROOT + '">' + ic('arrow-left') + 'プランに戻る</a></div>';
   $('#stay-plan').innerHTML = sp;
   var mb = $('#dt-mbar');
   if (!mb) { mb = document.createElement('div'); mb.id = 'dt-mbar'; mb.className = 'dt-mbar'; var dk = $('#dock'); if (dk) dk.insertBefore(mb, dk.firstChild); else document.body.appendChild(mb); }
@@ -1194,6 +1215,9 @@ var IP_FIELDS = {
   meta: function (c) { var p = c.p, r = c.r; return '<p class="ip-m">' + esc(p.dates ? md(p.dates.check_in) + '–' + md(p.dates.check_out) + '・' + p.dates.nights + '泊' : '') + '／' + esc(p.items && p.items.lodging ? p.items.lodging.name + (p.items.lodging.units > 1 ? '×' + p.items.lodging.units + '室' : '') : '') + '<br>'
     + (r ? esc(flShort(FBY[r.s.f])) + '／' + esc(flShort(FBY[r.s.r])) : esc(((p.items || {}).outbound || {}).flight_id || '') + '／' + esc(((p.items || {}).return || {}).flight_id || '')) + '</p>'; },
   feasibility: function (c) { var fz = c.fz; return '<div class="ip-fz"><b>実現性：</b>' + fzLbl(c.p) + ((fz.notes || []).length ? '<ul>' + fz.notes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') + '</div>'; },
+  stay: function (c) { var q = c.p.stay_q, a = c.p.raw_alt; if (!q && !a) return '';
+    return '<div class="ip-stayf"><b>宿の口コミ判定：</b>' + (q ? esc(q.label) + (q.rating ? '（' + esc(q.rating) + '）' : '') + (q.notes.length ? '<ul>' + q.notes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') : '記載なし')
+      + (a && a.why ? '<p><b>代替案を既定にしない理由（作成者）：</b>' + esc(a.why) + '</p>' : '') + '<p class="note">自動で拾った口コミの件数。誤検出を含み、事実の確認ではない</p></div>'; },
   note: function (c) { var n = txtList(c.p.note); return n.length ? '<div class="ip-notef"><b>注記：</b><ul>' + n.map(function (x) { return '<li>' + esc(typeof x === 'string' ? x : JSON.stringify(x)) + '</li>'; }).join('') + '</ul></div>' : ''; },
   unconfirmed: function (c) { var un = (c.p.unconfirmed || []).concat((c.T.unknown_parts || []).map(function (x) { return '合計外：' + (typeof x === 'string' ? x : JSON.stringify(x)); }));
     return '<div class="ip-un"><b>未確認：</b>' + (un.length ? '<ul>' + un.map(function (x) { return '<li>' + esc(typeof x === 'string' ? x : JSON.stringify(x)) + '</li>'; }).join('') + '</ul>' : 'なし') + '</div>'; },
@@ -1248,11 +1272,13 @@ function ipSort(list, how) {
   return list.slice().sort(fn);
 }
 /* まず見る3プラン：方針ごとに1件。日程NG・人数NGは出さない。足りなくても埋めない */
+function qOK(p) { return p.stay_q && p.stay_q.level === 'green' ? 1 : 0; } /* 作成者の「おすすめ」→口コミ判定を通った宿→日程OK の順 */
+function isCore(p) { return ['cheapest', 'balance', 'time_first'].indexOf(p.scenario) >= 0 ? 1 : 0; } /* 方針そのものの案（入り方・帰り方の比較用でない） */
 function ipReps(base) {
   return ['最安', 'バランス', '時間優先'].map(function (s) {
     var c = base.filter(function (p) { var r = ipCalc(p); return ipStrat(p) === s && r && ipSchedOK(p) && r.fit !== false; });
     c.sort(function (a, b) { var ra = ipCalc(a), rb = ipCalc(b);
-      return ((rb.fit === true && rb.v.lv === 'ok' ? 1 : 0) - (ra.fit === true && ra.v.lv === 'ok' ? 1 : 0)) || ((b.recommended ? 1 : 0) - (a.recommended ? 1 : 0)) || (ipUnc(a) - ipUnc(b))
+      return ((b.recommended ? 1 : 0) - (a.recommended ? 1 : 0)) || (qOK(b) - qOK(a)) || (isCore(b) - isCore(a)) || ((rb.fit === true && rb.v.lv === 'ok' ? 1 : 0) - (ra.fit === true && ra.v.lv === 'ok' ? 1 : 0)) || ((b.recommended ? 1 : 0) - (a.recommended ? 1 : 0)) || (ipUnc(a) - ipUnc(b))
         || ((ra.unkPrice.length ? 1 : 0) - (rb.unkPrice.length ? 1 : 0)) || a.id.localeCompare(b.id); });
     return {s: s, p: c[0] || null};
   });
@@ -1263,8 +1289,19 @@ function cut(s, n) { s = String(s || ''); if (s.length <= n) return {t: s, more:
 function ipNotes(p) { return txtList(p.note).concat((p.feasibility || {}).notes || [], (p.unconfirmed || []).map(function (x) { return '未確認：' + (typeof x === 'string' ? x : JSON.stringify(x)); })).map(function (x) { return typeof x === 'string' ? x : JSON.stringify(x); }); }
 function ipDetail(p, c) {
   var flds = (IP_LAYOUT.card_fields || []).slice();
-  ['rec', 'totals', 'check', 'meta', 'feasibility', 'note', 'unconfirmed', 'proscons'].forEach(function (k) { if (flds.indexOf(k) < 0) flds.push(k); });
+  ['rec', 'totals', 'check', 'meta', 'stay', 'feasibility', 'note', 'unconfirmed', 'proscons'].forEach(function (k) { if (flds.indexOf(k) < 0) flds.push(k); });
   return '<details class="ctl ip-more"><summary>詳細・全文</summary><div class="db"><p class="ip-ot">' + esc(p.title || p.id) + '</p>' + flds.map(function (k) { return IP_FIELDS[k] ? IP_FIELDS[k](c) : ''; }).join('') + '</div></details>';
+}
+/* 宿の口コミ判定（作成者の判定。警告は「最近の口コミでの指摘」の形）と、生の最安を代替案として */
+var Q_SHORT = {green: '赤信号なし', amber: '注意', red: '除外の基準', unrated: '評価点のみ'};
+function ipQual(p) {
+  var q = p.stay_q, a = p.raw_alt, h = '';
+  if (q) h += '<p class="ip-q q-' + esc(q.level) + '"><span class="lbl">' + esc(q.label) + '</span>' + (q.rating ? '<small>' + esc(q.rating) + '</small>' : '') + (q.other ? '<small class="ip-q2">' + (q.other === q.level ? auLbl(q.other_by) + 'の判定も同じ' : auLbl(q.other_by) + 'の判定：' + esc(Q_SHORT[q.other] || q.other)) + '</small>' : '')
+    + (q.level !== 'green' && q.notes.length ? '<span class="ip-qn">' + esc(q.notes[0]) + (q.notes.length > 1 ? '（ほか' + (q.notes.length - 1) + '件）' : '') + '</span>' : '') + '</p>';
+  if (a) h += '<div class="ip-alt" data-alt="' + esc(a.site_id) + '"><p><b class="tag tag-alt">代替案</b>生の最安：<a href="' + ROOT + 'stays/' + esc(a.site_id) + '/">' + esc(a.name) + '</a>'
+    + (a.total_pp != null ? '・1人$' + Math.round(a.total_pp).toLocaleString('en-US') + '<small>（作成者の概算）</small>' : '') + '</p>'
+    + (a.warnings.length ? '<p class="ip-altw">' + ic('triangle-alert', 'ic sm') + esc(a.warnings.join('・')) + '</p>' : '') + '</div>';
+  return h;
 }
 function ipCard(p, sel) {
   var bad = p.broken || [], r = ipCalc(p), t = p.tags || {}, cert = ipCert(r);
@@ -1276,7 +1313,7 @@ function ipCard(p, sel) {
     + '<p class="ip-meta">' + p.party_size + '人・帰り' + esc(t.return || '不明') + fzLbl(p) + (c.ck && c.ck.bad ? '<span class="lbl c-unv">合計不一致</span>' : '') + '</p>'
     + '<p class="ip-why' + (p.recommended ? ' ip-rec' : '') + '">' + (reason ? esc(rc.t) : '<span class="muted">理由の記載なし</span>') + '</p>'
     + '<p class="ip-note">' + (nc ? '<b>注記 ' + notes.length + '件</b>' + esc(nc.t) : '<b>注記なし</b>') + '</p>'
-    + (bad.length ? '<p class="ip-broken"><b>壊れたプラン</b>（未登録ID）：' + bad.map(esc).join('／') + '</p>' : '')
+    + '<div class="ip-qa">' + ipQual(p) + (bad.length ? '<p class="ip-broken"><b>壊れたプラン</b>（未登録ID）：' + bad.map(esc).join('／') + '</p>' : '') + '</div>'
     + ipDetail(p, c)
     + '<div class="btns ip-btns"><label class="chip"><input type="checkbox" data-act="ip-cmp" value="' + esc(p.id) + '"' + (sel ? ' checked' : '') + (bad.length ? ' disabled' : '') + '>比較に追加</label>'
     + '<button type="button" class="btn pri" data-act="ip-open" data-id="' + esc(p.id) + '"' + (bad.length ? ' disabled' : '') + '>' + ic('external-link') + 'ビルダーで開く</button></div></article>';
@@ -1353,8 +1390,13 @@ function renderCompare() {
   function cells(fn) { return rs.map(function (r, i) { return '<td>' + fn(r, i) + '</td>'; }).join(''); }
   function row(lab, fn, cls) { return '<tr' + (cls ? ' class="' + cls + '"' : '') + '><th>' + lab + '</th>' + cells(fn) + '</tr>'; }
   var nIdeal = cols.filter(function (x) { return x.kind === 'ideal'; }).length;
-  var h = '<p class="note">保存 ' + (cols.length - nIdeal) + '/' + MAXSAVE + '件' + (nIdeal ? '＋おすすめ ' + nIdeal + '件' : '') + '・差額は「' + esc(cols[0].name) + '」基準</p><details class="cmp-wrap" open><summary>比較表を' + '<span class="cw-o">閉じる</span><span class="cw-c">開く</span>（' + cols.length + '件）</summary><div class="tw"><table class="cmp-t cmp-main" style="--nc:' + cols.length + '"><thead><tr><th></th>'
-    + cols.map(function (x, i) { var r = rs[i]; return '<th scope="col">' + (i === 0 ? '<span class="lbl c-est">基準</span>' : '') + (r.v.lv === 'no' ? '<span class="lbl c-old">日程が成立しない</span>' : '') + (x.kind === 'ideal' ? '<span class="lbl c-date">おすすめ・' + esc(auLbl(x.p.author)) + '</span>' : '') + esc(x.name) + (minMid != null && !r.unkPrice.length && r.mid === minMid ? '<span class="lbl c-date">最安</span>' : '') + (minKm != null && r.km === minKm ? '<span class="lbl c-est">最短アクセス</span>' : '') + '</th>'; }).join('') + '</tr></thead><tbody>'
+  var mixP = rs.some(function (r) { return r.s.n !== rs[0].s.n; }), mixN = rs.some(function (r) { return r.nights.length !== rs[0].nights.length; });
+  var chips = '<span class="tag">比較中' + cols.length + '件（保存' + (cols.length - nIdeal) + '/' + MAXSAVE + (nIdeal ? '・おすすめ' + nIdeal : '') + '）</span><span class="tag">基準：' + esc(cols[0].name) + '</span>'
+    + (mixP ? '<span class="tag x">人数混在</span>' : '') + (mixN ? '<span class="tag x">泊数混在</span>' : '') + (minMid == null && rs.length > 1 ? '<span class="tag x">最安判定なし</span>' : '');
+  var why = minMid == null && rs.length > 1 ? (mixP || mixN ? (mixP ? '人数' : '') + (mixP && mixN ? '・' : '') + (mixN ? '泊数' : '') + 'が違うため最安を付けない。' : '料金が全部分かり日程が成立する案が2件未満のため最安を付けない。') : '';
+  var h = '<div class="cmp-chips">' + chips + '</div><p class="note cmp-why">差額は「' + esc(cols[0].name) + '」との比較。' + why + '</p>'
+    + '<details class="cmp-wrap" open><summary><span class="cw-o">比較表を閉じる</span><span class="cw-c">比較表を開く</span><span>（' + cols.length + '件）</span></summary><p class="cmp-pos" aria-live="polite"></p><div class="tw cmp-tw"><table class="cmp-t cmp-main" style="--nc:' + cols.length + '"><colgroup><col class="c-l">' + cols.map(function () { return '<col class="c-p">'; }).join('') + '</colgroup><thead><tr><th></th>'
+    + cols.map(function (x, i) { var r = rs[i]; return '<th scope="col"><span class="th-b">' + (i === 0 ? '<span class="lbl c-base">基準</span>' : '') + (r.v.lv === 'no' ? '<span class="lbl c-old">日程不成立</span>' : '') + (x.kind === 'ideal' ? '<span class="lbl c-date">' + esc(auLbl(x.p.author)) + '案</span>' : '') + (minMid != null && !r.unkPrice.length && r.mid === minMid ? '<span class="lbl c-date">最安</span>' : '') + (minKm != null && r.km === minKm ? '<span class="lbl c-est" title="会場まで最短">最短<span class="sr">（会場まで最短）</span></span>' : '') + '</span><span class="th-n">' + esc(x.name) + '</span></th>'; }).join('') + '</tr></thead><tbody>'
     + row('1人あたり', function (r) { return '<b>' + totalTxt(r) + '</b>'; })
     + row(rs[0].s.n === rs[rs.length - 1].s.n ? 'グループ合計' : '人数分の合計', function (r) { return totalTxt(r, true) + '<small>' + r.s.n + '人</small>'; })
     + (nIdeal ? row('作成者の合計', function (r, i) { var x = cols[i]; if (x.kind !== 'ideal') return '—'; var ck = ipCheck(x.p, r); return esc((x.p.totals || {}).display_pp || '不明') + (ck.bad ? '<span class="lbl c-unv">不一致</span><small>' + ck.why.map(esc).join('・') + '</small>' : '<span class="lbl c-ok">一致</span>'); }) : '')
@@ -1378,7 +1420,7 @@ function renderCompare() {
     + row('市内交通・その他', function (r) { return money(r.loc + r.oth); })
     + '</tbody></table></div></details>'
     + '<p class="links"><a class="btn" href="' + ROOT + '#checklist">' + ic('list-checks') + '予約前チェック</a></p>';
-  el.innerHTML = (minMid == null && rs.length > 1 ? '<p class="note">' + (sameN ? '料金がすべて分かり日程が成立するプランが2つ未満なので「最安」は付けない。' : '人数が違うプランがあるので「最安」は付けない。') + '</p>' : '') + h;
+  el.innerHTML = h;
   scrollCue(el);
 }
 /* 横スクロールできる表に「横にスクロール」の手がかりを付ける */
@@ -1389,7 +1431,12 @@ function scrollCue(root) {
     var cue = w.previousElementSibling && w.previousElementSibling.classList.contains('xcue') ? w.previousElementSibling : null;
     if (over && !cue) { cue = document.createElement('p'); cue.className = 'xcue'; cue.innerHTML = ic('move-horizontal', 'ic sm') + '横にスクロールできます'; w.parentNode.insertBefore(cue, w); }
     if (!over && cue) cue.remove();
-    w.onscroll = function () { w.classList.toggle('xs-end', w.scrollLeft + w.clientWidth >= w.scrollWidth - 2); };
+    var pos = w.classList.contains('cmp-tw') ? $('.cmp-pos', root) : null;
+    function upd() { w.classList.toggle('xs-end', w.scrollLeft + w.clientWidth >= w.scrollWidth - 2);
+      if (pos) { var cs = $$('thead th[scope=col]', w), lab = cs.length ? w.querySelector('thead th').getBoundingClientRect().right : 0, wr = w.getBoundingClientRect().right, first = 0, last = 0;
+        cs.forEach(function (c, i) { var b = c.getBoundingClientRect(); if (b.right > lab + 40 && !first) first = i + 1; if (b.left < wr - 40) last = i + 1; });
+        pos.textContent = over ? (first === last || !last ? (first || 1) : first + '–' + last) + ' / ' + cs.length + '件表示中' : ''; } }
+    w.onscroll = upd; upd();
   });
 }
 
@@ -1527,6 +1574,13 @@ function start() {
   /* 下部ドック：上段（概算・内訳）と下段（ナビ） */
   if (PAGE === 'stays') window.addEventListener('pagehide', function () { sessionStorage.setItem('bcf26.staysY', String(Math.round(window.scrollY))); });
   var dock = $('#dock'), mb0 = $('#mbar'); if (dock && mb0) dock.insertBefore(mb0, dock.firstChild);
+  /* 固定UI（ナビ＋ドック）の実高さ＋16px をページ下の余白にする（safe-area 込み） */
+  if (dock) { var setDock = function () { var h = window.matchMedia('(max-width:860px)').matches || window.matchMedia('(max-width:980px)').matches ? Math.ceil(dock.getBoundingClientRect().height) : 0; document.body.style.setProperty('--dock-h', h + 'px'); };
+    if (window.ResizeObserver) new ResizeObserver(setDock).observe(dock); window.addEventListener('resize', setDock); setDock();
+    /* キーボード表示中はドックを隠して入力欄と重ねない */
+    if (window.visualViewport) visualViewport.addEventListener('resize', function () { document.body.classList.toggle('kb-open', window.innerHeight - visualViewport.height > 150); });
+    document.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches('input[type=number],input[type=search],input[type=text]')) document.body.classList.add('kb-focus'); });
+    document.addEventListener('focusout', function () { document.body.classList.remove('kb-focus'); }); }
   navCount();
   if (PAGE === 'guide') { guideMapWhenVisible(); return; }
   if (PAGE === 'planner' && oldStayRedirect()) return;

@@ -570,3 +570,169 @@ table.cmp-main th:first-child,table.cmp-main td:first-child{width:150px}
 }
 .mx th{background:none;border:0;padding:4px}.mx td{padding:0;border:0;background:none}
 main small.taxe,body small.taxe,main .ip-tot dd small,.sp-price small,.lx-p small,.sg-p small,table.sum-t td small{font-size:14px}
+/* ===== v6 ===== */
+/* 12 固定UI：ナビ 64px・safe-area・ページ下余白＝固定UIの高さ＋16px */
+@media (max-width:980px){
+ body.app{padding-bottom:calc(var(--dock-h,140px) + 16px)!important}
+ .p-planner .wrap,.p-stay .wrap{padding-bottom:0!important}
+ .botnav{padding-bottom:env(safe-area-inset-bottom)}
+ .botnav a{min-height:64px}
+ body.kb-open .dock,body.kb-focus .dock{transform:translateY(110%);transition:transform .15s}
+}
+/* 2 ドック：紺地・白文字・補足 #e1eaf2 14px 以上・3段 */
+@media (max-width:980px){
+ .mbar-b{display:flex!important;flex-direction:column;align-items:stretch;gap:2px;background:var(--primary,#0d2a4d)!important;color:#fff;padding:8px 14px 10px}
+ .mb-r1{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+ .mb-r1 small{font-size:14px;color:#e1eaf2;opacity:1}
+ .mb-r2{display:flex!important;flex-direction:row!important;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+ .mb-r2 b{font-size:28px!important;line-height:1.15;color:#fff;font-variant-numeric:tabular-nums}
+ .mb-r{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:4px}
+ .mb-r3 .taxe,.mbar .taxe.mb-tx{display:block!important;margin:0!important;font-size:14px!important;color:#e1eaf2!important;font-weight:500}
+ .mbar-b .vchip{margin:0}
+}
+/* 3 ステップ01：縦を詰める（文字は縮めない） */
+details.step>.st-b{padding:16px}
+details.step[data-step="1"]>.st-b{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+details.step[data-step="1"]>.st-b>.in-grid{flex:1 1 100%;margin:0}
+details.step[data-step="1"] .in-dates{flex:0 1 auto;margin:0;align-items:center}
+details.step[data-step="1"] .tg{flex:0 0 auto;margin:0;font-size:14px;color:var(--ink)}
+details.step[data-step="1"] #in-basis{flex:1 1 100%;margin:0}
+.in-grid{gap:12px}
+@media (min-width:360px) and (max-width:640px){
+ details.step[data-step="1"] .in-grid{display:grid;grid-template-columns:120px minmax(0,1fr)}
+}
+/* 10 ステップ見出し：スマホは2行（番号＋名前＋状態／要約）。状態は色アイコン＋読み上げ用テキスト */
+@media (max-width:640px){
+ details.step>summary{grid-template-columns:36px minmax(0,1fr) auto!important;grid-template-rows:auto auto;row-gap:0!important;padding:10px 40px 10px 12px}
+ details.step>summary .st-no{grid-row:1 / span 2!important;align-self:center}
+ details.step>summary .st-t{grid-column:2!important;grid-row:1!important}
+ details.step>summary .badge{grid-column:3!important;grid-row:1!important;padding:4px;border-radius:50%;margin:0}
+ details.step>summary .badge .b-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+ details.step>summary .st-sub{grid-column:2 / 4!important;grid-row:2!important;padding-left:0!important;font-size:15px;color:var(--muted);text-align:left}
+}
+/* 1 スマホ比較表：見出し列 100px 固定・プラン列 224px・表だけ横スクロール */
+.cmp-tw{overscroll-behavior-x:contain}
+table.cmp-main th[scope=col]{vertical-align:top}
+.th-b{display:flex;flex-wrap:nowrap;gap:4px;overflow:hidden;margin-bottom:4px}
+.th-b .lbl{margin:0;flex:none}
+.th-n{display:block;font-weight:700}
+.cmp-pos{margin:4px 0;font-size:14px;color:var(--muted);min-height:1.4em}
+@media (max-width:640px){
+ table.cmp-main{table-layout:fixed!important;width:max-content!important;min-width:0!important}
+ table.cmp-main col.c-l{width:100px}
+ table.cmp-main col.c-p{width:224px}
+ table.cmp-main th:first-child,table.cmp-main td:first-child{width:100px!important;min-width:100px;max-width:100px;background:#fff;white-space:normal;overflow-wrap:anywhere;display:table-cell}
+ table.cmp-main tbody th{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35}
+ table.cmp-main th[scope=col]{min-width:0!important}
+}
+/* 6 比較の要点チップ */
+.cmp-chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.cmp-chips .tag{margin:0}
+.cmp-why{margin:4px 0 8px}
+/* 4 おすすめカード（構造化） */
+.sg>header{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sg-p{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 6px;margin:6px 0 0}
+.sg-p>b{font-size:24px;font-variant-numeric:tabular-nums}
+.sg-p .taxe{flex-basis:100%}
+.sg-dl{display:grid;gap:4px;margin:8px 0;font-size:14px;line-height:1.45;color:var(--ink)}
+.sg-dl>div{display:grid;grid-template-columns:3.2em minmax(0,1fr);gap:8px}
+.sg-dl dt{color:var(--muted);font-weight:600}
+.sg-dl dd{margin:0;font-variant-numeric:tabular-nums}
+.sg-dl .card-desc{font-size:14px;font-weight:700}
+.sg-d{margin:0 0 8px}
+/* 5 宿の注意：区分ブロック */
+.cautions{display:grid;gap:8px;margin:12px 0}
+details.cau{background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);padding:0 16px}
+details.cau.crit{border-color:var(--warn-bd);background:var(--warn-bg)}
+details.cau>summary{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--primary);min-height:44px;cursor:pointer}
+details.cau>summary small{font-weight:500;color:var(--muted);font-size:14px}
+ul.cau-l{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px;line-height:1.5}
+ul.cau-l>li{display:flex;gap:8px;align-items:flex-start;font-size:15px}
+ul.cau-l>li>svg{flex:none;margin-top:4px}
+.mt{display:inline-block;margin-left:6px;font-size:14px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+details.cau-en>summary{font-size:14px;min-height:32px;color:var(--muted)}
+details.cau-en p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+.cau-n{margin:0}
+/* 7 宿カード：写真なしは低い帯・写真は16:9 */
+.lx-tile .lx-ph:not(.noph) img{aspect-ratio:16/9;object-fit:cover;width:100%;height:auto}
+.lx-tile .noph{aspect-ratio:auto!important;height:104px;min-height:96px;max-height:120px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:10px;background:var(--soft);background-image:none}
+.noph-t{display:flex;flex-direction:column;line-height:1.3}
+.noph-t b{font-size:15px;color:var(--ink)}
+.noph-t small{font-size:14px;color:var(--muted)}
+.lx-b .lx-p{margin:4px 0 0}
+/* 8 宿一覧の上部 */
+.lx-top{display:grid;gap:8px}
+.lx-sc{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (min-width:861px){.lx-top{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+/* 9 PC 費用まとめ */
+.sum-total{display:flex;flex-direction:column;gap:2px;margin:0 0 12px}
+.sum-bh{font-size:16px;color:var(--primary);margin:12px 0 4px}
+table.sum-t,table.sum-t tbody{display:block;width:100%}
+table.sum-t tr{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;border-bottom:1px solid var(--line);padding:6px 0}
+table.sum-t th{grid-row:1;grid-column:1;text-align:left;font-weight:600;padding:0;z-index:1}
+table.sum-t td{grid-row:1 / 3;grid-column:1 / -1;display:grid;grid-template-columns:subgrid;padding:0}
+table.sum-t td .sv{grid-column:2;grid-row:1;text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+table.sum-t td small{grid-column:1 / -1;grid-row:2;text-align:left;display:block;color:var(--muted)}
+/* 11 宿詳細のサイド：金額3段 */
+.sp-amt{border-top:1px solid var(--line);padding:10px 0}
+.sp-k{display:block;font-size:14px;color:var(--muted);font-weight:600}
+.sp-a1 .sp-price b{font-size:30px;color:var(--ink)}
+.sp-a2 .sp-tot b{font-size:22px;color:var(--primary)}
+.sp-a3 b{font-size:18px}
+.sp-amt p{margin:0}
+.sp-g{font-size:14px;color:var(--muted)}
+.sp-c{margin-top:2px}
+.sp-act{display:grid;gap:8px;margin-top:10px}
+.btn.sel-ok,.btn.sel-ok:disabled{background:var(--ok-bg);border-color:var(--ok-bd);color:var(--ok-tx);opacity:1;cursor:default}
+.dt-mbar .btn.sel-ok{flex:none}
+/* 13 色の役割：装飾の色線をやめ、通常カードは1pxの細線 */
+.sg,.sg-alt .sg{border:1px solid var(--line)!important;border-top-width:1px!important}
+details.step{border-left-width:1px!important}
+details.step.st-ng{border-color:var(--ng-bd)}
+.vd.v-ok,.vd.v-chk,.vd.v-no{border-left-width:1px}
+.ip,.panel{border-width:1px}
+.seg.on,.tab.on,.mx-c.on{--sel:var(--primary)}
+/* 14 予約先の表 */
+table.offers .o-sub{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+table.offers .o-num{font-variant-numeric:tabular-nums;white-space:nowrap}
+table.offers th small{display:block;font-weight:500;color:var(--muted);font-size:14px}
+table.offers td.acts{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:640px){
+ .tw-off{overflow:visible}
+ table.offers{min-width:0!important;width:100%}
+ table.offers thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+ table.offers,table.offers tbody,table.offers tr,table.offers td{display:block;width:auto}
+ table.offers tr{border:1px solid var(--line);border-radius:var(--r2);padding:12px 16px;margin:0 0 12px;background:var(--surface)}
+ table.offers td{border:0;padding:4px 0;position:static!important;box-shadow:none!important;background:none!important}
+ table.offers td[data-l]:not(.o-src)::before{content:attr(data-l);display:block;font-size:14px;color:var(--muted);font-weight:600}
+}
+/* 15 余白・行間 */
+.panel,.ip,.sg,details.step>.st-b{padding:20px}
+@media (min-width:1100px){.panel{padding:24px}}
+@media (max-width:640px){.panel,.ip,.sg,details.step>.st-b{padding:16px}}
+.ip-grid,.sg-grid,.lx-grid{gap:16px}
+h2+*,h3+*{margin-top:8px}
+body.app p,body.app li{line-height:1.7}
+table td,table th,ul.plain li,.sg-dl,ul.cau-l>li{line-height:1.45}
+
+/* v6: おすすめプランの宿の口コミ判定・代替案 */
+.ip-q{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;margin:6px 0 0;font-size:14px}
+.ip-q small{color:var(--muted)}
+.ip-q .ip-qn{flex-basis:100%;color:var(--ink)}
+.ip-q.q-green .lbl{background:#e6f4ea;color:#1e5e34}
+.ip-q.q-amber .lbl{background:#fff4d6;color:#6b4a00}
+.ip-q.q-red .lbl{background:#fde8e6;color:#8a1f12}
+.ip-q.q-unrated .lbl{background:#eef1f5;color:#384656}
+.ip-alt{margin:8px 0 0;padding:8px 12px;border:1px dashed #c9a24a;border-radius:8px;background:#fffaf0;font-size:14px}
+.ip-alt p{margin:0}
+.ip-alt .tag-alt{background:#6b4a00;color:#fff;margin-right:6px}
+.ip-altw{margin-top:4px!important;color:#6b4a00;display:flex;gap:4px;align-items:flex-start}
+.ip-stayf ul{margin:4px 0 4px 18px}
+/* v6: 固定ヘッダーの下に隠れないように（フォーカス移動・アンカー） */
+html{scroll-padding-top:72px}
+main :is(a,button,input,select,label,summary){scroll-margin-top:72px}
+.ip-qa{display:flex;flex-direction:column;gap:6px}
+.ip-qa:empty{display:none}
+.lbl.c-base{background:#e8eef5;color:#0f3b5f;border-color:#c5d3e3}
+.lbl.c-base::before{content:none}
+.cmp-wrap>summary>span+span{margin-left:0}
