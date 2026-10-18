@@ -10580,5 +10580,34 @@
     "status_label": "OK"
    }
   }
- ]
+ ],
+ "layout": {
+  "group_order": {
+   "strategy": [
+    "最安",
+    "バランス",
+    "時間優先",
+    "その他"
+   ],
+   "arrival": [
+    "前泊",
+    "当日入り",
+    "土日のみ"
+   ]
+  },
+  "default_sort": "rec",
+  "default_view": "merged",
+  "reason_max": 40,
+  "note_max": 35,
+  "card_fields": [
+   "rec",
+   "totals",
+   "check",
+   "meta",
+   "feasibility",
+   "note",
+   "unconfirmed",
+   "proscons"
+  ]
+ }
 }
