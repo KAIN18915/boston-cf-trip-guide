@@ -1,0 +1,164 @@
+{
+ "note": "プランナー用の旅程データ。値はガイド本文（航空券は10/12、交通は10/18時点）から写したもの。分からない値は null（画面では未確認）。",
+ "venue": {
+  "name": "Hynes Convention Center",
+  "lat": 42.3479,
+  "lon": -71.0887
+ },
+ "dates": {
+  "min": "2026-11-19",
+  "max": "2026-11-23",
+  "default_in": "2026-11-20",
+  "default_out": "2026-11-22"
+ },
+ "events": [
+  {
+   "date": "2026-11-20",
+   "label": "11/20（金）",
+   "open": "09:00",
+   "close": "18:00",
+   "entry_until": "17:00"
+  },
+  {
+   "date": "2026-11-21",
+   "label": "11/21（土）",
+   "open": "09:00",
+   "close": "18:00",
+   "entry_until": "17:00"
+  },
+  {
+   "date": "2026-11-22",
+   "label": "11/22（日）",
+   "open": "09:00",
+   "close": "15:00",
+   "entry_until": "12:00"
+  }
+ ],
+ "local_transit_pp": 15,
+ "local_transit_note": "市内の移動（会場との往復など）の目安。ガイドの費用計算と同じ$15",
+ "airport_buffer_min": 160,
+ "airport_buffer_note": "出発の2時間前に空港、会場から空港まで約40分として逆算",
+ "transfer_in": [
+  {
+   "id": "sl1",
+   "label": "Silver Line SL1＋地下鉄",
+   "per": "person",
+   "cost": [
+    2.4,
+    2.4
+   ],
+   "from": "05:30",
+   "until": "01:00",
+   "note": "SL1は無料、地下鉄$2.40。SL1は5:30〜深夜1時頃"
+  },
+  {
+   "id": "logan_express",
+   "label": "Back Bay Logan Express",
+   "per": "person",
+   "cost": [
+    0,
+    0
+   ],
+   "from": "06:00",
+   "until": "22:00",
+   "note": "空港発は無料。空港発6〜22時、30分おき"
+  },
+  {
+   "id": "shuttle_blue",
+   "label": "Massportシャトル＋Blue Line",
+   "per": "person",
+   "cost": [
+    2.4,
+    2.4
+   ],
+   "from": null,
+   "until": null,
+   "note": "シャトル無料、地下鉄$2.40"
+  },
+  {
+   "id": "uber",
+   "label": "Uber／Lyft",
+   "per": "car",
+   "car_capacity": 4,
+   "cost": [
+    36,
+    41
+   ],
+   "from": null,
+   "until": null,
+   "note": "約$31〜35＋空港手数料$5.50。1台4人までとして計算（大型車の料金は未調査）"
+  },
+  {
+   "id": "taxi",
+   "label": "タクシー",
+   "per": "car",
+   "car_capacity": 4,
+   "cost": [
+    45,
+    45
+   ],
+   "from": null,
+   "until": null,
+   "note": "約$45＋チップ（チップは含まない）。1台4人までとして計算"
+  }
+ ],
+ "transfer_out": [
+  {
+   "id": "logan_express",
+   "label": "Back Bay Logan Express",
+   "per": "person",
+   "cost": [
+    3,
+    3
+   ],
+   "from": "05:00",
+   "until": "21:00",
+   "note": "空港へは$3。Back Bay発5〜21時。保安検査の優先レーン券がもらえる"
+  },
+  {
+   "id": "sl1",
+   "label": "地下鉄＋Silver Line SL1",
+   "per": "person",
+   "cost": [
+    2.4,
+    2.4
+   ],
+   "from": null,
+   "until": null,
+   "note": "地下鉄$2.40"
+  },
+  {
+   "id": "shuttle_blue",
+   "label": "Blue Line＋Massportシャトル",
+   "per": "person",
+   "cost": [
+    2.4,
+    2.4
+   ],
+   "from": null,
+   "until": null,
+   "note": "地下鉄$2.40"
+  },
+  {
+   "id": "uber",
+   "label": "Uber／Lyft",
+   "per": "car",
+   "car_capacity": 4,
+   "cost": null,
+   "from": null,
+   "until": null,
+   "note": "空港行きの料金は未調査"
+  },
+  {
+   "id": "taxi",
+   "label": "タクシー",
+   "per": "car",
+   "car_capacity": 4,
+   "cost": null,
+   "from": null,
+   "until": null,
+   "note": "空港行きの料金は未調査"
+  }
+ ],
+ "fare_note": "往路の運賃が往復（rt）のときは復路込みとして扱う。片道どうしなら足す"
+}

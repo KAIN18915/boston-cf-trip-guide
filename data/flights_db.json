@@ -1,0 +1,351 @@
+{
+ "schema_note": "便データ。fares は予約先・運賃種別ごと",
+ "generated": "2026-10-18",
+ "built_from": "flights_seed.json",
+ "flights": [
+  {
+   "id": "AS460",
+   "direction": "outbound",
+   "date": "2026-11-20",
+   "airline": "Alaska",
+   "flight_numbers": [
+    "AS460"
+   ],
+   "stops": 0,
+   "depart_airport": "SEA",
+   "depart_time": "15:40",
+   "arrive_airport": "BOS",
+   "arrive_time": "23:59",
+   "duration": null,
+   "overnight": false,
+   "arrival_note": "深夜着",
+   "fares": [
+    {
+     "channel": "Google Flights",
+     "fare_brand": null,
+     "price": 429,
+     "currency": "USD",
+     "one_way_or_rt": "rt",
+     "bags_included": null,
+     "carry_on_allowed": null,
+     "change_policy": null,
+     "refundable": null,
+     "seat_selection": null,
+     "price_seen_date": "2026-10-12",
+     "url": "https://www.google.com/travel/flights/search?tfs=EAAaHhIKMjAyNi0xMS0yMGoHCAESA1NFQXIHCAESA0JPUxoeEgoyMDI2LTExLTIyagcIARIDQk9TcgcIARIDU0VBQAFIAZgBAQ&curr=USD&hl=en",
+     "confidence": "date_confirmed",
+     "taxes_included": true
+    }
+   ],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/ASA460"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/sea-bos"
+    }
+   ]
+  },
+  {
+   "id": "DL474",
+   "direction": "outbound",
+   "date": "2026-11-20",
+   "airline": "Delta",
+   "flight_numbers": [
+    "DL474"
+   ],
+   "stops": 0,
+   "depart_airport": "SEA",
+   "depart_time": "15:45",
+   "arrive_airport": "BOS",
+   "arrive_time": "23:54",
+   "duration": null,
+   "overnight": false,
+   "arrival_note": "深夜着",
+   "fares": [
+    {
+     "channel": "Google Flights",
+     "fare_brand": null,
+     "price": 439,
+     "currency": "USD",
+     "one_way_or_rt": "rt",
+     "bags_included": null,
+     "carry_on_allowed": null,
+     "change_policy": null,
+     "refundable": null,
+     "seat_selection": null,
+     "price_seen_date": "2026-10-12",
+     "url": "https://www.google.com/travel/flights/search?tfs=EAAaHhIKMjAyNi0xMS0yMGoHCAESA1NFQXIHCAESA0JPUxoeEgoyMDI2LTExLTIyagcIARIDQk9TcgcIARIDU0VBQAFIAZgBAQ&curr=USD&hl=en",
+     "confidence": "date_confirmed",
+     "taxes_included": true
+    }
+   ],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/DAL474"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/sea-bos"
+    }
+   ]
+  },
+  {
+   "id": "DL473",
+   "direction": "outbound",
+   "date": "2026-11-20",
+   "airline": "Delta",
+   "flight_numbers": [
+    "DL473"
+   ],
+   "stops": 0,
+   "depart_airport": "SEA",
+   "depart_time": "23:07",
+   "arrive_airport": "BOS",
+   "arrive_time": "07:20",
+   "duration": null,
+   "overnight": true,
+   "arrival_note": "夜行。時刻表では23:10→7:35",
+   "fares": [
+    {
+     "channel": "Google Flights",
+     "fare_brand": null,
+     "price": 532,
+     "currency": "USD",
+     "one_way_or_rt": "rt",
+     "bags_included": null,
+     "carry_on_allowed": null,
+     "change_policy": null,
+     "refundable": null,
+     "seat_selection": null,
+     "price_seen_date": "2026-10-12",
+     "url": "https://www.google.com/travel/flights/search?tfs=EAAaHhIKMjAyNi0xMS0yMGoHCAESA1NFQXIHCAESA0JPUxoeEgoyMDI2LTExLTIyagcIARIDQk9TcgcIARIDU0VBQAFIAZgBAQ&curr=USD&hl=en",
+     "confidence": "date_confirmed",
+     "taxes_included": true,
+     "note": "別の比較ではこの運賃を再現できなかった"
+    }
+   ],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/DAL473"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/sea-bos"
+    }
+   ]
+  },
+  {
+   "id": "AS214",
+   "direction": "outbound",
+   "date": "2026-11-20",
+   "airline": "Alaska",
+   "flight_numbers": [
+    "AS214"
+   ],
+   "stops": 0,
+   "depart_airport": "SEA",
+   "depart_time": "23:00",
+   "arrive_airport": "BOS",
+   "arrive_time": "07:26",
+   "duration": null,
+   "overnight": true,
+   "arrival_note": "夜行。23:00〜23:22発・7:26〜7:40着の幅あり",
+   "fares": [
+    {
+     "channel": "Google Flights",
+     "fare_brand": null,
+     "price": 613,
+     "currency": "USD",
+     "one_way_or_rt": "rt",
+     "bags_included": null,
+     "carry_on_allowed": null,
+     "change_policy": null,
+     "refundable": null,
+     "seat_selection": null,
+     "price_seen_date": "2026-10-12",
+     "url": "https://www.google.com/travel/flights/search?tfs=EAAaHhIKMjAyNi0xMS0yMGoHCAESA1NFQXIHCAESA0JPUxoeEgoyMDI2LTExLTIyagcIARIDQk9TcgcIARIDU0VBQAFIAZgBAQ&curr=USD&hl=en",
+     "confidence": "date_confirmed",
+     "taxes_included": true
+    }
+   ],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/ASA214"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/sea-bos"
+    }
+   ]
+  },
+  {
+   "id": "B6398",
+   "direction": "outbound",
+   "date": "2026-11-20",
+   "airline": "JetBlue",
+   "flight_numbers": [
+    "B6 398"
+   ],
+   "stops": 0,
+   "depart_airport": "SEA",
+   "depart_time": "23:55",
+   "arrive_airport": "BOS",
+   "arrive_time": "08:16",
+   "duration": null,
+   "overnight": true,
+   "arrival_note": "夜行。運賃は未調査",
+   "fares": [],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/JBU398"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/sea-bos"
+    }
+   ]
+  },
+  {
+   "id": "THU_REDEYE",
+   "direction": "outbound",
+   "date": "2026-11-19",
+   "airline": null,
+   "flight_numbers": [],
+   "stops": null,
+   "depart_airport": "SEA",
+   "depart_time": null,
+   "arrive_airport": "BOS",
+   "arrive_time": null,
+   "duration": null,
+   "overnight": true,
+   "arrival_note": "木曜夜発・金曜朝着の便。便名・時刻・運賃とも未検索",
+   "fares": [],
+   "sources": [
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/sea-bos"
+    }
+   ],
+   "label": "木曜夜行便（便未定）"
+  },
+  {
+   "id": "AS306",
+   "direction": "return",
+   "date": "2026-11-22",
+   "airline": "Alaska",
+   "flight_numbers": [
+    "AS306"
+   ],
+   "stops": 0,
+   "depart_airport": "BOS",
+   "depart_time": "18:40",
+   "arrive_airport": "SEA",
+   "arrive_time": "21:59",
+   "duration": null,
+   "overnight": false,
+   "arrival_note": null,
+   "fares": [],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/ASA306"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/bos-sea"
+    }
+   ]
+  },
+  {
+   "id": "B6397",
+   "direction": "return",
+   "date": "2026-11-22",
+   "airline": "JetBlue",
+   "flight_numbers": [
+    "B6 397"
+   ],
+   "stops": 0,
+   "depart_airport": "BOS",
+   "depart_time": "19:20",
+   "arrive_airport": "SEA",
+   "arrive_time": "22:42",
+   "duration": null,
+   "overnight": false,
+   "arrival_note": null,
+   "fares": [],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/JBU397"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/bos-sea"
+    }
+   ]
+  },
+  {
+   "id": "DL797",
+   "direction": "return",
+   "date": "2026-11-22",
+   "airline": "Delta",
+   "flight_numbers": [
+    "DL797"
+   ],
+   "stops": 0,
+   "depart_airport": "BOS",
+   "depart_time": "19:25",
+   "arrive_airport": "SEA",
+   "arrive_time": "22:49",
+   "duration": null,
+   "overnight": false,
+   "arrival_note": "直行の最終",
+   "fares": [],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/DAL797"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/bos-sea"
+    }
+   ]
+  },
+  {
+   "id": "AS288",
+   "direction": "return",
+   "date": "2026-11-22",
+   "airline": "Alaska",
+   "flight_numbers": [
+    "AS288"
+   ],
+   "stops": 0,
+   "depart_airport": "BOS",
+   "depart_time": "16:58",
+   "arrive_airport": "SEA",
+   "arrive_time": null,
+   "duration": null,
+   "overnight": false,
+   "arrival_note": "会場が15:00に閉まるので厳しい",
+   "fares": [],
+   "sources": [
+    {
+     "label": "FlightAware",
+     "url": "https://www.flightaware.com/live/flight/ASA288"
+    },
+    {
+     "label": "時刻表",
+     "url": "https://2lnr.com/routes/bos-sea"
+    }
+   ]
+  }
+ ]
+}

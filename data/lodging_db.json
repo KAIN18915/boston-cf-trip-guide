@@ -1,0 +1,1823 @@
+{
+ "schema_note": "宿データ。prices のキーは 1泊=YYYY-MM-DD、期間合計=YYYY-MM-DD/YYYY-MM-DD。rooms[].offers は任意（予約サイト・料金プラン別）。不明な料金は null",
+ "generated": "2026-10-18",
+ "built_from": [
+  "lodging_seed.json"
+ ],
+ "properties": [
+  {
+   "id": "hi_boston",
+   "name": "HI Boston",
+   "type": "hostel",
+   "area": "Chinatown／Theater District",
+   "address": "19 Stuart St, Boston, MA",
+   "lat": 42.3511,
+   "lon": -71.0634,
+   "transit_to_hynes": "Boylston駅からGreen Lineで乗換なし",
+   "rooms": [
+    {
+     "room_type": "ドミトリー",
+     "max_occupancy": 1,
+     "beds": "2段ベッド1床",
+     "pricing": "per_bed",
+     "prices": {
+      "2026-11-21": 83,
+      "2026-11-20/2026-11-22": 168
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    },
+    {
+     "room_type": "バス付き個室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20": 95,
+      "2026-11-21": 95
+     },
+     "price_confidence": "reference",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Hostelworld（目安）",
+     "price_note": "約$95/泊（Hostelworld の目安。指定日・税込は未確認）"
+    }
+   ],
+   "features": [
+    "朝食付き"
+   ],
+   "url": "https://www.hiusa.org/find-hostels/massachusetts/boston-19-stuart-street",
+   "url_kind": "site",
+   "photo_url": "https://www.hiusa.org/wp-content/uploads/2020/02/hi-boston-003-min-540x245.jpg",
+   "photo_alt": "HI Boston の外観（レンガ造りの建物）",
+   "photo_source_url": "https://www.hiusa.org/find-hostels/massachusetts/boston-19-stuart-street",
+   "photo_source_name": "HI USA 公式",
+   "sources": [
+    {
+     "label": "Expedia 2泊",
+     "url": "https://www.expedia.com/Boston-Hotels-HI-Boston.h10057467.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22"
+    },
+    {
+     "label": "Expedia 土曜1泊",
+     "url": "https://www.expedia.com/Boston-Hotels-HI-Boston.h10057467.Hotel-Information?chkin=2026-11-21&chkout=2026-11-22"
+    },
+    {
+     "label": "Hostelworld",
+     "url": "https://www.hostelworld.com/hostels/north-america/usa/boston/"
+    }
+   ],
+   "rating": "8.8〜8.9",
+   "note": "朝食付き。Chinatown／Theater District。Expediaは残り2室（10/18）",
+   "planner": {
+    "groups": [
+     "near",
+     "solo",
+     "duo"
+    ],
+    "featured": true
+   }
+  },
+  {
+   "id": "meco",
+   "name": "Meco Hotel",
+   "type": "capsule",
+   "area": "West End（North Station）",
+   "address": "234 Friend St, Boston, MA",
+   "lat": 42.3643,
+   "lon": -71.0611,
+   "transit_to_hynes": "North Station駅からGreen Line D線で乗換なし",
+   "rooms": [
+    {
+     "room_type": "ポッド",
+     "max_occupancy": 1,
+     "beds": "ポッド1",
+     "pricing": "per_bed",
+     "prices": {
+      "2026-11-21": 87
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia",
+     "price_note": "Expedia 土曜1泊 $87（通常$98）。公式の「$55〜/泊」は開始価格"
+    },
+    {
+     "room_type": "4ポッド個室（4名）",
+     "max_occupancy": 4,
+     "beds": "ポッド4・バス付き",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 404
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia",
+     "price_note": "Expedia 4名で検索した2泊 $404。この個室の料金かは未確認"
+    }
+   ],
+   "fees_note": "サービス料5%（宿泊税とは別）、チェックイン時に$150のデポジット（カード枠の保留）",
+   "features": [
+    "男女別・男女共用の部屋",
+    "4ポッドのバス付き個室"
+   ],
+   "url": "https://www.mecohotels.com/",
+   "url_kind": "site",
+   "photo_url": "https://images.squarespace-cdn.com/content/v1/69067caa5636875e3457230e/4370ac22-f398-49fb-957e-ef0f92dbf39b/DSC00028.jpg?format=750w",
+   "photo_alt": "Meco Hotel の木製ポッドが並ぶ部屋",
+   "photo_source_url": "https://www.mecohotels.com/all-pod-rooms",
+   "photo_source_name": "Meco Hotel 公式",
+   "sources": [
+    {
+     "label": "Expedia 2泊",
+     "url": "https://www.expedia.com/Boston-Hotels-Meco-Hotel.h100356773.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22"
+    },
+    {
+     "label": "Expedia 土曜1泊",
+     "url": "https://www.expedia.com/Boston-Hotels-Meco-Hotel.h100356773.Hotel-Information?chkin=2026-11-21&chkout=2026-11-22"
+    },
+    {
+     "label": "ポッドの部屋",
+     "url": "https://www.mecohotels.com/all-pod-rooms"
+    }
+   ],
+   "rating": "9.4（Hostelworld）／8.6（Expedia）",
+   "note": "ボストン初のポッドホテル。男女別・男女共用の部屋と、4ポッドのバス付き個室がある。サービス料5%、デポジット$150",
+   "planner": {
+    "groups": [
+     "solo",
+     "group"
+    ],
+    "featured": true
+   }
+  },
+  {
+   "id": "ivy",
+   "name": "Hotel IVY Boston Common",
+   "type": "hostel",
+   "area": "Theater District",
+   "transit_to_hynes": "Boylston駅のすぐ近く",
+   "rooms": [
+    {
+     "room_type": "ドミトリー",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_bed",
+     "prices": {},
+     "price_confidence": "reference",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Hostelworld（目安）",
+     "price_note": "ドミトリー 約$50〜58〜"
+    },
+    {
+     "room_type": "個室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {},
+     "price_confidence": "reference",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Hostelworld（目安）",
+     "price_note": "個室 約$95〜99〜"
+    }
+   ],
+   "url": "https://www.hotelivyboston.com/",
+   "url_kind": "site",
+   "note": "旧Found Hotel。Theater District",
+   "planner": {
+    "groups": [
+     "near"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "bay_village",
+   "name": "Bay Village Suites",
+   "type": "hotel",
+   "area": "Bay Village",
+   "transit_to_hynes": "0.5mi",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 354
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "cancellation": "返金可（Expedia 表示）",
+   "url": "https://www.expedia.com/Rooms-At-Premier-Suites-Bay-Village.h92422919.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22",
+   "url_kind": "site",
+   "rating": "6.6（375件）",
+   "note": "返金可。会場に近く安いが評価が低い。レビューを読んでから",
+   "planner": {
+    "groups": [
+     "near",
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "premier",
+   "name": "Premier Suites Bay Village",
+   "type": "hotel",
+   "area": "Bay Village",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 384
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.expedia.com/Boston-Hotels-Premier-Suites-Bay-Village.h76165648.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22",
+   "url_kind": "site",
+   "rating": "6.4",
+   "note": "評価が低い",
+   "planner": {
+    "groups": [
+     "near",
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "homestay_boston",
+   "name": "Homestay In Boston（Expedia 2泊 11/20〜22）",
+   "type": "homestay",
+   "area": "Dorchester",
+   "transit_to_hynes": "Dorchester、約2.1mi",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 80,
+      "2026-11-20/2026-11-22": 160
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia",
+     "price_note": "土曜1泊 $80（1名）／2名・2泊 $160"
+    }
+   ],
+   "url": "https://www.expedia.com/Boston-Hotels-Homestay-In-Boston.h123166125.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22",
+   "url_kind": "site",
+   "sources": [
+    {
+     "label": "Expedia 土曜1泊",
+     "url": "https://www.expedia.com/Boston-Hotels-Homestay-In-Boston.h123166125.Hotel-Information?chkin=2026-11-21&chkout=2026-11-22"
+    }
+   ],
+   "rating": "8.0（121件）",
+   "note": "残り1室（10/18）",
+   "planner": {
+    "groups": [
+     "solo",
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": []
+  },
+  {
+   "id": "homestay_bnb",
+   "name": "Homestay BnB Near Downtown（Expedia 2泊 11/20〜22）",
+   "type": "homestay",
+   "area": "Dorchester",
+   "transit_to_hynes": "Dorchester、約2.1mi",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 83,
+      "2026-11-20/2026-11-22": 200
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia",
+     "price_note": "土曜1泊 $83（1名）／2名・2泊 $200"
+    }
+   ],
+   "url": "https://www.expedia.com/Boston-Hotels-Homestay-BnB-Near-Downtonw-Boston.h109487184.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22",
+   "url_kind": "site",
+   "sources": [
+    {
+     "label": "Expedia 土曜1泊",
+     "url": "https://www.expedia.com/Boston-Hotels-Homestay-BnB-Near-Downtonw-Boston.h109487184.Hotel-Information?chkin=2026-11-21&chkout=2026-11-22"
+    }
+   ],
+   "rating": "8.4（159件）",
+   "planner": {
+    "groups": [
+     "solo",
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": []
+  },
+  {
+   "id": "homestay_savin",
+   "name": "Homestay Near Savin Hill（Expedia 土曜1泊 11/21〜22）",
+   "type": "homestay",
+   "area": "Dorchester",
+   "transit_to_hynes": "Dorchester",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 80
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.expedia.com/Boston-Hotels-Homestay-Near-Near-Savin-Hill-Area.h125050198.Hotel-Information?chkin=2026-11-21&chkout=2026-11-22",
+   "url_kind": "site",
+   "rating": "7.8（75件）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "homestay_fields",
+   "name": "Homestay Fields Corner（Expedia 土曜1泊 11/21〜22）",
+   "type": "homestay",
+   "area": "Dorchester（Fields Corner）",
+   "transit_to_hynes": "Dorchester",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {},
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia",
+     "price_note": "$69/泊（総額は未確認）"
+    }
+   ],
+   "url": "https://www.expedia.com/Boston-Hotels-Homestay-In-Fields-Corner-Area-Boston.h111428434.Hotel-Information?chkin=2026-11-21&chkout=2026-11-22",
+   "url_kind": "site",
+   "rating": "7.8（90件）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "aloft",
+   "name": "Aloft Boston Seaport",
+   "type": "hotel",
+   "area": "Seaport",
+   "address": "401-403 D St, Boston, MA",
+   "lat": 42.3436,
+   "lon": -71.0446,
+   "transit_to_hynes": "1.9mi（Seaport、乗換あり）",
+   "rooms": [
+    {
+     "room_type": "客室（2名）",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 363
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    },
+    {
+     "room_type": "客室（4名）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 496
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.expedia.com/Boston-Hotels-Aloft-Boston-Seaport-District.h11263952.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22",
+   "url_kind": "site",
+   "rating": "8.8（1,515件）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "coolidge",
+   "name": "Coolidge Corner Guest House",
+   "type": "guesthouse",
+   "area": "Brookline",
+   "transit_to_hynes": "2.2mi（Brookline）",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 378
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "cancellation": "返金可（Expedia 表示）",
+   "url": "https://www.expedia.com/Boston-Hotels-Coolidge-Corner-Guest-House.h5227514.Hotel-Information?chkin=2026-11-20&chkout=2026-11-22",
+   "url_kind": "site",
+   "rating": "8.2（662件）",
+   "note": "返金可",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "element",
+   "name": "Element Boston Seaport",
+   "type": "hotel",
+   "area": "Seaport",
+   "address": "391-395 D St, Boston, MA",
+   "lat": 42.343,
+   "lon": -71.0453,
+   "transit_to_hynes": "Seaport、乗換あり",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 403
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Element+Boston+Seaport+District",
+   "url_kind": "map",
+   "rating": "8.8",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "temple",
+   "name": "Temple Place Suites",
+   "type": "hotel",
+   "area": "Downtown",
+   "transit_to_hynes": "Downtown",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 426
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-12",
+     "price_source": "Expedia（以前の確認）"
+    }
+   ],
+   "url": "https://www.templeplacesuites.com/",
+   "url_kind": "site",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "moxy",
+   "name": "Moxy Boston Downtown",
+   "type": "hotel",
+   "area": "Downtown",
+   "transit_to_hynes": "Downtown",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 491
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-12",
+     "price_source": "Expedia（以前の確認）",
+     "price_note": "部屋は狭め"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Moxy+Boston+Downtown",
+   "url_kind": "map",
+   "note": "部屋は狭め",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "doubletree",
+   "name": "DoubleTree Boston Downtown",
+   "type": "hotel",
+   "area": "Downtown",
+   "transit_to_hynes": "Downtown",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 491
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-12",
+     "price_source": "Expedia（以前の確認）"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=DoubleTree+by+Hilton+Boston+Downtown",
+   "url_kind": "map",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "holiday_somerville",
+   "name": "Holiday Inn Somerville",
+   "type": "hotel",
+   "area": "Somerville",
+   "address": "30 Washington St, Somerville, MA",
+   "lat": 42.3814,
+   "lon": -71.0821,
+   "transit_to_hynes": "2.1mi（Somerville）",
+   "rooms": [
+    {
+     "room_type": "客室（4名）",
+     "max_occupancy": 4,
+     "beds": "ベッド2台が多い（要確認）",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 474
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Boston+Bunker+Hill+Area+30+Washington+St+Somerville",
+   "url_kind": "map",
+   "rating": "8.2",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "hyatt_seaport",
+   "name": "Hyatt Place Boston Seaport",
+   "type": "hotel",
+   "area": "Seaport",
+   "address": "315 Northern Ave, Boston, MA",
+   "lat": 42.3473,
+   "lon": -71.0369,
+   "transit_to_hynes": "Seaport、乗換あり",
+   "rooms": [
+    {
+     "room_type": "客室（4名）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 489
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Hyatt+Place+Boston+Seaport+District",
+   "url_kind": "map",
+   "rating": "9.4",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "renaissance",
+   "name": "Renaissance Boston Seaport",
+   "type": "hotel",
+   "area": "Seaport",
+   "address": "606 Congress St, Boston, MA",
+   "lat": 42.348,
+   "lon": -71.0392,
+   "transit_to_hynes": "Seaport、乗換あり",
+   "rooms": [
+    {
+     "room_type": "客室（4名）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 498
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Renaissance+Boston+Seaport+District+Hotel",
+   "url_kind": "map",
+   "rating": "9.0",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "hix_cambridge",
+   "name": "Holiday Inn Express Cambridge",
+   "type": "hotel",
+   "area": "Cambridge",
+   "transit_to_hynes": "Cambridge",
+   "rooms": [
+    {
+     "room_type": "客室（4名）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 524
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "cancellation": "返金可（Expedia 表示）",
+   "url": "https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Boston+Cambridge",
+   "url_kind": "map",
+   "rating": "8.6",
+   "note": "返金可",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "lark",
+   "name": "Lark 907 Main",
+   "type": "hotel",
+   "area": "Cambridge",
+   "address": "907 Main St, Cambridge, MA",
+   "lat": 42.3636,
+   "lon": -71.0996,
+   "transit_to_hynes": "Cambridge",
+   "rooms": [
+    {
+     "room_type": "客室（4名）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 528
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=907+Main+Hotel+Cambridge+MA",
+   "url_kind": "map",
+   "rating": "9.4",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "showa",
+   "name": "昭和ボストン",
+   "type": "dorm",
+   "area": "Boston",
+   "restrictions": "女性専用",
+   "url": "https://www.showaboston.edu/",
+   "url_kind": "site",
+   "note": "CFNが案内する唯一の宿泊先だが女性専用",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "rooms": [],
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "backpackers",
+   "name": "Backpackers Hostel & Pub",
+   "type": "hostel",
+   "area": "Everett",
+   "transit_to_hynes": "Everett、約5km",
+   "rooms": [
+    {
+     "room_type": "ドミトリー",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_bed",
+     "prices": {},
+     "price_confidence": "reference",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Hostelworld（目安）",
+     "price_note": "ドミトリー 約$50"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Backpackers+Hostel+and+Pub+Everett+MA",
+   "url_kind": "map",
+   "note": "Wellington駅までシャトル。遠い",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "homestel",
+   "name": "Boston Homestel",
+   "type": "hostel",
+   "area": "Boston",
+   "transit_to_hynes": "約4km",
+   "rooms": [
+    {
+     "room_type": "ドミトリー",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_bed",
+     "prices": {},
+     "price_confidence": "reference",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Hostelworld（目安）",
+     "price_note": "約$21〜23〜（掲載価格、要確認）"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=Boston+Homestel",
+   "url_kind": "map",
+   "note": "遠い。掲載価格は要確認",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "farrington",
+   "name": "The Farrington Inn",
+   "type": "guesthouse",
+   "area": "Allston",
+   "transit_to_hynes": "Allston、約5.8km（Green Line B）",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {},
+     "price_confidence": "reference",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Hostelworld（目安）",
+     "price_note": "約$22〜（掲載価格、要確認）"
+    }
+   ],
+   "url": "https://www.google.com/maps/search/?api=1&query=The+Farrington+Inn+Allston+Boston",
+   "url_kind": "map",
+   "note": "遠い。掲載価格は要確認",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "vrbo_minutes_mit",
+   "name": "Minutes to MIT（Vrbo）",
+   "type": "vrbo_entire",
+   "area": "Cambridge",
+   "transit_to_hynes": "1.6mi",
+   "rooms": [
+    {
+     "room_type": "1棟（4名）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 465
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "cancellation": "返金可（Expedia 表示）",
+   "rating": "8.8（3件）",
+   "note": "掲載URLは控えていない",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "motel_0",
+   "name": "Plaza Inn Peabody",
+   "type": "motel",
+   "area": "Peabody",
+   "transit_to_hynes": "12〜20mi",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 75
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "note": "Expedia で最安だったが遠すぎる",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "motel_1",
+   "name": "Walpole Motel",
+   "type": "motel",
+   "area": "Walpole",
+   "transit_to_hynes": "12〜20mi",
+   "rooms": [
+    {
+     "room_type": "客室",
+     "max_occupancy": 1,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 83
+     },
+     "price_confidence": "listed",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Expedia"
+    }
+   ],
+   "note": "Expedia で最安だったが遠すぎる",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_21229815",
+   "name": "Somerville「#4 12 HOUR RENTAL」",
+   "type": "airbnb_room",
+   "area": "Somerville",
+   "lat": 42.377,
+   "lon": -71.097,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "個室・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 62
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "restrictions": "12時間だけのレンタルとみられる",
+   "url": "https://www.airbnb.com/rooms/21229815",
+   "url_kind": "site",
+   "rating": "4.76（345）",
+   "planner": {
+    "groups": [
+     "excluded"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1046660280019085273",
+   "name": "Boston Charm 2（Fields Corner）",
+   "type": "airbnb_room",
+   "area": "Dorchester",
+   "lat": 42.302,
+   "lon": -71.062,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "個室・専用バスなし",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 73
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1046660280019085273",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1046660280019085273/original/d7dcefe4-3f5d-4538-bee4-7d4a42b20a3e.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Boston Charm 2（Fields Corner）",
+   "photo_source_url": "https://www.airbnb.com/rooms/1046660280019085273",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.81（182）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1694552488478532491",
+   "name": "Belmont Constellation 1",
+   "type": "airbnb_room",
+   "area": "Belmont",
+   "lat": 42.377,
+   "lon": -71.166,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "シングル・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 74,
+      "2026-11-20/2026-11-22": 142
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1694552488478532491",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1694552488478532491/original/0a22ecc5-03b1-42ff-bc20-d05736c34be6.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Belmont Constellation 1",
+   "photo_source_url": "https://www.airbnb.com/rooms/1694552488478532491",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.9（48）",
+   "note": "郊外（Belmont）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_904674187733333504",
+   "name": "Chelsea Quiet Private Room",
+   "type": "airbnb_room",
+   "area": "Chelsea",
+   "lat": 42.388,
+   "lon": -71.033,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "個室・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 83
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/904674187733333504",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/99029b40-dfa1-4213-b65c-8cd742c16068.jpg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Chelsea Quiet Private Room",
+   "photo_source_url": "https://www.airbnb.com/rooms/904674187733333504",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.75（129）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1669132773457044869",
+   "name": "Belmont Constellation 2",
+   "type": "airbnb_room",
+   "area": "Belmont",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "個室・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 87
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1669132773457044869",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1669132773457044869/original/8f712cb8-38d3-47dd-bb92-29779a1ba9d6.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Belmont Constellation 2",
+   "photo_source_url": "https://www.airbnb.com/rooms/1669132773457044869",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.94（34）",
+   "note": "郊外（Belmont）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1999394",
+   "name": "Waltham の個室",
+   "type": "airbnb_room",
+   "area": "Waltham",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "クイーン・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 89
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1999394",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/5ab01ace-5c22-466c-a668-bdcd6c593dfe.jpg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Waltham の個室",
+   "photo_source_url": "https://www.airbnb.com/rooms/1999394",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.91（646）",
+   "note": "遠い（Waltham）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_26828892",
+   "name": "Shelly's Swan Room（East Boston）",
+   "type": "airbnb_room",
+   "area": "East Boston",
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "シングル2・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 92
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/26828892",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-26828892/original/01d63c74-be91-46e5-9abb-ee666908c2ef.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Shelly's Swan Room（East Boston）",
+   "photo_source_url": "https://www.airbnb.com/rooms/26828892",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.85（1,022）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1720263692156244937",
+   "name": "Inviting Room（Dorchester／Mattapan）",
+   "type": "airbnb_room",
+   "area": "Dorchester／Mattapan",
+   "lat": 42.284,
+   "lon": -71.081,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "クイーン・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-21": 92
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1720263692156244937",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1720263692156244937/original/ee2d239c-8e86-4103-9bc2-c2b674731cb7.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Inviting Room（Dorchester／Mattapan）",
+   "photo_source_url": "https://www.airbnb.com/rooms/1720263692156244937",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.88（33）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_22118698",
+   "name": "Quincy の個室",
+   "type": "airbnb_room",
+   "area": "Quincy",
+   "lat": 42.274,
+   "lon": -71.028,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "ダブル・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 120
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/22118698",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/b2326eb6-f58f-45f6-b7bd-0007cc27ce6d.jpg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Quincy の個室",
+   "photo_source_url": "https://www.airbnb.com/rooms/22118698",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.86（246）",
+   "note": "Red Lineまで徒歩3分",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_36165607",
+   "name": "Dorchester／Roxbury の個室",
+   "type": "airbnb_room",
+   "area": "Dorchester／Roxbury",
+   "lat": 42.312,
+   "lon": -71.062,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "クイーン・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 132
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/36165607",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/6bc6abc2-f89e-423a-8371-f2649f2ac067.jpg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Dorchester／Roxbury の個室",
+   "photo_source_url": "https://www.airbnb.com/rooms/36165607",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.75（294）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_631118154967104383",
+   "name": "Brighton 周辺の個室",
+   "type": "airbnb_room",
+   "area": "Brighton",
+   "lat": 42.356,
+   "lon": -71.158,
+   "rooms": [
+    {
+     "room_type": "個室",
+     "max_occupancy": 1,
+     "beds": "ベッド1・共用バス",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 182
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/631118154967104383",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/b6a442d0-09fb-4eb9-859e-d584a3b928a2.jpg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Brighton 周辺の個室",
+   "photo_source_url": "https://www.airbnb.com/rooms/631118154967104383",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.96（138）",
+   "planner": {
+    "groups": [
+     "solo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1394319140635097855",
+   "name": "Everett のコンド",
+   "type": "airbnb_entire",
+   "area": "Everett",
+   "lat": 42.412,
+   "lon": -71.045,
+   "rooms": [
+    {
+     "room_type": "1棟（2名で検索）",
+     "max_occupancy": 2,
+     "beds": "1BR・ベッド1・バス1",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 295
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1394319140635097855",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM5NDMxOTE0MDYzNTA5Nzg1NQ==/original/48482634-2014-47fd-b034-d51a504dc4d2.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Everett のコンド",
+   "photo_source_url": "https://www.airbnb.com/rooms/1394319140635097855",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.94（16）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_29390698",
+   "name": "South Boston のゲストスイート",
+   "type": "airbnb_entire",
+   "area": "South Boston",
+   "lat": 42.335,
+   "lon": -71.027,
+   "rooms": [
+    {
+     "room_type": "1棟（2名で検索）",
+     "max_occupancy": 2,
+     "beds": "クイーン1・バス1",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 342
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/29390698",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-29390698/original/b7572f40-9370-426a-b6b5-bbbf7de8794b.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：South Boston のゲストスイート",
+   "photo_source_url": "https://www.airbnb.com/rooms/29390698",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.96（480）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": true
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_727267711745270526",
+   "name": "Revere のアパート",
+   "type": "airbnb_entire",
+   "area": "Revere",
+   "lat": 42.42,
+   "lon": -71.0,
+   "rooms": [
+    {
+     "room_type": "1棟（2名で検索）",
+     "max_occupancy": 2,
+     "beds": "1BR",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 355
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/727267711745270526",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-727267711745270526/original/a621583b-f29e-4669-be12-3c1429098cd7.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Revere のアパート",
+   "photo_source_url": "https://www.airbnb.com/rooms/727267711745270526",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.93（230）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_18139000",
+   "name": "Somerville のアパート",
+   "type": "airbnb_entire",
+   "area": "Somerville",
+   "lat": 42.392,
+   "lon": -71.09,
+   "rooms": [
+    {
+     "room_type": "1棟（2名で検索）",
+     "max_occupancy": 2,
+     "beds": "1BR・シングル2",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 356
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/18139000",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-18139000/original/e24ebbe8-8fe5-430b-b539-ba1ac184af6f.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Somerville のアパート",
+   "photo_source_url": "https://www.airbnb.com/rooms/18139000",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.78（305）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_602679695355686500",
+   "name": "Revere のガーデンアパート",
+   "type": "airbnb_entire",
+   "area": "Revere",
+   "rooms": [
+    {
+     "room_type": "1棟（2名で検索）",
+     "max_occupancy": 2,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 367
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/602679695355686500",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-602679695355686500/original/4ee90ea4-553a-4451-a985-c056e83f78f6.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Revere のガーデンアパート",
+   "photo_source_url": "https://www.airbnb.com/rooms/602679695355686500",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.95（61）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_692705212150139166",
+   "name": "Dorchester／Roxbury の1BR",
+   "type": "airbnb_entire",
+   "area": "Dorchester／Roxbury",
+   "lat": 42.322,
+   "lon": -71.055,
+   "rooms": [
+    {
+     "room_type": "1棟（2名で検索）",
+     "max_occupancy": 2,
+     "beds": "1BR・ベッド2",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 394
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/692705212150139166",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-692705212150139166/original/edeabb7c-3101-4d5c-8364-c863e71315d8.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Dorchester／Roxbury の1BR",
+   "photo_source_url": "https://www.airbnb.com/rooms/692705212150139166",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.89（188）",
+   "planner": {
+    "groups": [
+     "duo"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1743180364932288070",
+   "name": "Everett の2BR",
+   "type": "airbnb_entire",
+   "area": "Everett",
+   "lat": 42.414,
+   "lon": -71.042,
+   "rooms": [
+    {
+     "room_type": "1棟（4名で検索）",
+     "max_occupancy": 4,
+     "beds": "ベッド3・バス1",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 410
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1743180364932288070",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1743180364932288070/original/e845f06e-da91-4af1-bd91-e2a27d2202b1.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Everett の2BR",
+   "photo_source_url": "https://www.airbnb.com/rooms/1743180364932288070",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.77（13）",
+   "note": "レビューが少ない",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1198624506234377861",
+   "name": "Revere の2BR",
+   "type": "airbnb_entire",
+   "area": "Revere",
+   "rooms": [
+    {
+     "room_type": "1棟（4名で検索）",
+     "max_occupancy": 4,
+     "beds": "クイーン2・バス1",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 461
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）",
+     "price_note": "2泊 $461（割引後）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1198624506234377861",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyNDUwNjIzNDM3Nzg2MQ%3D%3D/original/b743dfc3-cf28-4394-ab4c-eb565db5d0d1.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Revere の2BR",
+   "photo_source_url": "https://www.airbnb.com/rooms/1198624506234377861",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.93（101）",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1137178955892624910",
+   "name": "Brighton の2BR",
+   "type": "airbnb_entire",
+   "area": "Brighton",
+   "lat": 42.346,
+   "lon": -71.145,
+   "rooms": [
+    {
+     "room_type": "1棟（4名で検索）",
+     "max_occupancy": 4,
+     "beds": "ベッド3・バス1",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 493
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1137178955892624910",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1137178955892624910/original/17210b89-f303-4002-8403-1bd0e9951542.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Brighton の2BR",
+   "photo_source_url": "https://www.airbnb.com/rooms/1137178955892624910",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.69（156）",
+   "note": "T駅まで徒歩5分",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": true
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_1344219685697854095",
+   "name": "Brighton の2BR（プール付き）",
+   "type": "airbnb_entire",
+   "area": "Brighton",
+   "rooms": [
+    {
+     "room_type": "1棟（4名で検索）",
+     "max_occupancy": 4,
+     "beds": "",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 552
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/1344219685697854095",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1344219685697854095/original/4b5a32a6-e761-4f18-972e-ee3eaa9d1318.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Brighton の2BR（プール付き）",
+   "photo_source_url": "https://www.airbnb.com/rooms/1344219685697854095",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.88（90）",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  },
+  {
+   "id": "ab_53004524",
+   "name": "Revere のビーチハウス",
+   "type": "airbnb_entire",
+   "area": "Revere",
+   "rooms": [
+    {
+     "room_type": "1棟（4名で検索）",
+     "max_occupancy": 4,
+     "beds": "2BR・ベッド2・バス1.5",
+     "pricing": "per_room",
+     "prices": {
+      "2026-11-20/2026-11-22": 552
+     },
+     "price_confidence": "listed_before_fees",
+     "price_seen_date": "2026-10-18",
+     "price_source": "Airbnb 検索結果（手数料前）"
+    }
+   ],
+   "fees_note": "表示額は清掃費・サービス料・税の前",
+   "url": "https://www.airbnb.com/rooms/53004524",
+   "url_kind": "site",
+   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-53004524/original/8f3755b6-d6d9-4f32-96fe-bb68eb63757f.jpeg?im_w=480",
+   "photo_alt": "Airbnb掲載写真：Revere のビーチハウス",
+   "photo_source_url": "https://www.airbnb.com/rooms/53004524",
+   "photo_source_name": "Airbnb 掲載ページ",
+   "rating": "4.85（112）",
+   "planner": {
+    "groups": [
+     "group"
+    ],
+    "featured": false
+   },
+   "features": [],
+   "sources": []
+  }
+ ]
+}
