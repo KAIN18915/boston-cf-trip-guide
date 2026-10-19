@@ -1,6 +1,6 @@
 {
  "schema_note": "おすすめプラン。ideal_plans_*.json をまとめたもの。broken は検証で見つかった問題、tags はフィルター用",
- "generated": "2026-10-18",
+ "generated": "2026-10-19",
  "sources": [
   {
    "file": "ideal_plans_chatgpt.json",

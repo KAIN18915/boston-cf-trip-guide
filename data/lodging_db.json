@@ -1,6 +1,6 @@
 {
  "schema_note": "宿データ。prices のキーは 1泊=YYYY-MM-DD、期間合計=YYYY-MM-DD/YYYY-MM-DD。rooms[].offers は任意（予約サイト・料金プラン別）。不明な料金は null",
- "generated": "2026-10-18",
+ "generated": "2026-10-19",
  "built_from": [
   "lodging_seed.json",
   "lodging_db.json"

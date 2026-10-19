@@ -977,7 +977,8 @@ function photo(p) {
 }
 function photoHTML(p, cls) {
   var ph = photo(p), t = typeOf(p);
-  if (!ph) return '<div class="' + cls + ' noph" role="img" aria-label="写真なし（実際の宿の写真ではありません）">' + ic(t[1], 'ic lg') + '<span class="noph-t"><b>写真未掲載</b><small>アイコンはイメージ・実際の宿ではない</small></span></div>';
+  /* 写真なし：写真と同じ箱（同じ縦横比・同じ位置）＋同じ高さのキャプション行 */
+  if (!ph) return '<figure class="' + cls + ' noph"><div class="ph-box" role="img" aria-label="写真なし（実際の宿の写真ではありません）">' + ic(t[1], 'ic lg') + '<b>写真未掲載</b></div><figcaption>アイコンはイメージ・実際の宿ではない</figcaption></figure>';
   return '<figure class="' + cls + '"><img src="' + esc(ph.src) + '" alt="' + esc(ph.alt) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer">'
     + '<figcaption>写真: <a href="' + esc(ph.url) + '" target="_blank" rel="noopener">' + esc(ph.cap) + '</a></figcaption></figure>';
 }
