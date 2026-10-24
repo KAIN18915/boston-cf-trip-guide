@@ -1,6 +1,6 @@
 {
  "schema_note": "便データ。fares は予約先・運賃種別ごと。rt_quotes は往路＋復路の組み合わせの往復運賃",
- "generated": "2026-10-19",
+ "generated": "2026-10-23",
  "built_from": "flights_db.json + flight_rt_quotes.json",
  "flights": [
   {

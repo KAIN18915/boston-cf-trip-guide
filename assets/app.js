@@ -1186,10 +1186,11 @@ function renderStayDetail() {
 /* ---------- おすすめプラン（ideal_plans.json） ---------- */
 var IDEAL = {plans: [], sources: []}, HASREV = false;
 function ipByID(id) { for (var i = 0; i < IDEAL.plans.length; i++) if (IDEAL.plans[i].id === id) return IDEAL.plans[i]; return null; }
-function ipSel() { return lsGet(LS.ipsel, []).filter(function (id) { var p = ipByID(id); return p && !(p.broken || []).length; }); }
+function ipOpen(p) { return !!(p && p.open === true); } /* 未定の項目（帰り・宿）がある案。合計は計算しない（既定の便・宿で埋めない） */
+function ipSel() { return lsGet(LS.ipsel, []).filter(function (id) { var p = ipByID(id); return p && !(p.broken || []).length && !ipOpen(p); }); }
 /* 作成者の合計（1人あたり、分かっている分）とサイトの計算エンジンでの再計算を比べる。$5 を超える差か「未確認の有無」の違いを不一致とする */
 var IP_TOL = 5;
-function auLbl(a) { return String(a || '').toLowerCase() === 'chatgpt' ? 'ChatGPT' : a; }
+function auLbl(a) { var k = String(a || '').toLowerCase(); return k === 'chatgpt' ? 'ChatGPT' : k === 'self' ? '推奨案' : a; }
 function txtList(x) { return Array.isArray(x) ? x : x == null || x === '' ? [] : [x]; }
 function fzLbl(p) { var t = p.tags || {}, fz = p.feasibility || {}; return '<span class="lbl ' + ((t.status || fz.status) === 'OK' ? 'c-ok' : 'c-unv') + '">' + esc(t.status_label || fz.status_as_written || fz.status || '不明') + '</span>'; }
 function recLbl(p) { return p.recommended ? '<span class="lbl c-rec">' + ic('star', 'ic sm') + esc(auLbl(p.author)) + 'の推奨</span>' : ''; }
@@ -1211,9 +1212,13 @@ function ipChips(p) {
 var IP_FIELDS = {
   rec: function (c) { return c.p.recommended ? '<p class="ip-recf"><b>推奨理由：</b>' + esc(c.p.recommended_reason || '記載なし') + '</p>' : ''; },
   totals: function (c) { var T = c.T, r = c.r; return '<dl class="ip-tot"><div><dt>作成者の合計</dt><dd>' + esc(T.display_pp || (num(T.total_pp_known) != null ? money(T.total_pp_known) : '不明')) + '<small>/人・グループ ' + esc(T.display_group || '不明') + '</small></dd></div>'
-    + '<div><dt>再計算</dt><dd>' + (r ? totalTxt(r) + '<small>/人・グループ ' + totalTxt(r, true, true) + '</small>' : '計算不可') + '</dd></div></dl>'; },
+    + '<div><dt>再計算</dt><dd>' + (r ? totalTxt(r) + '<small>/人・グループ ' + totalTxt(r, true, true) + '</small>' : ipOpen(c.p) ? '未定<small>帰りの便・宿が決まっていないため計算しない</small>' : '計算不可') + '</dd></div></dl>'
+    + (ipOpen(c.p) ? '<p class="note ip-open">' + esc(T.known_parts_note ? T.known_parts_note + '。' : '') + '帰りの便・宿が未定のため比較表には入れない。ビルダーで開くと往路だけ引き継ぎ、帰り・宿はビルダーの既定値になる（自分で選び直す）</p>' : ''); },
   check: function (c) { var ck = c.ck; return ck ? (ck.bad ? '<p class="ip-mm"><span class="lbl c-unv">合計不一致</span>' + ck.why.map(esc).join('・') + '</p>' : '<p class="ip-ok"><span class="lbl c-ok">合計一致</span>差$' + IP_TOL + '以内</p>') : ''; },
-  meta: function (c) { var p = c.p, r = c.r; return '<p class="ip-m">' + esc(p.dates ? md(p.dates.check_in) + '–' + md(p.dates.check_out) + '・' + p.dates.nights + '泊' : '') + '／' + esc(p.items && p.items.lodging ? p.items.lodging.name + (p.items.lodging.units > 1 ? '×' + p.items.lodging.units + '室' : '') : '') + '<br>'
+  meta: function (c) { var p = c.p, r = c.r, it = p.items || {};
+    if (ipOpen(p)) return '<p class="ip-m">' + esc(p.dates ? md(p.dates.check_in) + '–' + md(p.dates.check_out) : '') + '／宿：' + esc(it.lodging ? it.lodging.name : '未予約') + '<br>'
+      + esc(it.outbound ? (FBY[it.outbound.flight_id] ? flShort(FBY[it.outbound.flight_id]) : (it.outbound.flight_numbers || []).join('・') || '往路未定') : '往路未定') + '／帰り：' + esc(it.return ? (FBY[it.return.flight_id] ? flShort(FBY[it.return.flight_id]) : '未定') : '未定') + '</p>';
+    return '<p class="ip-m">' + esc(p.dates ? md(p.dates.check_in) + '–' + md(p.dates.check_out) + '・' + p.dates.nights + '泊' : '') + '／' + esc(p.items && p.items.lodging ? p.items.lodging.name + (p.items.lodging.units > 1 ? '×' + p.items.lodging.units + '室' : '') : '') + '<br>'
     + (r ? esc(flShort(FBY[r.s.f])) + '／' + esc(flShort(FBY[r.s.r])) : esc(((p.items || {}).outbound || {}).flight_id || '') + '／' + esc(((p.items || {}).return || {}).flight_id || '')) + '</p>'; },
   feasibility: function (c) { var fz = c.fz; return '<div class="ip-fz"><b>実現性：</b>' + fzLbl(c.p) + ((fz.notes || []).length ? '<ul>' + fz.notes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') + '</div>'; },
   stay: function (c) { var q = c.p.stay_q, a = c.p.raw_alt; if (!q && !a) return '';
@@ -1224,7 +1229,7 @@ var IP_FIELDS = {
     return '<div class="ip-un"><b>未確認：</b>' + (un.length ? '<ul>' + un.map(function (x) { return '<li>' + esc(typeof x === 'string' ? x : JSON.stringify(x)) + '</li>'; }).join('') + '</ul>' : 'なし') + '</div>'; },
   proscons: function (c) { var p = c.p, T = c.T; return (p.pros || []).length || (p.cons || []).length || (T.excludes || []).length ? '<details class="ctl"><summary>長所・短所・合計外</summary><ul>' + (p.pros || []).map(function (x) { return '<li>＋' + esc(x) + '</li>'; }).join('') + (p.cons || []).map(function (x) { return '<li>−' + esc(x) + '</li>'; }).join('') + (T.excludes || []).map(function (x) { return '<li>合計外：' + esc(typeof x === 'string' ? x : JSON.stringify(x)) + '</li>'; }).join('') + '</ul></details>' : ''; },
   actions: function (c) { var bad = c.bad.length; return '<div class="btns"><button type="button" class="btn pri" data-act="ip-open" data-id="' + esc(c.p.id) + '"' + (bad ? ' disabled' : '') + '>' + ic('external-link') + 'プランビルダーで開く</button>'
-    + '<label class="chip"><input type="checkbox" data-act="ip-cmp" value="' + esc(c.p.id) + '"' + (c.sel ? ' checked' : '') + (bad ? ' disabled' : '') + '>比較に追加</label></div>'; }
+    + '<label class="chip"><input type="checkbox" data-act="ip-cmp" value="' + esc(c.p.id) + '"' + (c.sel ? ' checked' : '') + (bad || ipOpen(c.p) ? ' disabled' : '') + '>比較に追加</label></div>'; }
 };
 /* ===== おすすめプラン（chatgpt_plans_layout.md の配置）=====
    上から：人数 → 詳細フィルター → まず見る3プラン → 全プランを探す（方針×入り方）。JSON は変えず、UI 側で正規化する */
@@ -1235,7 +1240,7 @@ var HAD_PLAN = (function () { try { return !!localStorage.getItem('bcf26.plan');
 var STAT_ORD = {'OK': 0, '要確認': 1, '時間不足': 2};
 var RET_ORD = ['日曜朝', '日曜夕方以降', '月曜朝', '月曜夕方以降'];
 function ipStrat(p) { return (p.tags || {}).strategy || 'その他'; }
-function ipCalc(p) { if (!p._r && !(p.broken || []).length) p._r = calc(parseQ(p.site_q)); return p._r || null; }
+function ipCalc(p) { if (ipOpen(p)) return null; if (!p._r && !(p.broken || []).length) p._r = calc(parseQ(p.site_q)); return p._r || null; }
 function ipState() {
   var f = lsGet(IPF2, {}), o = {n: f.n || '', rd: f.rd || '', au: f.au || '', fs: f.fs || '', sort: f.sort || IP_LAYOUT.default_sort, view: f.view || IP_LAYOUT.default_view, cs: f.cs || '', ca: f.ca || '', open: !!f.open, inh: ''};
   if (!o.n) { var bn = st && st.n; if ([1, 2, 4].indexOf(+bn) >= 0 && HAD_PLAN) { o.n = String(bn); o.inh = 'ビルダーの人数'; } else { o.n = '1'; o.inh = 'none'; } }
@@ -1284,7 +1289,7 @@ function ipReps(base) {
     return {s: s, p: c[0] || null};
   });
 }
-function ipTitle(p) { var t = p.tags || {}; return p.scenario === 'return_style' ? '帰り' + (t.return || '不明') + '・' + (t.arrival || '') : (t.strategy || t.arrival || '') + '・' + (t.strategy ? t.arrival : '帰り' + (t.return || '不明')); }
+function ipTitle(p) { var t = p.tags || {}; if (p.card_title) return p.card_title; return p.scenario === 'return_style' ? '帰り' + (t.return || '不明') + '・' + (t.arrival || '') : (t.strategy || t.arrival || '') + '・' + (t.strategy ? t.arrival : '帰り' + (t.return || '不明')); }
 /* 短く切る（句点・読点で切れるなら優先）。全文は「詳細」で必ず読める */
 function cut(s, n) { s = String(s || ''); if (s.length <= n) return {t: s, more: false}; var i = Math.max(s.lastIndexOf('。', n), s.lastIndexOf('、', n), s.lastIndexOf('・', n)); return {t: (i >= n * 0.5 ? s.slice(0, i) : s.slice(0, n)) + '…', more: true}; }
 function ipNotes(p) { return txtList(p.note).concat((p.feasibility || {}).notes || [], (p.unconfirmed || []).map(function (x) { return '未確認：' + (typeof x === 'string' ? x : JSON.stringify(x)); })).map(function (x) { return typeof x === 'string' ? x : JSON.stringify(x); }); }
@@ -1297,6 +1302,7 @@ function ipDetail(p, c) {
 var Q_SHORT = {green: '赤信号なし', amber: '注意', red: '除外の基準', unrated: '評価点のみ'};
 function ipQual(p) {
   var q = p.stay_q, a = p.raw_alt, h = '';
+  if (!q && ipOpen(p) && !(p.items || {}).lodging) h += '<p class="ip-q q-none"><span class="lbl">宿：未予約</span><small>口コミ判定なし</small></p>';
   if (q) h += '<p class="ip-q q-' + esc(q.level) + '"><span class="lbl">' + esc(q.label) + '</span>' + (q.rating ? '<small>' + esc(q.rating) + '</small>' : '') + (q.other ? '<small class="ip-q2">' + (q.other === q.level ? auLbl(q.other_by) + 'の判定も同じ' : auLbl(q.other_by) + 'の判定：' + esc(Q_SHORT[q.other] || q.other)) + '</small>' : '')
     + (q.level !== 'green' && q.notes.length ? '<span class="ip-qn">' + esc(q.notes[0]) + (q.notes.length > 1 ? '（ほか' + (q.notes.length - 1) + '件）' : '') + '</span>' : '') + '</p>';
   if (a) h += '<div class="ip-alt" data-alt="' + esc(a.site_id) + '"><p><b class="tag tag-alt">代替案</b>生の最安：<a href="' + ROOT + 'stays/' + esc(a.site_id) + '/">' + esc(a.name) + '</a>'
@@ -1310,13 +1316,14 @@ function ipCard(p, sel) {
   var reason = p.recommended_reason || (p.pros || []).join('・'), rc = cut(reason, IP_LAYOUT.reason_max), notes = ipNotes(p), nc = notes.length ? cut(notes[0], IP_LAYOUT.note_max) : null;
   return '<article class="ip' + (bad.length ? ' ip-bad' : '') + '" data-ip="' + esc(p.id) + '">'
     + '<header class="ip-h"><h3>' + esc(ipTitle(p)) + '</h3><div class="ip-tags"><span class="tag tag-au">' + esc(auLbl(p.author)) + '</span>' + recLbl(p) + '</div></header>'
-    + (function () { var tt = r ? totalTxt(r) : '計算不可', i = tt.indexOf('<small class="taxe">'); return '<p class="ip-price"><b>' + (i < 0 ? tt : tt.slice(0, i)) + '</b><small>/人</small><span class="lbl c-' + cert.k + '">' + cert.t + '</span>' + (i < 0 ? '' : tt.slice(i)) + '</p>'; })()
+    + (ipOpen(p) ? '<p class="ip-price"><b>未定</b><small>/人</small><span class="lbl c-unv">未確認</span><small class="taxe">帰りの便・宿が未定</small></p>' : '')
+    + (ipOpen(p) ? '' : (function () { var tt = r ? totalTxt(r) : '計算不可', i = tt.indexOf('<small class="taxe">'); return '<p class="ip-price"><b>' + (i < 0 ? tt : tt.slice(0, i)) + '</b><small>/人</small><span class="lbl c-' + cert.k + '">' + cert.t + '</span>' + (i < 0 ? '' : tt.slice(i)) + '</p>'; })())
     + '<p class="ip-meta">' + p.party_size + '人・帰り' + esc(t.return || '不明') + fzLbl(p) + (c.ck && c.ck.bad ? '<span class="lbl c-unv">合計不一致</span>' : '') + '</p>'
     + '<p class="ip-why' + (p.recommended ? ' ip-rec' : '') + '">' + (reason ? esc(rc.t) : '<span class="muted">理由の記載なし</span>') + '</p>'
     + '<p class="ip-note">' + (nc ? '<b>注記 ' + notes.length + '件</b>' + esc(nc.t) : '<b>注記なし</b>') + '</p>'
     + '<div class="ip-qa">' + ipQual(p) + (bad.length ? '<p class="ip-broken"><b>壊れたプラン</b>（未登録ID）：' + bad.map(esc).join('／') + '</p>' : '') + '</div>'
     + ipDetail(p, c)
-    + '<div class="btns ip-btns"><label class="chip"><input type="checkbox" data-act="ip-cmp" value="' + esc(p.id) + '"' + (sel ? ' checked' : '') + (bad.length ? ' disabled' : '') + '>比較に追加</label>'
+    + '<div class="btns ip-btns"><label class="chip"><input type="checkbox" data-act="ip-cmp" value="' + esc(p.id) + '"' + (sel ? ' checked' : '') + (bad.length || ipOpen(p) ? ' disabled' : '') + '>比較に追加</label>'
     + '<button type="button" class="btn pri" data-act="ip-open" data-id="' + esc(p.id) + '"' + (bad.length ? ' disabled' : '') + '>' + ic('external-link') + 'ビルダーで開く</button></div></article>';
 }
 function ipGroupKey(p) { var t = p.tags || {}; return [p.party_size, ipStrat(p), t.arrival, t.return].join('|'); }
@@ -1342,7 +1349,7 @@ function renderIdeal() {
   var h = '<p class="note">' + IDEAL.plans.length + '件（' + IDEAL.sources.map(function (x) { return esc(auLbl(x.author)) + ' ' + x.count + '・' + esc(x.generated || '日付不明'); }).join('／') + '）・今のデータで再計算・作成者の合計と不一致 ' + mm + '件</p>'
     + '<div class="ip-ppl" role="radiogroup" aria-label="人数">' + ['1', '2', '4'].map(function (n) { return '<button type="button" class="seg' + (f.n === n ? ' on' : '') + '" role="radio" aria-checked="' + (f.n === n) + '" data-act="ip-n" data-v="' + n + '">' + ic('users', 'ic sm') + n + '人</button>'; }).join('')
     + '<span class="note ip-inh">' + (f.inh === 'none' ? '1人の候補を表示中' : f.inh ? esc(f.inh) + 'を引き継ぎ' : '') + '</span></div>'
-    + '<div class="ip-f">' + sl('rd', '帰る日', uniq(function (p) { return (p.tags || {}).return_day; })) + sl('au', '作成者', authors, auLbl, '両方') + sl('fs', '日程', uniq(function (p) { return (p.tags || {}).status; }))
+    + '<div class="ip-f">' + sl('rd', '帰る日', uniq(function (p) { return (p.tags || {}).return_day; })) + sl('au', '作成者', authors, auLbl, authors.length > 2 ? 'すべて' : '両方') + sl('fs', '日程', uniq(function (p) { return (p.tags || {}).status; }))
     + '<label class="fld inl">並び<select data-ipf="sort">' + opt('rec', 'おすすめ順', f.sort) + opt('price', '安い順', f.sort) + opt('ret_early', '帰着が早い順', f.sort) + opt('ret_late', '帰着が遅い順', f.sort) + opt('author', '作成者順', f.sort) + '</select></label>'
     + '<div class="ip-view" role="radiogroup" aria-label="表示">' + [['merged', '統合'], ['author', '作成者で比較']].map(function (x) { return '<button type="button" class="seg' + (f.view === x[0] ? ' on' : '') + '" role="radio" aria-checked="' + (f.view === x[0]) + '" data-act="ip-view" data-v="' + x[0] + '">' + x[1] + '</button>'; }).join('') + '</div></div>';
   var act = [];

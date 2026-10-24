@@ -1,6 +1,6 @@
 {
  "schema_note": "おすすめプラン。ideal_plans_*.json をまとめたもの。broken は検証で見つかった問題、tags はフィルター用",
- "generated": "2026-10-19",
+ "generated": "2026-10-23",
  "sources": [
   {
    "file": "ideal_plans_chatgpt.json",
@@ -23,6 +23,21 @@
     "2": "chatgpt-balance-2",
     "4": "chatgpt-balance-4"
    },
+   "url_stripped": 0
+  },
+  {
+   "file": "ideal_plans_self.json",
+   "author": "self",
+   "generated": "2026-10-23",
+   "schema": "bcf26.ideal_plans.v1",
+   "count": 1,
+   "about": "推奨案（往路のみ候補便あり。帰りの便と宿はこれから決める）。運賃は flights_db.json にある値と確認日だけを書く。推定はしない",
+   "assumptions": {
+    "no_booking": "予約・支払いは一切していない",
+    "open_items": "items.return / items.lodging が null のものは未定。サイトは合計を計算せず「未定」と表示する"
+   },
+   "sources": null,
+   "recommended": {},
    "url_stripped": 0
   },
   {
@@ -5961,6 +5976,112 @@
     "other": "green",
     "other_by": "chatgpt"
    },
+   "raw_alt": null,
+   "schema_errors": []
+  },
+  {
+   "id": "self-fri-pm-1",
+   "author": "self",
+   "open": true,
+   "scenario": "self_draft",
+   "scenario_label": "推奨案",
+   "title": "推奨案：金曜午後便＋帰り未定・宿未定",
+   "card_title": "推奨案：金曜午後便＋帰り未定・宿未定",
+   "party_size": 1,
+   "compare_group": "self",
+   "dates": {
+    "check_in": "2026-11-20",
+    "check_out": "2026-11-22",
+    "nights": 2,
+    "attend_days": [
+     "2026-11-21",
+     "2026-11-22"
+    ],
+    "note": "日程は11/20（金）〜11/22（日）。帰りの便が未定のため泊数は確定ではない"
+   },
+   "items": {
+    "outbound": {
+     "flight_id": "out-1120-SEABOS-1540-AS460",
+     "flight_numbers": [
+      "AS 460"
+     ],
+     "flight_number_source": "flights_db.json（2026-10-18 確認）の Alaska 15:40発・23:59着の便。予約記録での確認ではない",
+     "airline": "Alaska",
+     "date": "2026-11-20",
+     "from": "SEA",
+     "to": "BOS",
+     "depart": "15:40",
+     "arrive": "23:59",
+     "overnight": false,
+     "stops": 0,
+     "fare_brand": "Saver",
+     "price_pp": 234,
+     "currency": "USD",
+     "one_way": true,
+     "price_channel": "Google Flights → Alaska (airline direct)",
+     "price_seen_date": "2026-10-18",
+     "taxes_note": "税込み総額表示（flights_db.json）",
+     "source": "flights_db.json",
+     "flight_notes": [
+      "AS 460: Often delayed by 30+ min"
+     ]
+    },
+    "return": null,
+    "round_trip_quote": null,
+    "lodging": null
+   },
+   "totals": {
+    "total_pp_known": null,
+    "complete": false,
+    "display_pp": "未定（帰りの便・宿が未定）",
+    "display_group": "未定",
+    "unknown_parts": [
+     "復路の航空券（未定）",
+     "宿泊費（未予約）"
+    ],
+    "known_parts_note": "往路 AS 460 Saver $234（片道・税込、2026-10-18 確認）のみ判明"
+   },
+   "feasibility": {
+    "status": "要確認",
+    "status_as_written": "要確認（帰り・宿が未定）",
+    "notes": [
+     "金曜23:59着のため金曜の会場には行けない（土・日に参加）",
+     "深夜着：Logan Expressは22時頃まで。SL1（1時頃まで）かUber/Lyft（約$36〜41）"
+    ]
+   },
+   "site_q": "n=1&in=20&out=22&f=out-1120-SEABOS-1540-AS460",
+   "strategy": null,
+   "axes": {
+    "arrive": "土日のみ",
+    "return": "未定"
+   },
+   "recommended": false,
+   "recommended_reason": "往路の候補便だけ決まっていて、帰りの便と宿はこれから選ぶ",
+   "note": [
+    "往路の運賃は2026-10-18時点の表示（Saver $234・片道・税込）。今の運賃ではない",
+    "帰りの便：未定",
+    "宿：未予約"
+   ],
+   "unconfirmed": [
+    "復路の便",
+    "宿",
+    "合計"
+   ],
+   "pros": [],
+   "cons": [],
+   "sit": "fri-pm-1",
+   "broken": [],
+   "tags": {
+    "strategy": null,
+    "arrival": "土日のみ",
+    "axes_arrive": "土日のみ",
+    "axes_return": "未定",
+    "return_day": "未定",
+    "return": "未定",
+    "status": "要確認",
+    "status_label": "要確認（帰り・宿が未定）"
+   },
+   "stay_q": null,
    "raw_alt": null,
    "schema_errors": []
   },
