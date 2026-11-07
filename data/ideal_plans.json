@@ -28,10 +28,10 @@
   {
    "file": "ideal_plans_self.json",
    "author": "self",
-   "generated": "2026-10-23",
+   "generated": "2026-11-06",
    "schema": "bcf26.ideal_plans.v1",
-   "count": 1,
-   "about": "推奨案（往路のみ候補便あり。帰りの便と宿はこれから決める）。運賃は flights_db.json にある値と確認日だけを書く。推定はしない",
+   "count": 2,
+   "about": "手入力のプラン。金曜午後便（帰り・宿は未定、往路は AS 460）と、2026-11-06時点の木曜出発プラン（未予約）。木曜案の合計は Alaska の from 価格と Booking.com の滞在合計で、便ごとの運賃は未確認",
    "assumptions": {
     "no_booking": "予約・支払いは一切していない",
     "open_items": "items.return / items.lodging が null のものは未定。サイトは合計を計算せず「未定」と表示する"
@@ -13619,6 +13619,195 @@
     "other": null,
     "other_by": null
    },
+   "raw_alt": null,
+   "schema_errors": []
+  },
+  {
+   "id": "self-thu-1119-1",
+   "author": "self",
+   "open": false,
+   "price_basis": "stated",
+   "scenario": "self_draft",
+   "scenario_label": "木曜出発",
+   "title": "木曜出発プラン（11/19〜11/22）",
+   "card_title": "木曜出発プラン（11/19〜11/22）",
+   "party_size": 1,
+   "compare_group": "self",
+   "dates": {
+    "check_in": "2026-11-19",
+    "check_out": "2026-11-22",
+    "nights": 3,
+    "attend_days": [
+     "2026-11-20",
+     "2026-11-21",
+     "2026-11-22"
+    ],
+    "note": "木 11/19 出発、日 11/22 帰り。金・土・日に参加できる。未予約"
+   },
+   "items": {
+    "outbound": {
+     "flight_id": "out-1119-SEABOS-0738-DL459",
+     "flight_numbers": [
+      "DL 459"
+     ],
+     "flight_number_source": "2026-11-06 の時刻表。便ごとの運賃は未確認",
+     "airline": "Delta",
+     "date": "2026-11-19",
+     "from": "SEA",
+     "to": "BOS",
+     "depart": "07:38",
+     "arrive": "16:00",
+     "depart_tz": "PST",
+     "arrive_tz": "EST",
+     "overnight": false,
+     "stops": 0,
+     "price_pp": null,
+     "currency": "USD",
+     "one_way": true,
+     "price_seen_date": "2026-11-06",
+     "taxes_note": "便ごとの運賃は未確認。往復の参考は Alaska の from 価格",
+     "source": "2026-11-06 調査まとめ",
+     "alt": {
+      "flight_id": "out-1119-SEABOS-0847-AS279",
+      "flight_numbers": [
+       "AS 279"
+      ],
+      "airline": "Alaska",
+      "depart": "08:47",
+      "arrive": "17:17",
+      "stops": 0,
+      "note": "代替。SEA 08:47 PST → BOS 17:17 EST、直行"
+     }
+    },
+    "return": {
+     "flight_id": "ret-1122-BOSSEA-1804-AS257",
+     "flight_numbers": [
+      "AS 257"
+     ],
+     "airline": "Alaska",
+     "date": "2026-11-22",
+     "from": "BOS",
+     "to": "SEA",
+     "depart": "18:04",
+     "arrive": "21:29",
+     "depart_tz": "EST",
+     "arrive_tz": "PST",
+     "overnight": false,
+     "stops": 0,
+     "price_pp": null,
+     "currency": "USD",
+     "one_way": true,
+     "price_seen_date": "2026-11-06",
+     "source": "2026-11-06 調査まとめ",
+     "alt": {
+      "flight_id": "ret-1122-BOSSEA-1835-DL2889",
+      "flight_numbers": [
+       "DL 2889"
+      ],
+      "airline": "Delta",
+      "depart": "18:35",
+      "arrive": "22:03",
+      "stops": 0,
+      "note": "代替。BOS 18:35 EST → SEA 22:03 PST、直行"
+     }
+    },
+    "round_trip_quote": {
+     "price_pp": 618,
+     "currency": "USD",
+     "basis": "Alaska の片道 from $309 を往復分にした参考値。便ごとの運賃ではない",
+     "price_seen_date": "2026-11-06",
+     "not_a_per_flight_fare": true
+    },
+    "lodging": {
+     "lodging_id": "hi_boston",
+     "site_id": "hi_boston",
+     "name": "HI Boston Hostel",
+     "type": "hostel",
+     "area": "Theater District",
+     "room": "男性6人ドミトリー",
+     "units": 1,
+     "guests_searched": 1,
+     "channel": "Booking.com",
+     "offer_url": "https://www.booking.com/hotel/us/hostelling-international-boston.html",
+     "price_seen_date": "2026-11-06",
+     "nights": [
+      "2026-11-19",
+      "2026-11-20",
+      "2026-11-21"
+     ],
+     "stay_total_usd": 248,
+     "taxes_note": "税が含まれるかは不明",
+     "party_fit": "yes"
+    }
+   },
+   "totals": {
+    "currency": "USD",
+    "flights_pp": 618,
+    "flights_basis": "Alaska 片道 from $309 を往復にした参考。便ごとの運賃ではない",
+    "lodging_stay_total_usd": 248,
+    "total_pp_known": 866,
+    "total_group_known": 866,
+    "complete": false,
+    "display_pp": "約$866",
+    "display_group": "約$866",
+    "unknown_parts": [
+     "便ごとの運賃（未確認）",
+     "宿泊税が合計に含まれるか"
+    ],
+    "known_parts_note": "航空券の参考 約$618 ＋ HI Boston 3泊 $248。市内交通は含まない",
+    "excludes": [
+     "市内交通・空港移動",
+     "食費",
+     "預け荷物"
+    ]
+   },
+   "feasibility": {
+    "status": "要確認",
+    "status_as_written": "未予約",
+    "notes": [
+     "木 16:00着（EST）なら金・土・日の3日に参加できる",
+     "金曜出発の最短着は16:00で、初日の大半に間に合わない",
+     "日曜の復路は閉場15:00のあと。AS257 は 18:04発"
+    ]
+   },
+   "site_q": "n=1&in=19&out=22&f=out-1119-SEABOS-0738-DL459&r=ret-1122-BOSSEA-1804-AS257&ti=logan_express&to=logan_express&b=cheapest&c=hi_boston",
+   "recommended": false,
+   "recommended_reason": "11/6時点の木曜発・3泊の見積もり。予約はしていない",
+   "note": [
+    "状態：未予約。料金は2026-11-06（PST）時点",
+    "往路は DL459（木 07:38 PST→16:00 EST、直行）。代替は AS279（08:47→17:17、直行）",
+    "復路は AS257（日 18:04 EST→21:29 PST）。代替は DL2889（18:35→22:03）",
+    "航空券 約$618 は Alaska の片道 from $309 を往復にした参考で、便ごとの運賃ではない",
+    "宿は HI Boston Hostel の男性6人ドミトリー、Booking.com で3泊合計 $248。税が含まれるかは不明",
+    "ビルダーで開くと 10/18 の運賃・宿データで再計算する。この概算（約$866）とは別"
+   ],
+   "unconfirmed": [
+    "便ごとの運賃",
+    "宿泊税の有無",
+    "空室・空席"
+   ],
+   "pros": [
+    "金曜の会場開始に間に合う",
+    "会場から近いホステル（Theater District、約0.6mi）"
+   ],
+   "cons": [
+    "3泊になる",
+    "ドミトリー",
+    "便ごとの運賃は未確認"
+   ],
+   "sit": "thu-dep-1",
+   "broken": [],
+   "tags": {
+    "strategy": "その他",
+    "arrival": "前泊",
+    "axes_arrive": "前泊",
+    "axes_return": "日曜夕方",
+    "return_day": "日曜",
+    "return": "日曜夕方",
+    "status": "要確認",
+    "status_label": "未予約"
+   },
+   "stay_q": null,
    "raw_alt": null,
    "schema_errors": []
   }
