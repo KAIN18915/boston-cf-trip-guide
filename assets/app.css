@@ -748,3 +748,10 @@ figure.noph{display:block!important;aspect-ratio:auto!important;height:auto!impo
 .ph-box .ic.lg{width:40px;height:40px}
 figure.noph figcaption{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lx-ph figcaption,.dt-ph figcaption{line-height:1.5;height:calc(1.5em + 4px);box-sizing:border-box;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 予約済みの確定プラン。候補の見積もりより先に見せる */
+.confirmed{border:2px solid var(--ok-bd);background:linear-gradient(180deg,var(--ok-bg),var(--surface));box-shadow:var(--shadow-float)}
+.confirmed h2{color:var(--ok-tx)}
+.confirmed .amt{margin:8px 0 4px;font-size:32px;font-weight:800;color:var(--navy);line-height:1.2}
+.confirmed .amt small{font-size:13px;font-weight:500;color:var(--muted)}
+.confirmed .facts dd small{display:block;color:var(--muted);font-size:13px}

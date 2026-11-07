@@ -4,6 +4,48 @@
  "built_from": "flights_db.json + flight_rt_quotes.json",
  "flights": [
   {
+   "id": "out-1118-SEABOS-2307-DL473",
+   "direction": "outbound",
+   "date": "2026-11-18",
+   "airline": "Delta",
+   "operated_by": null,
+   "flight_numbers": [
+    "DL 473"
+   ],
+   "stops": 0,
+   "layovers": null,
+   "depart_airport": "SEA",
+   "depart_time": "23:07",
+   "arrive_airport": "BOS",
+   "arrive_time": "07:20",
+   "duration": "5 hr 13 min",
+   "aircraft": null,
+   "overnight": true,
+   "arrival_note": "予約済みの往路。水 11/18 23:07 SEA発、木 11/19 07:20 BOS着、直行、Main Classic、$468.41。変更可、払戻不可。",
+   "alternative": false,
+   "booked": true,
+   "fares": [
+    {
+     "channel": "予約済み",
+     "fare_brand": "Main Classic",
+     "price": 468.41,
+     "currency": "USD",
+     "one_way_or_rt": "one_way",
+     "bags_included": null,
+     "carry_on_allowed": null,
+     "change_policy": "変更可",
+     "refundable": false,
+     "seat_selection": null,
+     "price_seen_date": null,
+     "url": null,
+     "confidence": "confirmed",
+     "taxes_included": null,
+     "taxes_note": null,
+     "booked": true
+    }
+   ]
+  },
+  {
    "id": "out-1119-SEABOS-0540-AA3068-AA478",
    "direction": "outbound",
    "date": "2026-11-19",

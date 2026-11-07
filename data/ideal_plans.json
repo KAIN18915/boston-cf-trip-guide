@@ -31,9 +31,9 @@
    "generated": "2026-11-06",
    "schema": "bcf26.ideal_plans.v1",
    "count": 2,
-   "about": "手入力のプラン。金曜午後便（帰り・宿は未定、往路は AS 460）と、2026-11-06時点の木曜出発プラン（未予約）。木曜案の合計は Alaska の from 価格と Booking.com の滞在合計で、便ごとの運賃は未確認",
+   "about": "手入力の候補。金曜午後便（帰り・宿は未定、往路は AS 460）と、2026-11-06時点の木曜出発プラン（この2件は未予約の見積もり）。木曜案の合計は Alaska の from 価格と Booking.com の滞在合計で、便ごとの運賃は未確認。予約した旅程は confirmed_plan.json",
    "assumptions": {
-    "no_booking": "予約・支払いは一切していない",
+    "no_booking": "この2件は未予約の候補。予約した旅程は confirmed_plan.json",
     "open_items": "items.return / items.lodging が null のものは未定。サイトは合計を計算せず「未定」と表示する"
    },
    "sources": null,
@@ -13642,7 +13642,7 @@
      "2026-11-21",
      "2026-11-22"
     ],
-    "note": "木 11/19 出発、日 11/22 帰り。金・土・日に参加できる。未予約"
+    "note": "木 11/19 出発、日 11/22 帰り。金・土・日に参加できる。11/6の未予約の見積もりで、確定プランではない"
    },
    "items": {
     "outbound": {
@@ -13772,9 +13772,9 @@
    },
    "site_q": "n=1&in=19&out=22&f=out-1119-SEABOS-0738-DL459&r=ret-1122-BOSSEA-1804-AS257&ti=logan_express&to=logan_express&b=cheapest&c=hi_boston",
    "recommended": false,
-   "recommended_reason": "11/6時点の木曜発・3泊の見積もり。予約はしていない",
+   "recommended_reason": "11/6時点の未予約の見積もり。確定プランではない",
    "note": [
-    "状態：未予約。料金は2026-11-06（PST）時点",
+    "状態：この案は未予約の見積もり。料金は2026-11-06（PST）時点。予約した内容は確定プラン",
     "往路は DL459（木 07:38 PST→16:00 EST、直行）。代替は AS279（08:47→17:17、直行）",
     "復路は AS257（日 18:04 EST→21:29 PST）。代替は DL2889（18:35→22:03）",
     "航空券 約$618 は Alaska の片道 from $309 を往復にした参考で、便ごとの運賃ではない",

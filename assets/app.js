@@ -676,7 +676,7 @@ function renderPlanner() {
       return '<optgroup label="' + esc(mdw(d)) + '">' + by[d].map(function (f) {
         var extra = '';
         if (f.id !== sel) { var s2 = clone(st); s2[dir === 'outbound' ? 'f' : 'r'] = f.id; extra = '　' + dlt(deltaOf(r, calc(s2))); }
-        return opt(f.id, flShort(f) + (f.stops > 0 ? '・乗継' : '') + (f.alternative ? '・' + (dir === 'outbound' ? f.arrive_airport + '着' : f.depart_airport + '発') : '') + extra, sel);
+        return opt(f.id, flShort(f) + (f.stops > 0 ? '・乗継' : '') + (f.booked ? '・確定' : '') + (f.alternative ? '・' + (dir === 'outbound' ? f.arrive_airport + '着' : f.depart_airport + '発') : '') + extra, sel);
       }).join('') + '</optgroup>';
     }).join('');
   }
@@ -1365,7 +1365,7 @@ function renderIdeal() {
   if (f.cs) act.push(['cs', '方針：' + f.cs]); if (f.ca) act.push(['ca', '入り方：' + f.ca]);
   if (act.length) h += '<div class="lx-active" aria-label="使っている条件">' + act.map(function (x) { return '<button type="button" class="chip on" data-act="ip-rmf" data-k="' + x[0] + '">' + esc(x[1]) + ic('x', 'ic sm') + '<span class="sr">を外す</span></button>'; }).join('') + '<button type="button" class="btn sm" data-act="ip-reset">すべて外す</button></div>';
   var pinned = base.filter(function (p) { return String(p.author).toLowerCase() === 'self' || ipStated(p); });
-  if (pinned.length) h += '<section class="ip-reps" aria-labelledby="ip-pin-h"><h3 id="ip-pin-h">手入力のプラン<small>' + pinned.length + '件</small></h3><div class="ip-grid">' + pinned.map(function (p) { return ipCard(p, sel.indexOf(p.id) >= 0); }).join('') + '</div><p class="note">下の「まず見る3プラン」とは別枠。既存の案は残してある。</p></section>';
+  if (pinned.length) h += '<section class="ip-reps" aria-labelledby="ip-pin-h"><h3 id="ip-pin-h">手入力のプラン<small>' + pinned.length + '件</small></h3><div class="ip-grid">' + pinned.map(function (p) { return ipCard(p, sel.indexOf(p.id) >= 0); }).join('') + '</div><p class="note">未予約の候補。予約した内容は上の確定プラン。下の「まず見る3プラン」とは別枠。</p></section>';
   /* 3) まず見る3プラン */
   var reps = ipReps(base);
   h += '<section class="ip-reps" aria-labelledby="ip-reps-h"><h3 id="ip-reps-h">まず見る3プラン<small>' + f.n + '人</small></h3>'
@@ -1587,8 +1587,27 @@ function oldStayRedirect() {
   return true;
 }
 function getJSON(u) { return fetch(u, {cache: 'no-cache'}).then(function (r) { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); }); }
+function money2(v) { return '$' + Number(v).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+/* 確定プランは data/confirmed_plan.json が正。静的HTMLは同じ内容の初期表示 */
+function renderConfirmed(p) {
+  var el = document.getElementById('confirmed');
+  if (!el || !p || !p.outbound || !p['return'] || !p.lodging || !p.event_dates) return;
+  var o = p.outbound, rt = p['return'], g = p.lodging;
+  var stay = ROOT + 'stays/' + encodeURIComponent(g.id) + '/';
+  var research = ROOT + 'research-2026-11-06.html';
+  el.innerHTML = '<h2>' + ic('shield-check', 'ic h') + esc(p.label || '確定プラン') + ' <span class="lbl c-ok">予約済み</span></h2>'
+    + '<p>' + esc(p.party_label || '') + '。' + esc(p.event || '') + 'は ' + esc(mdw(p.event_dates.start)) + '〜' + esc(mdw(p.event_dates.end)) + '。この内容が予約したプラン。ほかの金額は調査時点の見積もり。</p>'
+    + '<p class="amt">' + money2(p.total_usd) + ' <small>' + esc(p.total_includes || '') + '</small></p>'
+    + '<dl class="facts">'
+    + '<div><dt>往路</dt><dd>' + esc(o.airline) + ' ' + esc(o.flight_number) + '・' + esc(mdw(o.date)) + ' ' + esc(o.depart_time) + ' ' + esc(o.depart_airport) + '発 → ' + esc(mdw(o.arrive_date)) + ' ' + esc(o.arrive_time) + ' ' + esc(o.arrive_airport) + '着・直行・' + esc(o.cabin_fare) + '・' + money2(o.price_usd) + '<small>変更可、払戻不可</small></dd></div>'
+    + '<div><dt>復路</dt><dd>' + esc(rt.airline) + ' ' + esc(rt.flight_number) + '・' + esc(mdw(rt.date)) + ' ' + esc(rt.depart_time) + ' ' + esc(rt.depart_airport) + '発 → ' + esc(rt.arrive_time) + ' ' + esc(rt.arrive_airport) + '着・直行・' + esc(rt.cabin_fare) + '・' + money2(rt.price_usd) + '</dd></div>'
+    + '<div><dt>宿</dt><dd><a href="' + stay + '">' + esc(g.name) + '</a>（' + esc(g.address) + '）・' + esc(g.room) + '<small>' + esc(mdw(g.check_in)) + ' ' + esc(g.check_in_from) + 'からチェックイン、' + esc(mdw(g.check_out)) + ' ' + esc(g.check_out_by) + 'までにチェックアウト・' + g.nights + '泊・' + money2(g.price_usd) + '（税込、払戻不可、' + esc(g.payment) + '）</small></dd></div>'
+    + '</dl>'
+    + '<p class="note"><a href="' + research + '">2026-11-06 調査まとめ</a>は当時の見積もり。予約した金額ではない。プラン作成の合計は調査データでの再計算で、この予約額とは別。</p>';
+}
 function start() {
   document.addEventListener('click', onClick);
+  getJSON(ROOT + 'data/confirmed_plan.json').then(renderConfirmed).catch(function () {});
   /* 下部ドック：上段（概算・内訳）と下段（ナビ） */
   if (PAGE === 'stays') window.addEventListener('pagehide', function () { sessionStorage.setItem('bcf26.staysY', String(Math.round(window.scrollY))); });
   var dock = $('#dock'), mb0 = $('#mbar'); if (dock && mb0) dock.insertBefore(mb0, dock.firstChild);

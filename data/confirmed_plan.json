@@ -1,0 +1,61 @@
+{
+ "schema": "bcf26.confirmed_plan.v1",
+ "status": "booked",
+ "label": "確定プラン",
+ "party": "solo",
+ "party_label": "1人",
+ "event": "ボストンキャリアフォーラム",
+ "event_dates": {
+  "start": "2026-11-20",
+  "end": "2026-11-22"
+ },
+ "currency": "USD",
+ "total_usd": 1066.07,
+ "total_includes": "航空券＋宿泊",
+ "outbound": {
+  "airline": "Delta",
+  "flight_number": "DL473",
+  "flight_numbers": ["DL 473"],
+  "flight_id": "out-1118-SEABOS-2307-DL473",
+  "date": "2026-11-18",
+  "depart_airport": "SEA",
+  "depart_time": "23:07",
+  "arrive_date": "2026-11-19",
+  "arrive_airport": "BOS",
+  "arrive_time": "07:20",
+  "stops": 0,
+  "cabin_fare": "Main Classic",
+  "price_usd": 468.41,
+  "changeable": true,
+  "refundable": false
+ },
+ "return": {
+  "airline": "Alaska",
+  "flight_number": "AS257",
+  "flight_numbers": ["AS 257"],
+  "flight_id": "ret-1122-BOSSEA-1804-AS257",
+  "date": "2026-11-22",
+  "depart_airport": "BOS",
+  "depart_time": "18:04",
+  "arrive_airport": "SEA",
+  "arrive_time": "21:29",
+  "stops": 0,
+  "cabin_fare": "Saver",
+  "price_usd": 308.40
+ },
+ "lodging": {
+  "id": "hi_boston",
+  "name": "HI Boston Hostel",
+  "address": "19 Stuart St, Theater District",
+  "room": "男性6人ドミトリーのベッド1床",
+  "check_in": "2026-11-19",
+  "check_in_from": "16:00",
+  "check_out": "2026-11-22",
+  "check_out_by": "11:00",
+  "nights": 3,
+  "price_usd": 289.26,
+  "taxes_included": true,
+  "refundable": false,
+  "payment": "支払いはホステルが行う"
+ }
+}
