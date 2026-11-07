@@ -239,6 +239,8 @@ body.sheet-open{overflow:hidden}
  .botnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:960;background:#fff;border-top:1px solid var(--line);padding:4px 4px calc(4px + env(safe-area-inset-bottom));box-shadow:0 -2px 8px rgba(0,0,0,.06)}
  .botnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11px;color:var(--muted);text-decoration:none;padding:4px 0;position:relative;border-radius:8px}
  .botnav a .ic{width:22px;height:22px}
+ .botnav a{min-width:0}
+ .botnav a>span:not(.cnt){white-space:nowrap;font-size:10.5px;letter-spacing:-.03em}
  .botnav a[aria-current]{color:var(--navy);font-weight:700;background:var(--hover)}
  .botnav .cnt:not(:empty){position:absolute;top:0;right:calc(50% - 22px)}
  .in-grid{grid-template-columns:1fr 1fr}
